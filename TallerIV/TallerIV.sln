@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV", "TallerIV\TallerIV.csproj", "{15370644-D2EA-4463-98C8-43BDEFCFEC2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV.Negocio", "TallerIV.Negocio\TallerIV.Negocio.csproj", "{F6957C62-4831-44EA-BF6B-36AE585E3DC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV.Datos", "TallerIV.Datos\TallerIV.Datos.csproj", "{EFD7661A-B85B-4DC2-9397-ABDA0FC60E4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{15370644-D2EA-4463-98C8-43BDEFCFEC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15370644-D2EA-4463-98C8-43BDEFCFEC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15370644-D2EA-4463-98C8-43BDEFCFEC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6957C62-4831-44EA-BF6B-36AE585E3DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6957C62-4831-44EA-BF6B-36AE585E3DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6957C62-4831-44EA-BF6B-36AE585E3DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6957C62-4831-44EA-BF6B-36AE585E3DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD7661A-B85B-4DC2-9397-ABDA0FC60E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD7661A-B85B-4DC2-9397-ABDA0FC60E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD7661A-B85B-4DC2-9397-ABDA0FC60E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD7661A-B85B-4DC2-9397-ABDA0FC60E4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
