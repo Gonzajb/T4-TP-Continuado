@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Negocio
 {
-    class UsuarioEmpleado
+    public class UsuarioEmpleado
     {
         public string Nombre { get; set; }
 

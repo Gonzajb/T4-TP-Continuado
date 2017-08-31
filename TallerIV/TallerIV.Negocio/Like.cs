@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Negocio
 {
-    class Like
+    public class Like
     {
         public int ID { get; set; }
         public bool LikeEmpleado { get; set; }
