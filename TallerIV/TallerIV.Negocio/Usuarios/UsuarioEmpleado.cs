@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Negocio
 {
-    class UsuarioEmpleado
+    public class UsuarioEmpleado: Usuario
     {
         public string Nombre { get; set; }
 
         public string Apellido { get; set; }
 
+        public 
 
 
     }

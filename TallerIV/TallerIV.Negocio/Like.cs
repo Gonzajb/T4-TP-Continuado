@@ -11,8 +11,6 @@ namespace TallerIV.Negocio
         public int ID { get; set; }
         public bool LikeEmpleado { get; set; }
         public bool LikeReclutador { get; set; }
-        //UsuarioReclutador
-        //UsuarioEmpleado
 
     }
 }
