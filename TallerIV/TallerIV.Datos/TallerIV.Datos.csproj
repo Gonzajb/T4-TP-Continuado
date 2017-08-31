@@ -57,7 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dato.cs" />
+    <Compile Include="Repositorios\AbstractRepository.cs" />
+    <Compile Include="TallerIVContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,10 +66,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TallerIV.Negocio\TallerIV.Negocio.csproj">
+    <ProjectReference Include="..\TallerIV.Negocio\TallerIV.Dominio.csproj">
       <Project>{ef64df1c-7e1a-49af-baac-a8ea05cab662}</Project>
-      <Name>TallerIV.Negocio</Name>
+      <Name>TallerIV.Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Servicios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

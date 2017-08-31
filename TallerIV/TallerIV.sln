@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV", "TallerIV\Taller
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV.Datos", "TallerIV.Datos\TallerIV.Datos.csproj", "{5AA0A727-7071-4148-A75B-72CA19E0C545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV.Negocio", "TallerIV.Negocio\TallerIV.Negocio.csproj", "{EF64DF1C-7E1A-49AF-BAAC-A8EA05CAB662}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TallerIV.Dominio", "TallerIV.Negocio\TallerIV.Dominio.csproj", "{EF64DF1C-7E1A-49AF-BAAC-A8EA05CAB662}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

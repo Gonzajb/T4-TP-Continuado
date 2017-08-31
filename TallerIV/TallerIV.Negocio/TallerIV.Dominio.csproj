@@ -7,8 +7,8 @@
     <ProjectGuid>{EF64DF1C-7E1A-49AF-BAAC-A8EA05CAB662}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TallerIV.Negocio</RootNamespace>
-    <AssemblyName>TallerIV.Negocio</AssemblyName>
+    <RootNamespace>TallerIV.Dominio</RootNamespace>
+    <AssemblyName>TallerIV.Dominio</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

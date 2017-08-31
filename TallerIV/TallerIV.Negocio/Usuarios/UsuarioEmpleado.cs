@@ -9,11 +9,7 @@ namespace TallerIV.Negocio
     public class UsuarioEmpleado: Usuario
     {
         public string Nombre { get; set; }
-
         public string Apellido { get; set; }
-
-        public 
-
-
+        public List<Tag> Tags { get; set; }
     }
 }
