@@ -9,10 +9,10 @@ using TallerIV.Negocio;
 
 namespace TallerIV.Datos
 {
-    public class Dato : DbContext
+    public class TallerIVContext : DbContext
     {
 
-        public Dato() : base("TallerIVContext")
+        public TallerIVContext() : base("TallerIVContext")
         {
         }
 

@@ -8,9 +8,9 @@ namespace TallerIV.Negocio
 {
     public class Encuentro
     {
-        public int ID { get; set; }
-        //UsuarioReclutador
-        //UsuarioEmpleado
+        public int Id { get; set; }
+        public UsuarioReclutador UsuarioReclutador { get; set; }
+        public UsuarioEmpleado UsuarioEmpleado { get; set; }
 
     }
 }

@@ -8,9 +8,11 @@ namespace TallerIV.Negocio
 {
     public class Like
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public bool LikeEmpleado { get; set; }
         public bool LikeReclutador { get; set; }
+        public UsuarioReclutador UsuarioReclutador { get; set; }
+        public UsuarioEmpleado UsuarioEmpleado { get; set; }
 
     }
 }

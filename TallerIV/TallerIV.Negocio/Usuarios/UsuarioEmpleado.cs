@@ -12,7 +12,6 @@ namespace TallerIV.Negocio
 
         public string Apellido { get; set; }
 
-        public 
 
 
     }
