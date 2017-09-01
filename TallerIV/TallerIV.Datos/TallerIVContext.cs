@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using TallerIV.Negocio;
+using TallerIV.Dominio;
 
 namespace TallerIV.Datos
 {

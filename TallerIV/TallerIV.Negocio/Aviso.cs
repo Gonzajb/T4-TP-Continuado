@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TallerIV.Negocio
+namespace TallerIV.Dominio
 {
     public class Aviso
     {

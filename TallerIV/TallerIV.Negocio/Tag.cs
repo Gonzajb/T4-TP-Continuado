@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TallerIV.Negocio
+namespace TallerIV.Dominio
 {
     public class Tag
     {
