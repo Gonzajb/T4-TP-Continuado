@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Datos.Repositorios
 {
-    public abstract class AbstractRepository<T> where T : EntityObject
+    public abstract class AbstractRepository<T> where T : class
     {
-        DbSet<T> dbSet;
+        protected DbSet<T> dbSet;
+        protected TallerIVContext db;
         public AbstractRepository(){
-            TallerIVContext db = new TallerIVContext();
+            this.db = new TallerIVContext();
+            dbSet = db.Set<T>();
+        }
+        public AbstractRepository(TallerIVContext db)
+        {
+            this.db = db;
             dbSet = db.Set<T>();
         }
         public void AddEntity(T entity) {

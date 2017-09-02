@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TallerIV.Negocio")]
+[assembly: AssemblyTitle("TallerIV.Dominio")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TallerIV.Negocio")]
+[assembly: AssemblyProduct("TallerIV.Dominio")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("daf805ad-5628-4205-aa5f-4b8f674647ce")]
+[assembly: Guid("ef64df1c-7e1a-49af-baac-a8ea05cab662")]
 
 // Version information for an assembly consists of the following four values:
 //
