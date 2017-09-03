@@ -9,8 +9,9 @@ namespace TallerIV.Dominio
     public class Encuentro
     {
         public int Id { get; set; }
-        public UsuarioReclutador UsuarioReclutador { get; set; }
-        public UsuarioEmpleado UsuarioEmpleado { get; set; }
-
+        public virtual UsuarioReclutador UsuarioReclutador { get; set; }
+        public string UsuarioReclutador_Id { get; set; } 
+        public virtual UsuarioEmpleado UsuarioEmpleado { get; set; }
+        public string UsuarioEmpleado_Id { get; set; }
     }
 }

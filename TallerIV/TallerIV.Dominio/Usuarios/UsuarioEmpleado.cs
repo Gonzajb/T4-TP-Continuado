@@ -10,6 +10,6 @@ namespace TallerIV.Dominio
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public List<Tag> Tags { get; set; }
+        public virtual List<Tag> Tags { get; set; }
     }
 }

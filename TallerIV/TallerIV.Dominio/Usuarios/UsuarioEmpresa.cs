@@ -10,7 +10,7 @@ namespace TallerIV.Dominio
     {
         public string Cuit { get; set; }
         public string RazonSocial { get; set; }
-        public List<Aviso> Avisos { get; set; }
-        public List <UsuarioReclutador>Reclutadores { get; set; }
+        public virtual List<Aviso> Avisos { get; set; }
+        public virtual List <UsuarioReclutador>Reclutadores { get; set; }
     }
 }
