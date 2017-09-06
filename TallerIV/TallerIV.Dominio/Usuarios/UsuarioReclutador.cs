@@ -8,6 +8,6 @@ namespace TallerIV.Dominio
 {
     public class UsuarioReclutador: UsuarioPersona
     {
-        public List<Aviso>Avisos { get; set; }
+        //public List<Aviso>Avisos { get; set; }
     }
 }

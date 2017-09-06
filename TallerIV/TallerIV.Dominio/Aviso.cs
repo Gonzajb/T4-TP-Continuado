@@ -15,8 +15,8 @@ namespace TallerIV.Dominio
         public string Descripcion { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public virtual UsuarioReclutador UsuarioReclutador { get; set; }
         public string UsuarioReclutador_Id { get; set; }
+        public virtual UsuarioReclutador UsuarioReclutador { get; set; }
         public virtual List<Tag> TagsBuscados { get; set; }
         public string UsuarioEmpresa_Id { get; set; }
         public string UsuarioReclutadorAsignado_Id { get; set; }

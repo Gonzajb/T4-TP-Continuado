@@ -10,17 +10,17 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TallerIV.Datos
 {
-    public class TallerIVContext : IdentityDbContext
+    public class TallerIVDbContext : IdentityDbContext<Usuario>
     {
 
-        public TallerIVContext() : base("TallerIVContext")
+        public TallerIVDbContext() : base("TallerIVContext")
         {
         }
 
         public DbSet<Aviso> Aviso { get; set; }
         public DbSet<Encuentro> Encuentro { get; set; }
         public DbSet<Like> Like { get; set; }
-        public DbSet<Usuario> Usuario { get; set; }
+        //public DbSet<Usuario> Usuario { get; set; }
         public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
         public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
 
@@ -58,8 +58,13 @@ namespace TallerIV.Datos
             modelBuilder.Entity<UsuarioEmpresa>().ToTable("Usuarios")
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
 
-            modelBuilder.Entity<UsuarioReclutador>().ToTable("Usuarios")
-                .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioReclutador_Id);
+            //modelBuilder.Entity<UsuarioReclutador>().ToTable("Usuarios")
+            //    .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioReclutador_Id);
+        }
+
+        public static TallerIVDbContext Create()
+        {
+            return new TallerIVDbContext();
         }
     }
 }

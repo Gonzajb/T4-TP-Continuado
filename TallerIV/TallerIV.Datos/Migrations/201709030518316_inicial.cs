@@ -21,8 +21,8 @@ namespace TallerIV.Datos.Migrations
                         UsuarioReclutadorAsignado_Id = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Usuarios", t => t.UsuarioReclutador_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpresa_Id, cascadeDelete: true)
+                .ForeignKey("dbo.IdentityUser", t => t.UsuarioReclutador_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpresa_Id)
                 .Index(t => t.UsuarioReclutador_Id)
                 .Index(t => t.UsuarioEmpresa_Id);
             
@@ -36,7 +36,7 @@ namespace TallerIV.Datos.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Usuarios",
+                "dbo.IdentityUser",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -56,10 +56,6 @@ namespace TallerIV.Datos.Migrations
                         Apellido = c.String(),
                         FechaDeNacimiento = c.DateTime(),
                         Edad = c.Int(),
-                        Nombre1 = c.String(),
-                        Apellido1 = c.String(),
-                        Cuit = c.String(),
-                        RazonSocial = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         UsuarioEmpresa_Id = c.String(maxLength: 128),
                     })
@@ -78,7 +74,7 @@ namespace TallerIV.Datos.Migrations
                         IdentityUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Usuarios", t => t.IdentityUser_Id)
+                .ForeignKey("dbo.IdentityUser", t => t.IdentityUser_Id)
                 .Index(t => t.IdentityUser_Id);
             
             CreateTable(
@@ -91,7 +87,7 @@ namespace TallerIV.Datos.Migrations
                         IdentityUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.UserId)
-                .ForeignKey("dbo.Usuarios", t => t.IdentityUser_Id)
+                .ForeignKey("dbo.IdentityUser", t => t.IdentityUser_Id)
                 .Index(t => t.IdentityUser_Id);
             
             CreateTable(
@@ -105,7 +101,7 @@ namespace TallerIV.Datos.Migrations
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.IdentityRole", t => t.IdentityRole_Id)
-                .ForeignKey("dbo.Usuarios", t => t.IdentityUser_Id)
+                .ForeignKey("dbo.IdentityUser", t => t.IdentityUser_Id)
                 .Index(t => t.IdentityRole_Id)
                 .Index(t => t.IdentityUser_Id);
             
@@ -120,7 +116,7 @@ namespace TallerIV.Datos.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpleado_Id1)
-                .ForeignKey("dbo.Usuarios", t => t.UsuarioReclutador_Id, cascadeDelete: true)
+                .ForeignKey("dbo.IdentityUser", t => t.UsuarioReclutador_Id, cascadeDelete: true)
                 .Index(t => t.UsuarioReclutador_Id)
                 .Index(t => t.UsuarioEmpleado_Id1);
             
@@ -135,8 +131,8 @@ namespace TallerIV.Datos.Migrations
                         UsuarioEmpleado_Id = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpleado_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Usuarios", t => t.UsuarioReclutador_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpleado_Id)
+                .ForeignKey("dbo.IdentityUser", t => t.UsuarioReclutador_Id, cascadeDelete: true)
                 .Index(t => t.UsuarioReclutador_Id)
                 .Index(t => t.UsuarioEmpleado_Id);
             
@@ -175,25 +171,42 @@ namespace TallerIV.Datos.Migrations
                 .Index(t => t.UsuarioEmpleado_Id)
                 .Index(t => t.Tag_Id);
             
+            CreateTable(
+                "dbo.Usuarios",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Nombre = c.String(),
+                        Apellido = c.String(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        Cuit = c.String(),
+                        RazonSocial = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.IdentityUser", t => t.Id)
+                .Index(t => t.Id);
+            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.IdentityUserRole", "IdentityUser_Id", "dbo.Usuarios");
-            DropForeignKey("dbo.IdentityUserLogin", "IdentityUser_Id", "dbo.Usuarios");
-            DropForeignKey("dbo.IdentityUserClaim", "IdentityUser_Id", "dbo.Usuarios");
-            DropForeignKey("dbo.Usuarios", "UsuarioEmpresa_Id", "dbo.Usuarios");
+            DropForeignKey("dbo.Usuarios", "Id", "dbo.IdentityUser");
+            DropForeignKey("dbo.IdentityUserRole", "IdentityUser_Id", "dbo.IdentityUser");
+            DropForeignKey("dbo.IdentityUserLogin", "IdentityUser_Id", "dbo.IdentityUser");
+            DropForeignKey("dbo.IdentityUserClaim", "IdentityUser_Id", "dbo.IdentityUser");
+            DropForeignKey("dbo.IdentityUser", "UsuarioEmpresa_Id", "dbo.Usuarios");
             DropForeignKey("dbo.Avisos", "UsuarioEmpresa_Id", "dbo.Usuarios");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.Likes", "UsuarioReclutador_Id", "dbo.Usuarios");
+            DropForeignKey("dbo.Likes", "UsuarioReclutador_Id", "dbo.IdentityUser");
             DropForeignKey("dbo.Likes", "UsuarioEmpleado_Id", "dbo.Usuarios");
-            DropForeignKey("dbo.Encuentros", "UsuarioReclutador_Id", "dbo.Usuarios");
+            DropForeignKey("dbo.Encuentros", "UsuarioReclutador_Id", "dbo.IdentityUser");
             DropForeignKey("dbo.Encuentros", "UsuarioEmpleado_Id1", "dbo.Usuarios");
             DropForeignKey("dbo.UsuarioEmpleadoTag", "Tag_Id", "dbo.Tag");
             DropForeignKey("dbo.UsuarioEmpleadoTag", "UsuarioEmpleado_Id", "dbo.Usuarios");
-            DropForeignKey("dbo.Avisos", "UsuarioReclutador_Id", "dbo.Usuarios");
+            DropForeignKey("dbo.Avisos", "UsuarioReclutador_Id", "dbo.IdentityUser");
             DropForeignKey("dbo.AvisoTag", "Tag_Id", "dbo.Tag");
             DropForeignKey("dbo.AvisoTag", "Aviso_Id", "dbo.Avisos");
+            DropIndex("dbo.Usuarios", new[] { "Id" });
             DropIndex("dbo.UsuarioEmpleadoTag", new[] { "Tag_Id" });
             DropIndex("dbo.UsuarioEmpleadoTag", new[] { "UsuarioEmpleado_Id" });
             DropIndex("dbo.AvisoTag", new[] { "Tag_Id" });
@@ -206,9 +219,10 @@ namespace TallerIV.Datos.Migrations
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.IdentityUserLogin", new[] { "IdentityUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "IdentityUser_Id" });
-            DropIndex("dbo.Usuarios", new[] { "UsuarioEmpresa_Id" });
+            DropIndex("dbo.IdentityUser", new[] { "UsuarioEmpresa_Id" });
             DropIndex("dbo.Avisos", new[] { "UsuarioEmpresa_Id" });
             DropIndex("dbo.Avisos", new[] { "UsuarioReclutador_Id" });
+            DropTable("dbo.Usuarios");
             DropTable("dbo.UsuarioEmpleadoTag");
             DropTable("dbo.AvisoTag");
             DropTable("dbo.IdentityRole");
@@ -217,7 +231,7 @@ namespace TallerIV.Datos.Migrations
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
-            DropTable("dbo.Usuarios");
+            DropTable("dbo.IdentityUser");
             DropTable("dbo.Tag");
             DropTable("dbo.Avisos");
         }

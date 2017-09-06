@@ -5,14 +5,14 @@ namespace TallerIV.Datos.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TallerIV.Datos.TallerIVContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TallerIV.Datos.TallerIVDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(TallerIV.Datos.TallerIVContext context)
+        protected override void Seed(TallerIV.Datos.TallerIVDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

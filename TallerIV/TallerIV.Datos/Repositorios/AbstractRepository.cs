@@ -11,12 +11,12 @@ namespace TallerIV.Datos.Repositorios
     public abstract class AbstractRepository<T> where T : class
     {
         protected DbSet<T> dbSet;
-        protected TallerIVContext db;
+        protected TallerIVDbContext db;
         public AbstractRepository(){
-            this.db = new TallerIVContext();
+            this.db = TallerIVDbContext.Create();
             dbSet = db.Set<T>();
         }
-        public AbstractRepository(TallerIVContext db)
+        public AbstractRepository(TallerIVDbContext db)
         {
             this.db = db;
             dbSet = db.Set<T>();
