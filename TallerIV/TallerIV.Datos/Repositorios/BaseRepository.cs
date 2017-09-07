@@ -23,10 +23,12 @@ namespace TallerIV.Datos.Repositorios
         }
         public void AddEntity(T entity) {
             dbSet.Add(entity);
+            db.SaveChanges();
         }
         public void RemoveEntity(T entity)
         {
             dbSet.Remove(entity);
+            db.SaveChanges();
         }
         public IQueryable<T> GetAll()
         {
