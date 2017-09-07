@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Dominio
 {
-    public class UsuarioEmpleado: Usuario
+    public class UsuarioEmpleado: UsuarioPersona
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public UsuarioEmpleado(){}
+
+        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            FechaDeNacimiento = fechaDeNacimiento;
+        }
         public virtual List<Tag> Tags { get; set; }
     }
 }

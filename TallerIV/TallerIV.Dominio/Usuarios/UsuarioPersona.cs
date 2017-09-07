@@ -8,15 +8,28 @@ namespace TallerIV.Dominio
 {
     public abstract class UsuarioPersona: Usuario
     {
+        public UsuarioPersona() { }
+        public UsuarioPersona(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento) : base(fechaDeResgistro, email,userName) {
+            Nombre = nombre;
+            Apellido = apellido;
+            FechaDeNacimiento = fechaDeNacimiento;
+        }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public DateTime FechaDeNacimiento { get; set; }
+        public DateTime? FechaDeNacimiento { get; set; }
         public int Edad
         {
             get
             {
                 DateTime zeroTime = new DateTime(1, 1, 1);
-                int years = (zeroTime + (DateTime.Now - this.FechaDeNacimiento)).Year - 1;
+                int years = 0;
+                if (this.FechaDeNacimiento.HasValue)
+                {
+                    years = (zeroTime + (DateTime.Now - FechaDeNacimiento.Value)).Year - 1;
+                }
+                else
+                {
+                }
                 return years;
             }
             private set { }
