@@ -21,8 +21,8 @@ namespace TallerIV.Datos
         public DbSet<Encuentro> Encuentro { get; set; }
         public DbSet<Like> Like { get; set; }
         //public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
-        public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
+        //public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
+        //public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

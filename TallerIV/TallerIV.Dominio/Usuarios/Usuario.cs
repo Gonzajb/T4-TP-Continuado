@@ -11,6 +11,11 @@ namespace TallerIV.Dominio
 {
     public abstract class Usuario : IdentityUser
     {
+        public Usuario() { }
+        public Usuario(DateTime fechaRegistro, string email, string userName):base(userName) {
+            this.FechaRegistro = fechaRegistro;
+            this.Email = email;
+        }
         public DateTime FechaRegistro { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Usuario> manager)
         {
