@@ -1,0 +1,14 @@
+﻿@model TallerIV.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Registrarme";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<h4>Crear un nuevo usuario.</h4>
+<a class="btn btn-primary" href="@Url.Action("Register", "Account")">Quiero postularme.</a>
+<a class="btn btn-primary" href="@Url.Action("Register", "AccountEmpresa")">Quiero registrar mi empresa.</a>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

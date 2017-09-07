@@ -210,8 +210,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountEmpresaController.cs" />
+    <Compile Include="Controllers\AvisoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RegisterAccountController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -305,6 +307,12 @@
     <Content Include="Views\AccountEmpresa\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\AccountEmpresa\SendCode.cshtml" />
     <Content Include="Views\AccountEmpresa\VerifyCode.cshtml" />
+    <Content Include="Views\RegisterAccount\Index.cshtml" />
+    <Content Include="Views\Aviso\Create.cshtml" />
+    <Content Include="Views\Aviso\Delete.cshtml" />
+    <Content Include="Views\Aviso\Details.cshtml" />
+    <Content Include="Views\Aviso\Edit.cshtml" />
+    <Content Include="Views\Aviso\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

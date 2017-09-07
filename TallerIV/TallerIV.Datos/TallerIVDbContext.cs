@@ -68,5 +68,7 @@ namespace TallerIV.Datos
         }
 
         public System.Data.Entity.DbSet<TallerIV.Dominio.Tag> Tags { get; set; }
+
+        public System.Data.Entity.DbSet<TallerIV.Dominio.UsuarioReclutador> IdentityUsers { get; set; }
     }
 }
