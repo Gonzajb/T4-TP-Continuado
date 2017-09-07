@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Datos.Repositorios
 {
-    public abstract class AbstractRepository<T> where T : class
+    public class BaseRepository<T> where T : class
     {
         protected DbSet<T> dbSet;
         protected TallerIVDbContext db;
-        public AbstractRepository(){
+        public BaseRepository(){
             this.db = TallerIVDbContext.Create();
             dbSet = db.Set<T>();
         }
-        public AbstractRepository(TallerIVDbContext db)
+        public BaseRepository(TallerIVDbContext db)
         {
             this.db = db;
             dbSet = db.Set<T>();
@@ -34,6 +34,10 @@ namespace TallerIV.Datos.Repositorios
         }
         public T GetById(long id) {
             return dbSet.Find(id);
+        }
+        public void UpdateEntity(T entity) {
+            db.Entry(entity).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

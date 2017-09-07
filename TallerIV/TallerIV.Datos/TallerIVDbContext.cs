@@ -66,5 +66,7 @@ namespace TallerIV.Datos
         {
             return new TallerIVDbContext();
         }
+
+        public System.Data.Entity.DbSet<TallerIV.Dominio.Tag> Tags { get; set; }
     }
 }

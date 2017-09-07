@@ -8,12 +8,15 @@ using TallerIV.Datos.Repositorios;
 
 namespace TallerIV.Negocio.Servicios
 {
-    public abstract class AbstractService<T> where T : class
+    public class BaseService<T> where T : class
     {
-        AbstractRepository<T> repository;
-        public AbstractService(AbstractRepository<T> repository)
+        BaseRepository<T> repository;
+        public BaseService(BaseRepository<T> repository)
         {
             this.repository = repository;
+        }
+        public BaseService() {
+            this.repository = new BaseRepository<T>();
         }
         public void AddEntity(T entity)
         {
@@ -30,6 +33,9 @@ namespace TallerIV.Negocio.Servicios
         public T GetById(long id)
         {
             return this.repository.GetById(id);
+        }
+        public void UpdateEntity(T entity) {
+            this.repository.UpdateEntity(entity);
         }
     }
 }

@@ -126,7 +126,7 @@
       <DependentUpon>201709030518316_inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repositorios\AbstractRepository.cs" />
+    <Compile Include="Repositorios\BaseRepository.cs" />
     <Compile Include="TallerIVDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
