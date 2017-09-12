@@ -65,16 +65,6 @@ namespace TallerIV.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [Display(Name = "Nombre")]
-        public string Nombre { get; set; }
-
-        [Required]
-        [Display(Name = "Apellido")]
-        public string Apellido { get; set; }
-
-        [Display(Name = "Fecha de nacimiento")]
-        public DateTime? FechaDeNacimiento { get; set; }
 
         [Required]
         [EmailAddress]

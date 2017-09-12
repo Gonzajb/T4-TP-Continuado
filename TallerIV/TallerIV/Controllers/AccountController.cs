@@ -148,7 +148,7 @@ namespace TallerIV.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterPostulanteViewModel model)
         {
             if (ModelState.IsValid)
             {

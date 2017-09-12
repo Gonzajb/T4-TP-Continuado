@@ -13,7 +13,7 @@ namespace TallerIV.Datos.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709030518316_inicial"; }
+            get { return "201709120121535_inicial"; }
         }
         
         string IMigrationMetadata.Source

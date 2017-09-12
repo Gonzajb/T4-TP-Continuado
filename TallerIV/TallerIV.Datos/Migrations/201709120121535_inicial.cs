@@ -176,8 +176,6 @@ namespace TallerIV.Datos.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Nombre = c.String(),
-                        Apellido = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Cuit = c.String(),
                         RazonSocial = c.String(),
