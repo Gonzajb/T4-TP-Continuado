@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -210,10 +211,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountEmpresaController.cs" />
+    <Compile Include="Controllers\AccountReclutadorController.cs" />
     <Compile Include="Controllers\AvisoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegisterAccountController.cs" />
+    <Compile Include="Controllers\RegisterReclutadorController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,6 +225,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterEmpresaViewModel.cs" />
+    <Compile Include="Models\RegisterReclutadorViewModel.cs" />
     <Compile Include="Models\RegisterPostulanteViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -303,7 +307,9 @@
     <Content Include="Views\AccountEmpresa\ForgotPassword.cshtml" />
     <Content Include="Views\AccountEmpresa\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\AccountEmpresa\Login.cshtml" />
-    <Content Include="Views\AccountEmpresa\Register.cshtml" />
+    <Content Include="Views\AccountEmpresa\Register.cshtml">
+      <BrowseToURL>~/AccountEmpresa/Register</BrowseToURL>
+    </Content>
     <Content Include="Views\AccountEmpresa\ResetPassword.cshtml" />
     <Content Include="Views\AccountEmpresa\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\AccountEmpresa\SendCode.cshtml" />
@@ -314,6 +320,18 @@
     <Content Include="Views\Aviso\Details.cshtml" />
     <Content Include="Views\Aviso\Edit.cshtml" />
     <Content Include="Views\Aviso\Index.cshtml" />
+    <Content Include="Views\AccountReclutador\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\AccountReclutador\ConfirmEmail.cshtml" />
+    <Content Include="Views\AccountReclutador\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\AccountReclutador\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\AccountReclutador\ForgotPassword.cshtml" />
+    <Content Include="Views\AccountReclutador\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\AccountReclutador\Login.cshtml" />
+    <Content Include="Views\AccountReclutador\Register.cshtml" />
+    <Content Include="Views\AccountReclutador\ResetPassword.cshtml" />
+    <Content Include="Views\AccountReclutador\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\AccountReclutador\SendCode.cshtml" />
+    <Content Include="Views\AccountReclutador\VerifyCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
