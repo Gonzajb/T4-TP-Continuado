@@ -152,7 +152,7 @@ namespace TallerIV.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new UsuarioEmpleado(DateTime.Now, model.Email,model.Nombre, model.Apellido, model.Email, model.FechaDeNacimiento)  {
+                var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento)  {
                     FechaRegistro = DateTime.Now
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
