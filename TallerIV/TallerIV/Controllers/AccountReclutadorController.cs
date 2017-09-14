@@ -153,6 +153,7 @@ namespace TallerIV.Controllers
             {
                 var user = new UsuarioReclutador(DateTime.Now, model.Email, model.Email, model.Nombre, model.Apellido, model.FechaDeNacimiento, this.User.Identity.GetUserId());
                 var result = await UserManager.CreateAsync(user, model.Password);
+                UserManager.AddToRole(user.Id, "Reclutador");
                 if (result.Succeeded)
                 {
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

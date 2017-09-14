@@ -156,6 +156,7 @@ namespace TallerIV.Controllers
                     FechaRegistro = DateTime.Now
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                UserManager.AddToRole(user.Id, "Empleado");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
