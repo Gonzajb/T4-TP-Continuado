@@ -26,7 +26,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.FechaDeNacimiento, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FechaDeNacimiento, new { @type = "date", min = "1910-04-01", max = "2017-01-01" })
         </div>
     </div>
     <div class="form-group">

@@ -51,6 +51,12 @@ namespace TallerIV.Datos.Migrations
                     role = new IdentityRole("Empresa");
                     roleManager.Create(role);
                 }
+            role = roleManager.FindByName("Reclutador");
+            if (role == null)
+            {
+                role = new IdentityRole("Reclutador");
+                roleManager.Create(role);
+            }
 
                 // Create test users
                 var user = userManager.FindByName("nsabaj@hotmail.com");
