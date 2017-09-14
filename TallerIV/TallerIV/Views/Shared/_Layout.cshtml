@@ -88,7 +88,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (userIsEmpresa)
                     {
-                        <li><a>Mis avisos</a></li>
+                        <li>@Html.ActionLink("Mis avisos", "Index", "Aviso")</li>
                     }
                     @if (userIsPostulante)
                     {

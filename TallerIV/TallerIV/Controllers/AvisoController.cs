@@ -9,21 +9,24 @@ using System.Web.Mvc;
 using TallerIV.Datos;
 using TallerIV.Dominio;
 using TallerIV.Negocio.Servicios;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace TallerIV.Controllers
 {
     public class AvisoController : Controller
     {
-        private BaseService<Aviso> avisoService;
+        private AvisosService avisoService;
         public AvisoController()
         {
-            avisoService = new BaseService<Aviso>();
+            avisoService = new AvisosService();
         }
 
         // GET: Aviso
         public ActionResult Index()
         {
-            return View(this.avisoService.GetAll());
+            string id = this.User.Identity.GetUserId();
+            return View(this.avisoService.GetAllByEmpresa(id, false));
         }
 
         // GET: Aviso/Details/5
@@ -57,6 +60,7 @@ namespace TallerIV.Controllers
         {
             if (ModelState.IsValid)
             {
+                aviso.UsuarioEmpresa_Id = this.User.Identity.GetUserId();
                 this.avisoService.AddEntity(aviso);
                 return RedirectToAction("Index");
             }
