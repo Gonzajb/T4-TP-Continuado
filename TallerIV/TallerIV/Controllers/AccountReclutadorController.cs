@@ -108,7 +108,6 @@ namespace TallerIV.Controllers
         // POST: /Account/VerifyCode
         [HttpPost]
         [AllowAnonymous]
-        //[Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
@@ -152,7 +151,7 @@ namespace TallerIV.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new UsuarioReclutador(DateTime.Now, model.Email, model.Nombre, model.Apellido, model.Email, model.FechaDeNacimiento);
+                var user = new UsuarioReclutador(DateTime.Now, model.Email, model.Email, model.Nombre, model.Apellido, model.FechaDeNacimiento, this.User.Identity.GetUserId());
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
