@@ -1,5 +1,8 @@
 namespace TallerIV.Datos.Migrations
 {
+    using Dominio;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -11,21 +14,64 @@ namespace TallerIV.Datos.Migrations
         {
             AutomaticMigrationsEnabled = false;
         }
+        //var user = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
 
-        protected override void Seed(TallerIV.Datos.TallerIVDbContext context)
+        protected override void Seed(TallerIVDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            InitializeIdentityForEF(context);
+            base.Seed(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        public static void InitializeIdentityForEF(TallerIVDbContext db)
+        {
+
+            //if (!db.Users.Any())
+            //{
+                var roleStore = new RoleStore<IdentityRole>(db);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<IdentityUser>(db);
+                var userManager = new UserManager<IdentityUser>(userStore);
+
+                // Add missing roles
+                var role = roleManager.FindByName("Admin");
+                if (role == null)
+                {
+                    role = new IdentityRole("Admin");
+                    roleManager.Create(role);
+                }
+                role = roleManager.FindByName("Empleado");
+                if (role == null)
+                {
+                    role = new IdentityRole("Empleado");
+                    roleManager.Create(role);
+                }
+                role = roleManager.FindByName("Empresa");
+                if (role == null)
+                {
+                    role = new IdentityRole("Empresa");
+                    roleManager.Create(role);
+                }
+
+                // Create test users
+                var user = userManager.FindByName("nsabaj@hotmail.com");
+                if (user == null)
+                {
+                    var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
+                    //var result = await UserManager.CreateAsync(user, model.Password);
+                    userManager.Create(usuarioEmpleado, "Ns12345!");
+                    //userManager.SetLockoutEnabled(usuarioEmpleado.Id, false);
+                    userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
+                }
+
+                user = userManager.FindByName("laempresa1");
+                if (user == null)
+                {
+                    var usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
+                    userManager.Create(usuarioEmpresa, "Le12345!");
+                    //userManager.SetLockoutEnabled(usuarioEmpresa.Id, false);
+                    userManager.AddToRole(usuarioEmpresa.Id, "Empresa");
+                }
+            //}
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using TallerIV.Dominio
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,6 +13,11 @@
     
     @*@RenderSection("scripts", required: false)*@
 </head>
+
+@{ 
+    bool userIsEmpresa = this.User.IsInRole("Empresa");
+    bool userIsPostulante = this.User.IsInRole("Empleado");
+}
 
 @*<body>
     <!-- Navigation -->
