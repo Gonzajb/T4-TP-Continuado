@@ -65,7 +65,14 @@ namespace TallerIV.Models
 
     public class RegisterViewModel
     {
-
+        public RegisterViewModel() {
+        }
+        public RegisterViewModel(string email, string password)
+        {
+            this.Email = email;
+            this.Password = password;
+            this.ConfirmPassword = password;
+        }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

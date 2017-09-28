@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,14 @@ namespace TallerIV.Dominio
                 this.Tags.AddRange(tags);
         }
         public virtual List<Tag> Tags { get; set; }
+        [NotMapped]
+        public string TagsText
+        {
+            get
+            {
+                return String.Join(",", this.Tags.Select(x => x.Titulo));
+            }
+        }
         //public virtual ParametrosBusquedaUsuario ParametrosBusqueda { get; set; }
         //public long? ParametrosBusqueda_Id { get; set; }
     }

@@ -222,6 +222,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EditPostulanteViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterEmpresaViewModel.cs" />
@@ -352,6 +353,7 @@
     <Content Include="Views\AccountReclutador\VerifyCode.cshtml" />
     <Content Include="Views\Shared\_LayoutProui.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiLogin.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

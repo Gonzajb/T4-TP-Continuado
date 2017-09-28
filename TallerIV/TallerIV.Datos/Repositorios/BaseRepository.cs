@@ -45,7 +45,6 @@ namespace TallerIV.Datos.Repositorios
         }
         public void UpdateEntity(T entity) {
             dbSet.AddOrUpdate(entity);
-            //db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
     }

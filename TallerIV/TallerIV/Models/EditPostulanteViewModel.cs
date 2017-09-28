@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using TallerIV.Dominio;
 
 namespace TallerIV.Models
 {
-    public class RegisterPostulanteViewModel : RegisterViewModel
+    public class EditPostulanteViewModel
     {
-        public RegisterPostulanteViewModel() {
-        }
-        public RegisterPostulanteViewModel(string id, string nombre, string apellido, DateTime? fechaDeNacimiento, string tags, string email, string password):base(email, password)
-        {
-            this.Id = id;
-            this.Nombre = nombre;
-            this.Apellido = apellido;
-            this.FechaDeNacimiento = fechaDeNacimiento;
-            this.Tags = tags;
-        }
         public string Id { get; set; }
+        public string Email { get; set; }
+
         [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
+
         [Required]
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }

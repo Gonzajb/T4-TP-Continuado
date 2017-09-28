@@ -420,6 +420,41 @@ namespace TallerIV.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            string id = this.User.Identity.GetUserId();
+            BaseService<UsuarioEmpleado> usuariosService = new BaseService<UsuarioEmpleado>();
+            var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == id);
+            EditPostulanteViewModel model = new EditPostulanteViewModel() {
+                Apellido = user.Apellido,
+                Email = user.Email,
+                FechaDeNacimiento = user.FechaDeNacimiento,
+                Id = user.Id,
+                Nombre = user.Nombre,
+                Tags = user.TagsText
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(EditPostulanteViewModel model) {
+            if (ModelState.IsValid)
+            {
+                BaseService<UsuarioEmpleado> usuariosService = new BaseService<UsuarioEmpleado>();
+                TagsService tagsService = new TagsService();
+                var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == model.Id);
+                user.FechaDeNacimiento = model.FechaDeNacimiento;
+                user.Apellido = model.Apellido;
+                user.Nombre = model.Nombre;
+                user.Tags.Clear();
+                user.Tags.AddRange(tagsService.GetTagsByString(model.Tags));
+                usuariosService.UpdateEntity(user);
+                return RedirectToAction("Index", "Home");
+            }
+            else {
+                return View(model);
+            }
+        }
         public JsonResult SearchTags(string term) {
             TagsService tagsService = new TagsService();
             var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, text = x.Titulo });
