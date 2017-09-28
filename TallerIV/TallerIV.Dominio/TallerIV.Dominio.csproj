@@ -70,6 +70,8 @@
     <Compile Include="Like.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tag.cs" />
+    <Compile Include="TipoRelacionLaboral.cs" />
+    <Compile Include="Usuarios\ParametrosBusquedaUsuario.cs" />
     <Compile Include="Usuarios\Usuario.cs" />
     <Compile Include="Usuarios\UsuarioEmpleado.cs" />
     <Compile Include="Usuarios\UsuarioEmpresa.cs" />

@@ -21,7 +21,6 @@ namespace TallerIV.Datos
         public DbSet<Encuentro> Encuentro { get; set; }
         public DbSet<Like> Like { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<UsuarioReclutador> IdentityUsers { get; set; }
         //public DbSet<Usuario> Usuario { get; set; }
         //public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
         //public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
@@ -56,6 +55,8 @@ namespace TallerIV.Datos
 
             modelBuilder.Entity<UsuarioEmpleado>().ToTable("Usuarios")
                 .HasMany(u => u.Tags).WithMany();
+            //modelBuilder.Entity<UsuarioEmpleado>()
+            //    .HasOptional(u => u.ParametrosBusqueda).WithMany().HasForeignKey(x => x.ParametrosBusqueda_Id);
 
             modelBuilder.Entity<UsuarioEmpresa>().ToTable("Usuarios")
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);

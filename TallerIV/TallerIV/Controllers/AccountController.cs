@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TallerIV.Models;
 using TallerIV.Dominio;
+using TallerIV.Negocio.Servicios;
 
 namespace TallerIV.Controllers
 {
@@ -140,6 +141,8 @@ namespace TallerIV.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            BaseService<Tag> tagsService = new BaseService<Tag>();
+            ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
             return View();
         }
 
@@ -171,7 +174,8 @@ namespace TallerIV.Controllers
                 }
                 AddErrors(result);
             }
-
+            BaseService<Tag> tagsService = new BaseService<Tag>();
+            ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
             // If we got this far, something failed, redisplay form
             return View(model);
         }

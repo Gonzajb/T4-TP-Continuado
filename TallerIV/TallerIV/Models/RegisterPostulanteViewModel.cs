@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using TallerIV.Dominio;
 
 namespace TallerIV.Models
 {
@@ -18,5 +19,7 @@ namespace TallerIV.Models
 
         [Display(Name = "Fecha de nacimiento")]
         public DateTime? FechaDeNacimiento { get; set; }
+        [Display(Name = "Aptitudes")]
+        public List<string> Tags { get; set; }
     }
 }

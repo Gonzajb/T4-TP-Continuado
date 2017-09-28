@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Dominio.Usuarios;
 
 namespace TallerIV.Dominio
 {
@@ -17,5 +18,7 @@ namespace TallerIV.Dominio
             FechaDeNacimiento = fechaDeNacimiento;
         }
         public virtual List<Tag> Tags { get; set; }
+        //public virtual ParametrosBusquedaUsuario ParametrosBusqueda { get; set; }
+        //public long? ParametrosBusqueda_Id { get; set; }
     }
 }

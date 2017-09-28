@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TallerIV.Models;
 using TallerIV.Dominio;
+using TallerIV.Negocio.Servicios;
 
 namespace TallerIV.Controllers
 {
@@ -169,7 +170,6 @@ namespace TallerIV.Controllers
                 }
                 AddErrors(result);
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
