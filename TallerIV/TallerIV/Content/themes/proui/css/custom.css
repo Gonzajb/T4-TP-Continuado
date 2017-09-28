@@ -1,0 +1,78 @@
+﻿/***COMMON***/
+/*#sidebar,*/
+/*#sidebar-alt {
+    position:fixed!important;
+}*/
+
+.sidebar-frontend {
+    position:fixed!important;
+}
+
+.sidebar-nav li a.active {
+    border-left-color: #7ABCE7!important;
+}
+
+div.validation-summary-errors ul {
+    list-style: none;
+}
+
+.btn {
+    text-transform: uppercase;
+}
+
+.table-facility-timetable th, .table-facility-timetable td {
+    text-align: left!important;
+}
+
+/***GENERAL INFORMATION***/
+div.useful-contact div.widget-extra p {
+    color: #777777!important;
+}
+
+img.avatar {
+    width: 128px!important;
+}
+
+img.avatar-small {
+    width: 64px;
+}
+img.avatar-xsmall {
+    width: 32px;
+}
+
+/***SURVEYS***/
+h4.survey-sub-header {
+    min-height: 62px;
+}
+
+/***CALENDAR***/
+ul.nav-calendar-left li {
+    white-space:normal;
+}
+
+ul.calendar-tabs li.active a {
+    font-weight: bold;
+    color: #fff!important;
+}
+
+.fc-button {
+    color:#fff;
+    background-color:#7ABCE7;
+    border-color:#3498DB;
+}
+
+.fc-button:hover {
+    background-color: #3498DB;
+    border-color: #2875A8;
+    color: #FFF;
+}
+
+/***COMMUNITY***/
+
+ul.publicroles li.active a {
+    font-weight: bold;
+    color: #fff!important;
+}
+
+
+

@@ -350,10 +350,14 @@
     <Content Include="Views\AccountReclutador\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\AccountReclutador\SendCode.cshtml" />
     <Content Include="Views\AccountReclutador\VerifyCode.cshtml" />
+    <Content Include="Views\Shared\_LayoutProui.cshtml" />
+    <Content Include="Views\Shared\_LayoutProuiLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\themes\" />
     <Folder Include="Views\AptitudesEmpleado\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\UsuarioEmpleado\" />
   </ItemGroup>
   <ItemGroup>

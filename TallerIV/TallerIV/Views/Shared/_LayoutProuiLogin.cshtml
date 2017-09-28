@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>@(!String.IsNullOrEmpty(ViewBag.Title) ? String.Format("{0} - ", ViewBag.Title) : String.Empty)Taller IV</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Nicolas Sabaj, Brian Fraiman, Nicolas Goyano, Gonzalo Bangueses">
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link href="~/Content/themes/img/isotipo-60.png" rel="apple-touch-icon" />
+    <link rel="icon" href="~/Content/themes/img/isotipo-32.png" type="image/x-icon" />
+    <link href="~/Content/themes/img/isotipo-120.png" rel="apple-touch-icon" sizes="120x120" />
+    <!-- END Icons -->
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="~/Content/themes/css/bootstrap.min.css">
+
+    <!-- Related styles of various icon packs and plugins -->
+    <link rel="stylesheet" href="~/Content/themes/css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="~/Content/themes/css/main.css">
+
+    <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="~/Content/themes/css/themes.css">
+
+    <link rel="stylesheet" href="~/Content/themes/css/custom.css">
+    <!-- END Stylesheets -->
+    <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+    <script src="/Content/themes/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+
+    <!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(decodeURI('%3Cscript src="~/Content/themes/js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
+</head>
+<body>
+    <!-- Login Background -->
+    <div id="login-background">
+        <!-- For best results use an image with a resolution of 2560x400 pixels (prefer a blurred image for smaller file size) -->
+        @*<img src="~/Content/themes/img/placeholders/headers/login_header.jpg" alt="Login Background" class="animation-pulseSlow">*@
+        <img src="~/Content/themes/img/background-login.png" alt="Login Background" class="animation-pulseSlow">
+    </div>
+    <!-- END Login Background -->
+    <!-- Login Container -->
+    <div id="login-container" class="animation-fadeIn">
+        <!-- Login Title -->
+        <div class="login-title text-center">
+            <h1><i class="gi gi-flash"></i> <strong>Taller IV</strong></h1>
+        </div>
+        <!-- END Login Title -->
+
+        @RenderBody()
+
+        <!-- Footer -->
+        <footer class="text-muted text-center">
+            <small><span id="year-copy"></span> &copy; <a href="#" target="_blank"></a></small>
+        </footer>
+        <!-- END Footer -->
+    </div>
+    <!-- END Login Container -->
+    <!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+    <script src="~/Content/themes/js/vendor/bootstrap.min.js"></script>
+    <script src="~/Content/themes/js/plugins.js"></script>
+    <script src="~/Content/themes/js/app.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="~/Content/themes/js/pages/login.js"></script>
+    <script>$(function () { Login.init(); });</script>
+</body>
+</html>
