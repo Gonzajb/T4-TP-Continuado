@@ -16,13 +16,28 @@ namespace TallerIV.Datos.Migrations
         }
         //var user = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
 
-        protected override void Seed(TallerIVDbContext context)
+        protected override void Seed(TallerIVDbContext db)
         {
-            InitializeIdentityForEF(context);
-            base.Seed(context);
+            InicializarTags(db);
+            InicializarUsuarios(db);
+            base.Seed(db);
         }
-
-        public static void InitializeIdentityForEF(TallerIVDbContext db)
+        public static void InicializarTags(TallerIVDbContext db) {
+            if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))
+            {
+                db.Tags.Add(new Tag { Titulo = "ASP.NET" });
+            }
+            if (!db.Tags.Any(x => x.Titulo == "SQL SERVER"))
+            {
+                db.Tags.Add(new Tag { Titulo = "SQL SERVER" });
+            }
+            if (!db.Tags.Any(x => x.Titulo == "JAVA"))
+            {
+                db.Tags.Add(new Tag { Titulo = "JAVA" });
+            }
+            db.SaveChanges();
+        }
+        public static void InicializarUsuarios(TallerIVDbContext db)
         {
 
             //if (!db.Users.Any())

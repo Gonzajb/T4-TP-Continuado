@@ -56,6 +56,10 @@
     <script type="text/javascript" src="~/Content/themes/proui/js/datepicker-locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
     <script src="~/Content/themes/js/functions.js"></script>
 
+    @Styles.Render("~/Content/Selectize/css")
+    <link href="~/Content/Selectize/css/selectize.css" rel="stylesheet" />
+    <link href="~/Content/Selectize/css/selectize.bootstrap3.css" rel="stylesheet" />
+
     @RenderSection("head", required: false)
 </head>
 <!-- In the PHP version you can set the following options from inc/config file -->
@@ -209,7 +213,7 @@
     <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
 
     @RenderSection("scripts", required: false)
-
+    @Scripts.Render("~/bundles/selectize")
     <!-- Modal Loading -->
     <div id="modal-loading" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-sm">

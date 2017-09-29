@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using TallerIV.Models;
 using TallerIV.Dominio;
 using TallerIV.Negocio.Servicios;
+using TallerIV.Datos;
+using System.Collections.Generic;
 
 namespace TallerIV.Controllers
 {
@@ -153,16 +155,25 @@ namespace TallerIV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterPostulanteViewModel model)
         {
+            TallerIVDbContext db = new TallerIVDbContext();
+            TagsService tagsService = new TagsService(db);
+            BaseService<UsuarioEmpleado> usuariosService = new BaseService<UsuarioEmpleado>(db);
+
             if (ModelState.IsValid)
             {
                 var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento)  {
                     FechaRegistro = DateTime.Now
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                UserManager.AddToRole(user.Id, "Empleado");
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Empleado");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    var user2 = usuariosService.GetAll().FirstOrDefault(x => x.Id == user.Id);
+                    user2.Tags.AddRange(tagsService.GetTagsByString(model.Tags));
+                    usuariosService.UpdateEntity(user);
+
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -174,7 +185,6 @@ namespace TallerIV.Controllers
                 }
                 AddErrors(result);
             }
-            BaseService<Tag> tagsService = new BaseService<Tag>();
             ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -410,7 +420,11 @@ namespace TallerIV.Controllers
         {
             return View();
         }
-
+        public JsonResult SearchTags(string term) {
+            TagsService tagsService = new TagsService();
+            var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, text = x.Titulo });
+            return Json(tags, JsonRequestBehavior.AllowGet);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

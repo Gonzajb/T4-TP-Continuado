@@ -11,11 +11,16 @@ namespace TallerIV.Dominio
     {
         public UsuarioEmpleado(){}
 
-        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
+        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, List<Tag> tags = null) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
         {
-            Nombre = nombre;
-            Apellido = apellido;
-            FechaDeNacimiento = fechaDeNacimiento;
+            this.Tags = new List<Tag>();
+
+            this.Nombre = nombre;
+            this.Apellido = apellido;
+            this.FechaDeNacimiento = fechaDeNacimiento;
+
+            if (tags != null)
+                this.Tags.AddRange(tags);
         }
         public virtual List<Tag> Tags { get; set; }
         //public virtual ParametrosBusquedaUsuario ParametrosBusqueda { get; set; }

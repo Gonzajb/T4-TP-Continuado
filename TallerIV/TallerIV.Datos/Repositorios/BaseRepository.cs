@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace TallerIV.Datos.Repositorios
             dbSet.Add(entity);
             db.SaveChanges();
         }
+        public void AddEntityRange(List<T> entities)
+        {
+            dbSet.AddRange(entities);
+            db.SaveChanges();
+        }
         public void RemoveEntity(T entity)
         {
             dbSet.Remove(entity);
@@ -38,7 +44,8 @@ namespace TallerIV.Datos.Repositorios
             return dbSet.Find(id);
         }
         public void UpdateEntity(T entity) {
-            db.Entry(entity).State = EntityState.Modified;
+            dbSet.AddOrUpdate(entity);
+            //db.Entry(entity).State = EntityState.Modified;
             db.SaveChanges();
         }
     }

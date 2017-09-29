@@ -4,16 +4,21 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Datos;
 using TallerIV.Datos.Repositorios;
 
 namespace TallerIV.Negocio.Servicios
 {
     public class BaseService<T> where T : class
     {
-        BaseRepository<T> repository;
+        protected BaseRepository<T> repository;
         public BaseService(BaseRepository<T> repository)
         {
             this.repository = repository;
+        }
+        public BaseService(TallerIVDbContext db)
+        {
+            this.repository = new BaseRepository<T>(db);
         }
         public BaseService() {
             this.repository = new BaseRepository<T>();

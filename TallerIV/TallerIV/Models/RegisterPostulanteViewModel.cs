@@ -20,6 +20,6 @@ namespace TallerIV.Models
         [Display(Name = "Fecha de nacimiento")]
         public DateTime? FechaDeNacimiento { get; set; }
         [Display(Name = "Aptitudes")]
-        public List<string> Tags { get; set; }
+        public string Tags { get; set; }
     }
 }
