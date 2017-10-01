@@ -77,7 +77,7 @@ namespace TallerIV.Datos.Migrations
                 var user = userManager.FindByName("nsabaj@hotmail.com");
                 if (user == null)
                 {
-                    var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
+                    var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23), "Mi nombre es Nicolás.");
                     //var result = await UserManager.CreateAsync(user, model.Password);
                     userManager.Create(usuarioEmpleado, "Ns12345!");
                     //userManager.SetLockoutEnabled(usuarioEmpleado.Id, false);

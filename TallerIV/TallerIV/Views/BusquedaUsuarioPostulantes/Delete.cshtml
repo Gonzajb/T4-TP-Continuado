@@ -1,0 +1,73 @@
+﻿@model TallerIV.Dominio.Usuarios.BusquedaUsuarioPostulante
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BusquedaUsuarioPostulante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoMinimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SueldoMinimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoMinimoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SueldoMinimoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajoPrioridad)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

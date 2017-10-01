@@ -3,13 +3,17 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-user"></i>Crear cuenta.<br><small>Editar datos de cuenta y perfil profesional.</small>
+        </h1>
+    </div>
+</div>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
@@ -45,6 +49,12 @@
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CartaDePresentacion, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.CartaDePresentacion, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

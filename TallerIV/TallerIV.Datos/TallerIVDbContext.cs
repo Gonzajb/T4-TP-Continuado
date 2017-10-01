@@ -55,8 +55,8 @@ namespace TallerIV.Datos
 
             modelBuilder.Entity<UsuarioEmpleado>().ToTable("Usuarios")
                 .HasMany(u => u.Tags).WithMany();
-            //modelBuilder.Entity<UsuarioEmpleado>()
-            //    .HasOptional(u => u.ParametrosBusqueda).WithMany().HasForeignKey(x => x.ParametrosBusqueda_Id);
+            modelBuilder.Entity<UsuarioEmpleado>()
+                .HasOptional(u => u.Busqueda).WithMany().HasForeignKey(x => x.Busqueda_Id);
 
             modelBuilder.Entity<UsuarioEmpresa>().ToTable("Usuarios")
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
@@ -71,5 +71,7 @@ namespace TallerIV.Datos
         {
             return new TallerIVDbContext();
         }
+
+        public System.Data.Entity.DbSet<TallerIV.Dominio.Usuarios.BusquedaUsuarioPostulante> BusquedaUsuarioPostulantes { get; set; }
     }
 }

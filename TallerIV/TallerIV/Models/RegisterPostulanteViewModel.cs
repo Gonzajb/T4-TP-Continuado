@@ -11,7 +11,7 @@ namespace TallerIV.Models
     {
         public RegisterPostulanteViewModel() {
         }
-        public RegisterPostulanteViewModel(string id, string nombre, string apellido, DateTime? fechaDeNacimiento, string tags, string email, string password):base(email, password)
+        public RegisterPostulanteViewModel(string id, string nombre, string apellido, DateTime? fechaDeNacimiento, string tags, string email, string password, string cartaDePresentacion):base(email, password)
         {
             this.Id = id;
             this.Nombre = nombre;
@@ -29,6 +29,8 @@ namespace TallerIV.Models
 
         [Display(Name = "Fecha de nacimiento")]
         public DateTime? FechaDeNacimiento { get; set; }
+        [Display(Name = "Carta de presentación")]
+        public string CartaDePresentacion  { get; set; }
         [Display(Name = "Aptitudes")]
         public string Tags { get; set; }
     }

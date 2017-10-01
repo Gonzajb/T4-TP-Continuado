@@ -1,0 +1,70 @@
+﻿@model TallerIV.Dominio.Usuarios.BusquedaUsuarioPostulante
+
+@{
+    ViewBag.Title = "Administrar mis parámetros de búsqueda";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-search"></i>Parámetros de búsqueda.<br><small>Administrar mis parámetros de búsqueda de trabajo.</small>
+        </h1>
+    </div>
+</div>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SueldoMinimo, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.SueldoMinimo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SueldoMinimo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.SueldoMinimoPrioridad, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SueldoMinimoPrioridad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoRelacionDeTrabajo, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.TipoRelacionDeTrabajo, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoRelacionDeTrabajo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.TipoRelacionDeTrabajoPrioridad, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoRelacionDeTrabajoPrioridad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HorasTrabajo, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-3">
+                @Html.EditorFor(model => model.HorasTrabajo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HorasTrabajo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                @Html.EnumDropDownListFor(model => model.HorasTrabajoPrioridad, new { @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.HorasTrabajoPrioridad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Grabar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

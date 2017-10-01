@@ -13,6 +13,7 @@ using TallerIV.Dominio;
 using TallerIV.Negocio.Servicios;
 using TallerIV.Datos;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TallerIV.Controllers
 {
@@ -145,7 +146,7 @@ namespace TallerIV.Controllers
         {
             BaseService<Tag> tagsService = new BaseService<Tag>();
             ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
-            return View();
+            return View(new RegisterPostulanteViewModel());
         }
 
         //
@@ -161,7 +162,7 @@ namespace TallerIV.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento)  {
+                var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento, model.CartaDePresentacion)  {
                     FechaRegistro = DateTime.Now
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -432,6 +433,7 @@ namespace TallerIV.Controllers
                 FechaDeNacimiento = user.FechaDeNacimiento,
                 Id = user.Id,
                 Nombre = user.Nombre,
+                CartaDePresentacion = user.CartaDePresentacion,
                 Tags = user.TagsText
             };
             return View(model);
@@ -440,14 +442,17 @@ namespace TallerIV.Controllers
         public ActionResult Edit(EditPostulanteViewModel model) {
             if (ModelState.IsValid)
             {
-                BaseService<UsuarioEmpleado> usuariosService = new BaseService<UsuarioEmpleado>();
-                TagsService tagsService = new TagsService();
+                TallerIVDbContext db = new TallerIVDbContext();
+                BaseService<UsuarioEmpleado> usuariosService = new BaseService<UsuarioEmpleado>(db);
+                TagsService tagsService = new TagsService(db);
                 var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == model.Id);
                 user.FechaDeNacimiento = model.FechaDeNacimiento;
                 user.Apellido = model.Apellido;
                 user.Nombre = model.Nombre;
+                user.CartaDePresentacion = model.CartaDePresentacion;
+                var tags = tagsService.GetTagsByString(model.Tags);
                 user.Tags.Clear();
-                user.Tags.AddRange(tagsService.GetTagsByString(model.Tags));
+                user.Tags.AddRange(tags);
                 usuariosService.UpdateEntity(user);
                 return RedirectToAction("Index", "Home");
             }

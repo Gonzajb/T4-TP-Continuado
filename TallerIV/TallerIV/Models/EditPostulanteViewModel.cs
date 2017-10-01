@@ -21,6 +21,8 @@ namespace TallerIV.Models
 
         [Display(Name = "Fecha de nacimiento")]
         public DateTime? FechaDeNacimiento { get; set; }
+        [Display(Name = "Carta de presentación")]
+        public string CartaDePresentacion { get; set; }
         [Display(Name = "Aptitudes")]
         public string Tags { get; set; }
     }

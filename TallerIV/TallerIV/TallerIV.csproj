@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AccountEmpresaController.cs" />
     <Compile Include="Controllers\AccountReclutadorController.cs" />
     <Compile Include="Controllers\AvisoController.cs" />
+    <Compile Include="Controllers\BusquedaUsuarioPostulantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RegisterAccountController.cs" />
@@ -354,6 +355,11 @@
     <Content Include="Views\Shared\_LayoutProui.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiLogin.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\BusquedaUsuarioPostulantes\Create.cshtml" />
+    <Content Include="Views\BusquedaUsuarioPostulantes\Delete.cshtml" />
+    <Content Include="Views\BusquedaUsuarioPostulantes\Details.cshtml" />
+    <Content Include="Views\BusquedaUsuarioPostulantes\Edit.cshtml" />
+    <Content Include="Views\BusquedaUsuarioPostulantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

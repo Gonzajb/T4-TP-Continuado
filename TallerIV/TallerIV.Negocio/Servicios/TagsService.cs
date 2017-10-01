@@ -28,7 +28,7 @@ namespace TallerIV.Negocio.Servicios
             return tagsADevolver;
         }
         public List<Tag> GetTagsByTitulo(string term) {
-            return this.GetAll().Where(x => x.Titulo.ToUpper() == term.ToUpper()).ToList();
+            return this.GetAll().Where(x => x.Titulo.ToUpper().Contains(term.ToUpper())).ToList();
         }
     }
 }

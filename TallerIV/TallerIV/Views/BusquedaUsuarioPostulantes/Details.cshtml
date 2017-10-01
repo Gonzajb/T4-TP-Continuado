@@ -1,0 +1,67 @@
+﻿@model TallerIV.Dominio.Usuarios.BusquedaUsuarioPostulante
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BusquedaUsuarioPostulante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoMinimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SueldoMinimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoMinimoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SueldoMinimoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajoPrioridad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
