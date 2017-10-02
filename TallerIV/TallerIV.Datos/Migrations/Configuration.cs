@@ -84,14 +84,23 @@ namespace TallerIV.Datos.Migrations
                     userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
                 }
 
-                user = userManager.FindByName("laempresa1");
-                if (user == null)
+                var usuarioEmpresa = userManager.FindByName("laempresa1");
+                if (usuarioEmpresa == null)
                 {
-                    var usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
+                    usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
                     userManager.Create(usuarioEmpresa, "Le12345!");
                     //userManager.SetLockoutEnabled(usuarioEmpresa.Id, false);
                     userManager.AddToRole(usuarioEmpresa.Id, "Empresa");
                 }
+                user = userManager.FindByName("Relutador1");
+                if (user == null)
+                {
+                    var usuarioReclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "rec1@gmail.com", "Rec1", "TE", DateTime.Now,usuarioEmpresa.Id);
+                    userManager.Create(usuarioReclutador, "Le12345!");
+                    userManager.AddToRole(usuarioReclutador.Id, "Reclutador");
+
+                }
+
             //}
         }
     }
