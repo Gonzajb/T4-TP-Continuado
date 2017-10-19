@@ -460,6 +460,7 @@ namespace TallerIV.Controllers
                 return View(model);
             }
         }
+        [AllowAnonymous]
         public JsonResult SearchTags(string term) {
             TagsService tagsService = new TagsService();
             var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, text = x.Titulo });
