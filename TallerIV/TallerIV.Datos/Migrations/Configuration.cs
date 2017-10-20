@@ -20,7 +20,17 @@ namespace TallerIV.Datos.Migrations
         {
             InicializarTags(db);
             InicializarUsuarios(db);
+            InicializarAvisos(db);
             base.Seed(db);
+        }
+        public static void InicializarAvisos(TallerIVDbContext db) {
+            UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
+            UsuarioEmpresa usuarioEmpresa = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault();
+
+           Aviso aviso1 = new Aviso("primer aviso", "es tu primer trabajo", DateTime.Now, usuarioReclutador.Id, usuarioReclutador, null, TipoRelacionDeTrabajo.Dependencia,Dominio.Usuarios.Prioridad.
+                ,8,Dominio.Usuarios.Prioridad.Baja,usuarioEmpresa.Id);
+
+            db.Aviso.Add(aviso1);
         }
         public static void InicializarTags(TallerIVDbContext db) {
             if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))

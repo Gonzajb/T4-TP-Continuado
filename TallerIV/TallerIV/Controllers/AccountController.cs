@@ -512,7 +512,7 @@ namespace TallerIV.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "HomeEmpleado");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
