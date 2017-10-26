@@ -9,6 +9,7 @@ namespace TallerIV.Controllers
 {
     public class HomeEmpleadoController : Controller
     {
+        
         // GET: HomeEmpleado
         private AvisosService avisoService;
         public ActionResult Index()

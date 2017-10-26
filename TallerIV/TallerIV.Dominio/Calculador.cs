@@ -10,7 +10,7 @@ namespace TallerIV.Dominio
     {
         public Calculador()
         {
-
+            
         }
     }
 }

@@ -28,19 +28,19 @@ namespace TallerIV.Datos.Migrations
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             UsuarioEmpresa usuarioEmpresa = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault();
 
-            Aviso aviso1 = new Aviso(
-                "primer aviso",
-                "es tu primer trabajo",
-                DateTime.Now,
-                usuarioReclutador, null,
-                TipoRelacionDeTrabajo.Dependencia,
-                Dominio.Usuarios.Prioridad.Baja,
-                8,
-                Dominio.Usuarios.Prioridad.Baja,
-                usuarioEmpresa.Id);
+           Aviso aviso = new Aviso(
+               "primer aviso", 
+               "es tu primer trabajo", 
+               DateTime.Now, 
+               usuarioReclutador, null, 
+               TipoRelacionDeTrabajo.Dependencia,
+               Dominio.Usuarios.Prioridad.Baja,
+               8,
+               Dominio.Usuarios.Prioridad.Baja,
+               usuarioEmpresa.Id);
 
 
-            Aviso aviso2 = new Aviso(
+            Aviso otroAviso = new Aviso(
                "segundo aviso",
                "es tu primer trabajo",
                DateTime.Now,
