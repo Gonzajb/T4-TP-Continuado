@@ -8,6 +8,9 @@ namespace TallerIV.Dominio
 {
     class Calculador
     {
-        public Calculador ()
+        public Calculador()
+        {
+            
+        }
     }
 }

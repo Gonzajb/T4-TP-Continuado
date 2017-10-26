@@ -27,7 +27,7 @@ namespace TallerIV.Datos.Migrations
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             UsuarioEmpresa usuarioEmpresa = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault();
 
-           Aviso aviso1 = new Aviso(
+           Aviso aviso = new Aviso(
                "primer aviso", 
                "es tu primer trabajo", 
                DateTime.Now, 
@@ -39,7 +39,7 @@ namespace TallerIV.Datos.Migrations
                usuarioEmpresa.Id);
 
 
-            Aviso aviso2 = new Aviso(
+            Aviso otroAviso = new Aviso(
                "segundo aviso",
                "es tu primer trabajo",
                DateTime.Now,
@@ -49,7 +49,9 @@ namespace TallerIV.Datos.Migrations
                8,
                Dominio.Usuarios.Prioridad.Baja,
                usuarioEmpresa.Id);
-            db.Aviso.Add(aviso1);
+
+            db.Aviso.Add(aviso);
+            db.Aviso.Add(otroAviso);
         }
         public static void InicializarTags(TallerIVDbContext db) {
             if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))
