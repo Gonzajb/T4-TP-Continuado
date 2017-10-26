@@ -11,11 +11,12 @@ namespace TallerIV.Controllers
     {
         
         // GET: HomeEmpleado
+        private AvisosService avisoService;
         public ActionResult Index()
         {
-          
+            avisoService = new AvisosService();
             
-            return View();
+            return View(avisoService.GetAll(false).ToList());
         }
 
     }

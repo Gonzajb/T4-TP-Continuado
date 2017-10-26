@@ -12,7 +12,8 @@ namespace TallerIV.Datos.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
         //var user = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
 
@@ -50,8 +51,15 @@ namespace TallerIV.Datos.Migrations
                Dominio.Usuarios.Prioridad.Baja,
                usuarioEmpresa.Id);
 
-            db.Aviso.Add(aviso);
-            db.Aviso.Add(otroAviso);
+            if (!db.Aviso.Any(X=> X.Titulo == "primer aviso"))
+            {
+                db.Aviso.Add(aviso1);
+            }
+            if (!db.Aviso.Any(X => X.Titulo == "segundo aviso"))
+            {
+                db.Aviso.Add(aviso2);
+            }
+
         }
         public static void InicializarTags(TallerIVDbContext db) {
             if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))
