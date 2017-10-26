@@ -11,19 +11,19 @@ namespace TallerIV.Dominio
         public Aviso()
         {
         }
-        public Aviso(string titulo, string descripcion, DateTime fechainicio, UsuarioReclutador usuarioreclutador, List<Tag> tagsbuscados, TipoRelacionDeTrabajo relaciontrabajo, Prioridad relaciontrabajop, int horastrabajo, Prioridad horastrabajop, string usuarioempresa_id)
+        public Aviso(string titulo, string descripcion, DateTime fechaInicio, UsuarioReclutador usuarioReclutador, List<Tag> tagsBuscados, TipoRelacionDeTrabajo relacionTrabajo, Prioridad relacionTrabajoPrioridad, int horasTrabajo, Prioridad horasTrabajoPrioridad, string usuarioEmpresaId)
         {
             this.Titulo = titulo;
             this.Descripcion = descripcion;
-            this.FechaInicio = fechainicio;
+            this.FechaInicio = FechaInicio;
             //this.UsuarioReclutador_Id = usuarioreclutador_id;
-            this.UsuarioReclutador = usuarioreclutador;
-            this.TagsBuscados = tagsbuscados;
-            this.TipoRelacionDeTrabajo = relaciontrabajo;
-            this.TipoRelacionDeTrabajoPrioridad = relaciontrabajop;
-            this.HorasTrabajo = horastrabajo;
-            this.HorasTrabajoPrioridad = horastrabajop;
-            this.UsuarioEmpresa_Id = usuarioempresa_id;
+            this.UsuarioReclutador = usuarioReclutador;
+            this.TagsBuscados = tagsBuscados;
+            this.TipoRelacionDeTrabajo = relacionTrabajo;
+            this.TipoRelacionDeTrabajoPrioridad = relacionTrabajoPrioridad;
+            this.HorasTrabajo = horasTrabajo;
+            this.HorasTrabajoPrioridad = HorasTrabajoPrioridad;
+            this.UsuarioEmpresa_Id = usuarioEmpresaId;
 
         }
         public int Id { get; set; }
