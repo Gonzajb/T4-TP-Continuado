@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Dominio
 {
-    class Coincidencia
+    public class Coincidencia
     {
         public Coincidencia()
         {
