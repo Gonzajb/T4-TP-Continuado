@@ -66,8 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aviso.cs" />
-    <Compile Include="CalculadorDePorcentaje.cs" />
-    <Compile Include="Coincidencia.cs" />
+    <Compile Include="Coincidencias\CalculadoresDePorcentaje\CalculadorDePorcentaje.cs" />
+    <Compile Include="Coincidencias\Coincidencia.cs" />
     <Compile Include="Coincidencias\GeneradorCoincidencias.cs" />
     <Compile Include="Encuentro.cs" />
     <Compile Include="Like.cs" />
@@ -85,6 +85,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
