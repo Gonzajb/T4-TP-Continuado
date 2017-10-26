@@ -98,13 +98,7 @@
             },
             load: function (query, callback) {
                 if (!query.length) return callback();
-                //callback([
-                //    { key: 1, value: 'One', text: 'One' },
-                //    { key: 2, value: 'Two' },
-                //    { key: 3, value: 'Three' },
-                //    { key: 4, value: 'Four' },
-                //    { key: 5, value: 'Five' },
-                //        ]);
+                
                 $.ajax({
                     url: '@Url.Action("SearchTags")?term=' + query,
                     error: function () {

@@ -11,6 +11,23 @@ namespace TallerIV.Dominio
         public Aviso()
         {
         }
+        public Aviso(string titulo, string descripcion, DateTime fechainicio, string usuarioreclutador_id, UsuarioReclutador usuarioreclutador,
+            List<Tag> tagsbuscados, TipoRelacionDeTrabajo relaciontrabajo, Prioridad relaciontrabajop, 
+            int horastrabajo, Prioridad horastrabajop, string usuarioempresa_id, )
+        {
+            this.Titulo = titulo;
+            this.Descripcion = descripcion;
+            this.FechaInicio = fechainicio;
+            this.UsuarioReclutador_Id = usuarioreclutador_id;
+            this.UsuarioReclutador = usuarioreclutador;
+            this.TagsBuscados = tagsbuscados;
+            this.TipoRelacionDeTrabajo = relaciontrabajo;
+            this.TipoRelacionDeTrabajoPrioridad = relaciontrabajop;
+            this.HorasTrabajo = horastrabajo;
+            this.HorasTrabajoPrioridad = horastrabajop;
+            this.UsuarioEmpresa_Id = usuarioempresa_id;
+
+        }
         public int Id { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
@@ -20,12 +37,11 @@ namespace TallerIV.Dominio
         public virtual UsuarioReclutador UsuarioReclutador { get; set; }
         public virtual List<Tag> TagsBuscados { get; set; }
         public float? SueldoOfrecido { get; set; }
-        public Prioridad SueldoOfrecidoPrioridad { get; set; }
+        public Prioridad? SueldoOfrecidoPrioridad { get; set; }
         public TipoRelacionDeTrabajo TipoRelacionDeTrabajo { get; set; }
         public Prioridad TipoRelacionDeTrabajoPrioridad { get; set; }
         public int HorasTrabajo { get; set; }
         public Prioridad HorasTrabajoPrioridad { get; set; }
         public string UsuarioEmpresa_Id { get; set; }
-        public string UsuarioReclutadorAsignado_Id { get; set; }
     }
 }
