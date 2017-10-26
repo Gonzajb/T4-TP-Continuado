@@ -12,14 +12,14 @@ namespace TallerIV.Dominio
         public Aviso()
         {
         }
-        public Aviso(string titulo, string descripcion, DateTime fechaInicio, UsuarioReclutador usuarioReclutador, List<Tag> tagsBuscados, TipoRelacionDeTrabajo relacionTrabajo, Prioridad relacionTrabajoPrioridad, int horasTrabajo, Prioridad horasTrabajoPrioridad, string usuarioEmpresaId)
+        public Aviso(string titulo, string descripcion, DateTime fechaInicio, UsuarioReclutador usuarioReclutador, List<AptitudPorAviso> aptitudesBuscados, TipoRelacionDeTrabajo relacionTrabajo, Prioridad relacionTrabajoPrioridad, int horasTrabajo, Prioridad horasTrabajoPrioridad, string usuarioEmpresaId)
         {
             this.Titulo = titulo;
             this.Descripcion = descripcion;
             this.FechaInicio = FechaInicio;
             //this.UsuarioReclutador_Id = usuarioreclutador_id;
             this.UsuarioReclutador = usuarioReclutador;
-            this.TagsBuscados = tagsBuscados;
+            this.AptitudesBuscadas = aptitudesBuscados;
             this.TipoRelacionDeTrabajo = relacionTrabajo;
             this.TipoRelacionDeTrabajoPrioridad = relacionTrabajoPrioridad;
             this.HorasTrabajo = horasTrabajo;

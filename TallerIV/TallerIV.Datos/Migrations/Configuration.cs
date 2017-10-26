@@ -27,7 +27,7 @@ namespace TallerIV.Datos.Migrations
         public static void InicializarAvisos(TallerIVDbContext db) {
 
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
-            string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id.;
+            string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
 
             Aviso aviso = new Aviso(
                "Este es un Aviso de .Net",
@@ -55,17 +55,17 @@ namespace TallerIV.Datos.Migrations
             //   usuarioEmpresa.Id);
 
 
-            db.Aviso.Add(aviso);
+            db.Avisos.Add(aviso);
             //db.Aviso.Add(otroAviso);
 
-            if (!db.Avisos.Any(X=> X.Titulo == "primer aviso"))
-            {
-                db.Avisos.Add(aviso1);
-            }
-            if (!db.Avisos.Any(X => X.Titulo == "segundo aviso"))
-            {
-                db.Avisos.Add(aviso2);
-            }
+            //if (!db.Avisos.Any(X=> X.Titulo == "primer aviso"))
+            //{
+            //    db.Avisos.Add(aviso1);
+            //}
+            //if (!db.Avisos.Any(X => X.Titulo == "segundo aviso"))
+            //{
+            //    db.Avisos.Add(aviso2);
+            //}
 
         }
         public static void InicializarTags(TallerIVDbContext db) {
