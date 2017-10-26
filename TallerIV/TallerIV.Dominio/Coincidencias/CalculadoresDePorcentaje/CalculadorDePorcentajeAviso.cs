@@ -29,22 +29,29 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
         //    this.PuntajeMaximo = puntajeMaximo;
         //}
         public Coincidencia GenerarCoincidencia(UsuarioEmpleado empleado)
-        {            
+        {
             int PuntajeEmpleado = 0;
-            foreach(Tag tag in Aviso.TagsBuscados)
+            Coincidencia coincidencia;
+            if (empleado.Tags != null && Aviso.TagsBuscados != null)
             {
-                int i = 0;
-                while (tag.Titulo != empleado.Tags[i].Titulo || i < empleado.Tags.Count)
+                foreach (Tag tag in Aviso.TagsBuscados)
                 {
-                    i++;
+                    int i = 0;
+                    while (tag.Titulo != empleado.Tags[i].Titulo && i < empleado.Tags.Count)
+                    {
+                        i++;
+                    }
+                    if (tag.Titulo == empleado.Tags[i].Titulo)
+                    {
+                        //PuntajeEmpleado += tag.Prioridad;
+                    }
                 }
-                if (tag.Titulo == empleado.Tags[i].Titulo)
-                {
-                    //PuntajeEmpleado += tag.Prioridad;
-                }                
+                coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, empleado, Aviso);
             }
-            Coincidencia coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, empleado, Aviso);
-
+            else
+            {
+                coincidencia = null;
+            }
             return coincidencia;
         }
         public Aviso Aviso { get; set; }

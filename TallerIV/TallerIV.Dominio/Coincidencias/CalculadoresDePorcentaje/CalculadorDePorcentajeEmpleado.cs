@@ -17,20 +17,27 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
         {
             int PuntajeMaximo = CalcularPuntajeMaximo(aviso);
             int PuntajeEmpleado = 0;
-            foreach (Tag tag in aviso.TagsBuscados)
+            Coincidencia coincidencia;
+            if (Empleado.Tags != null && aviso.TagsBuscados != null)
             {
-                int i = 0;
-                while (tag.Titulo != Empleado.Tags[i].Titulo || i < Empleado.Tags.Count)
+                foreach (Tag tag in aviso.TagsBuscados)
                 {
-                    i++;
+                    int i = 0;
+                    while (tag.Titulo != Empleado.Tags[i].Titulo && i < Empleado.Tags.Count)
+                    {
+                        i++;
+                    }
+                    if (tag.Titulo == Empleado.Tags[i].Titulo)
+                    {
+                        //PuntajeEmpleado += tag.Prioridad;
+                    }
                 }
-                if (tag.Titulo == Empleado.Tags[i].Titulo)
-                {
-                    //PuntajeEmpleado += tag.Prioridad;
-                }
+                coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, Empleado, aviso);
             }
-            Coincidencia coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, Empleado, aviso);
-
+            else
+            {
+                coincidencia = null;
+            }
             return coincidencia;
         }
         public UsuarioEmpleado Empleado { get; set; }
