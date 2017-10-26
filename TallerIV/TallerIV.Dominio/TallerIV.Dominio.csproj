@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aviso.cs" />
-    <Compile Include="Calculador.cs" />
+    <Compile Include="CalculadorDePorcentaje.cs" />
     <Compile Include="Coincidencia.cs" />
     <Compile Include="Encuentro.cs" />
     <Compile Include="Like.cs" />
