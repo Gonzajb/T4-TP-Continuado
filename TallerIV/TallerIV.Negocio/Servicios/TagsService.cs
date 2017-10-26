@@ -8,26 +8,26 @@ using TallerIV.Dominio;
 
 namespace TallerIV.Negocio.Servicios
 {
-    public class TagsService : BaseService<Tag>
+    public class TagsService : BaseService<Aptitud>
     {
         public TagsService(TallerIVDbContext db) : base(db) {
         }
         public TagsService() : base() { }
-        public List<Tag> GetTagsByString(string tagsString) {
+        public List<Aptitud> GetTagsByString(string tagsString) {
             //Resuelve una lista de tags separados por comas (",") agregando a la base de datos los inexistentes.
-            List<Tag> tagsAAgregar = new List<Tag>();
-            List<Tag> tagsADevolver = new List<Tag>();
+            List<Aptitud> tagsAAgregar = new List<Aptitud>();
+            List<Aptitud> tagsADevolver = new List<Aptitud>();
             string[] tagsAProcesar = tagsString.Split(',');
 
             tagsADevolver.AddRange(this.GetAll().Where(x => tagsAProcesar.Any(t => t.ToUpper() == x.Titulo.ToUpper())).ToList());
-            tagsAAgregar.AddRange(tagsAProcesar.Where(t => !tagsADevolver.Any(x => x.Titulo.ToUpper() == t.ToUpper())).Select(t => new Tag { Titulo = t }).ToList());
+            tagsAAgregar.AddRange(tagsAProcesar.Where(t => !tagsADevolver.Any(x => x.Titulo.ToUpper() == t.ToUpper())).Select(t => new Aptitud { Titulo = t }).ToList());
 
             repository.AddEntityRange(tagsAAgregar);
             tagsADevolver.AddRange(tagsAAgregar);
 
             return tagsADevolver;
         }
-        public List<Tag> GetTagsByTitulo(string term) {
+        public List<Aptitud> GetTagsByTitulo(string term) {
             return this.GetAll().Where(x => x.Titulo.ToUpper().Contains(term.ToUpper())).ToList();
         }
     }

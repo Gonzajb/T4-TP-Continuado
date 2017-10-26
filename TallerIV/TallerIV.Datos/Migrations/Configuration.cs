@@ -62,17 +62,17 @@ namespace TallerIV.Datos.Migrations
 
         }
         public static void InicializarTags(TallerIVDbContext db) {
-            if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "ASP.NET"))
             {
-                db.Tags.Add(new Tag { Titulo = "ASP.NET" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "ASP.NET" });
             }
-            if (!db.Tags.Any(x => x.Titulo == "SQL SERVER"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "SQL SERVER"))
             {
-                db.Tags.Add(new Tag { Titulo = "SQL SERVER" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "SQL SERVER" });
             }
-            if (!db.Tags.Any(x => x.Titulo == "JAVA"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "JAVA"))
             {
-                db.Tags.Add(new Tag { Titulo = "JAVA" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "JAVA" });
             }
             db.SaveChanges();
         }

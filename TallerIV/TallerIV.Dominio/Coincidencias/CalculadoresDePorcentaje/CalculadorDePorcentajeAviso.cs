@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Dominio.Avisos;
 using TallerIV.Dominio.Coincidencias;
 
 namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
@@ -32,16 +33,16 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
         {
             int PuntajeEmpleado = 0;
             Coincidencia coincidencia;
-            if (empleado.Tags != null && Aviso.TagsBuscados != null)
+            if (empleado.Tags != null && Aviso.AptitudesBuscadas != null)
             {
-                foreach (Tag tag in Aviso.TagsBuscados)
+                foreach (AptitudPorAviso aptitud in Aviso.AptitudesBuscadas)
                 {
                     int i = 0;
-                    while (tag.Titulo != empleado.Tags[i].Titulo && i < empleado.Tags.Count)
+                    while (aptitud.Aptitud.Titulo != empleado.Tags[i].Titulo && i < empleado.Tags.Count)
                     {
                         i++;
                     }
-                    if (tag.Titulo == empleado.Tags[i].Titulo)
+                    if (aptitud.Aptitud.Titulo == empleado.Tags[i].Titulo)
                     {
                         //PuntajeEmpleado += tag.Prioridad;
                     }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TallerIV.Dominio
 {
-    public class Tag
+    public class Aptitud
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Titulo { get; set; }
     }
 }

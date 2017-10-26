@@ -14,9 +14,9 @@ namespace TallerIV.Controllers
 {
     public class TagsController : Controller
     {
-        private BaseService<Tag> tagsService;
+        private BaseService<Aptitud> tagsService;
         public TagsController() {
-            tagsService = new BaseService<Tag>();
+            tagsService = new BaseService<Aptitud>();
         }
         // GET: Tags
         public ActionResult Index()
@@ -31,7 +31,7 @@ namespace TallerIV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tag tag = this.tagsService.GetById(id.Value);
+            Aptitud tag = this.tagsService.GetById(id.Value);
             if (tag == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace TallerIV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo")] Tag tag)
+        public ActionResult Create([Bind(Include = "Id,Titulo")] Aptitud tag)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace TallerIV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tag tag = this.tagsService.GetById(id.Value);
+            Aptitud tag = this.tagsService.GetById(id.Value);
             if (tag == null)
             {
                 return HttpNotFound();
@@ -80,7 +80,7 @@ namespace TallerIV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo")] Tag tag)
+        public ActionResult Edit([Bind(Include = "Id,Titulo")] Aptitud tag)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace TallerIV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tag tag = this.tagsService.GetById(id.Value);
+            Aptitud tag = this.tagsService.GetById(id.Value);
             if (tag == null)
             {
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace TallerIV.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tag tag = tagsService.GetById(id);
+            Aptitud tag = tagsService.GetById(id);
             this.tagsService.RemoveEntity(tag);
             return RedirectToAction("Index");
         }
