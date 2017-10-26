@@ -16,13 +16,13 @@
             <!-- END Main Title -->
             <!-- Top Stats -->
             <div class="col-md-8 col-lg-6">
-                <div class="row text-right">
-                    <div class="col-xs-12 col-sm-12">
-                        <h2 class="animation-hatch">
-                            @ViewBag.Sentence<br>
-                        </h2>
-                    </div>
-                </div>
+                @foreach (var item in Model)
+                {
+                    <text>
+                        @item.Titulo <br /> @item.SueldoOfrecidoPrioridad <br />
+
+                    </text>
+                }
             </div>
             <!-- END Top Stats -->
         </div>
@@ -30,9 +30,3 @@
     <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
     <img class="animation-pulseSlow" alt="header image" src="~/Content/themes/img/background-dashboard.png">
 </div>
-@foreach (var item in Model) {
-    <text>
-    @item.Titulo <br /> @item.SueldoOfrecidoPrioridad <br />
-
-    </text>
-}
