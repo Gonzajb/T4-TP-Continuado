@@ -12,7 +12,8 @@ namespace TallerIV.Datos.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
         //var user = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
 
@@ -27,16 +28,16 @@ namespace TallerIV.Datos.Migrations
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             UsuarioEmpresa usuarioEmpresa = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault();
 
-           Aviso aviso1 = new Aviso(
-               "primer aviso", 
-               "es tu primer trabajo", 
-               DateTime.Now, 
-               usuarioReclutador, null, 
-               TipoRelacionDeTrabajo.Dependencia,
-               Dominio.Usuarios.Prioridad.Baja,
-               8,
-               Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresa.Id);
+            Aviso aviso1 = new Aviso(
+                "primer aviso",
+                "es tu primer trabajo",
+                DateTime.Now,
+                usuarioReclutador, null,
+                TipoRelacionDeTrabajo.Dependencia,
+                Dominio.Usuarios.Prioridad.Baja,
+                8,
+                Dominio.Usuarios.Prioridad.Baja,
+                usuarioEmpresa.Id);
 
 
             Aviso aviso2 = new Aviso(
@@ -49,7 +50,16 @@ namespace TallerIV.Datos.Migrations
                8,
                Dominio.Usuarios.Prioridad.Baja,
                usuarioEmpresa.Id);
-            db.Aviso.Add(aviso1);
+
+            if (!db.Aviso.Any(X=> X.Titulo == "primer aviso"))
+            {
+                db.Aviso.Add(aviso1);
+            }
+            if (!db.Aviso.Any(X => X.Titulo == "segundo aviso"))
+            {
+                db.Aviso.Add(aviso2);
+            }
+
         }
         public static void InicializarTags(TallerIVDbContext db) {
             if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))

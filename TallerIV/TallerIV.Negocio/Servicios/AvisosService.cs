@@ -25,6 +25,16 @@ namespace TallerIV.Negocio.Servicios
             return avisos.AsEnumerable();
         
         }
+        public IEnumerable<Aviso> GetAll(bool filtrarFinalizados)
+        {
+            IQueryable<Aviso> avisos = this.GetAll();
+            if (filtrarFinalizados)
+                avisos = avisos.Where(a => !a.FechaFin.HasValue);
+
+            return avisos.AsEnumerable();
+
+        }
+
         public void ReasignarAviso(long idAviso, string idReclutador)
         {
             Aviso aviso = this.GetById(idAviso);
