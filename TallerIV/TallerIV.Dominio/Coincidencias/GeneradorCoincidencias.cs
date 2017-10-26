@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TallerIV.Dominio.Usuarios;
+using TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje;
 
 namespace TallerIV.Dominio.Coincidencias
 {
@@ -18,8 +19,7 @@ namespace TallerIV.Dominio.Coincidencias
         public List<Coincidencia> GenerarListadoCoincidencias(Aviso avisoOrigen, IQueryable<UsuarioEmpleado> usuariosEmpleado) {
             //Inicialización
             List<Coincidencia> listCoincidencias = new List<Coincidencia>();
-            CalculadorDePorcentaje calculadorDePorcentaje = new CalculadorDePorcentaje();
-            calculadorDePorcentaje.Aviso = avisoOrigen;
+            CalculadorDePorcentajeAviso calculadorDePorcentaje = new CalculadorDePorcentajeAviso(avisoOrigen);
 
             //Se filtran todos los empleados que cumplan con los parámetros excluyentes
             List<UsuarioEmpleado> listCandidatos = usuariosEmpleado.Where(x =>
@@ -32,8 +32,7 @@ namespace TallerIV.Dominio.Coincidencias
             //Se generan las coincidencias
             foreach (var empleado in listCandidatos)
             {
-                calculadorDePorcentaje.Empleado = empleado;
-                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia();
+                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia(empleado);
                 listCoincidencias.Add(coincidencia);
             }
 
@@ -53,8 +52,7 @@ namespace TallerIV.Dominio.Coincidencias
             //Inicialización
             DateTime fechaActual = DateTime.Now;
             List<Coincidencia> listCoincidencias = new List<Coincidencia>();
-            CalculadorDePorcentaje calculadorDePorcentaje = new CalculadorDePorcentaje();
-            calculadorDePorcentaje.Empleado = usuarioEmpleadoOrigen;
+            CalculadorDePorcentajeEmpleado calculadorDePorcentaje = new CalculadorDePorcentajeEmpleado(usuarioEmpleadoOrigen);
             BusquedaUsuarioPostulante busqueda = usuarioEmpleadoOrigen.Busqueda;
 
             //Se filtran todos los avisos que cumplan con los parámetros excluyentes
@@ -68,9 +66,8 @@ namespace TallerIV.Dominio.Coincidencias
 
             //Se generan las coincidencias
             foreach (var aviso in listCandidatos)
-            {
-                calculadorDePorcentaje.Aviso = aviso;
-                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia();
+            {                
+                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia(aviso);
                 listCoincidencias.Add(coincidencia);
             }
 
