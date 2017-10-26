@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Dominio.Avisos;
 
 namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
 {
@@ -11,7 +12,7 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
         protected int CalcularPuntajeMaximo(Aviso aviso)
         {
             int puntajeMaximo = 0;
-            foreach (Tag tag in aviso.TagsBuscados)
+            foreach (AptitudPorAviso aptitud in aviso.AptitudesBuscadas)
             {
                 //PuntajeMaximo += (int)aviso.TagsBuscadosPrioridad;
             }

@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using TallerIV.Dominio;
 using Microsoft.AspNet.Identity.EntityFramework;
+using TallerIV.Dominio.Avisos;
 
 namespace TallerIV.Datos
 {
@@ -17,11 +18,11 @@ namespace TallerIV.Datos
         {
         }
 
-        public DbSet<Aviso> Aviso { get; set; }
-        public DbSet<Encuentro> Encuentro { get; set; }
-        public DbSet<Like> Like { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        //public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Aviso> Avisos { get; set; }
+        public DbSet<Encuentro> Encuentros { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Aptitud> Aptitudes { get; set; }
+        public DbSet<AptitudPorAviso> AptitudesPorAviso { get; set; }
         //public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
         //public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
 
@@ -37,10 +38,15 @@ namespace TallerIV.Datos
             //MUCHOS A MUCHOS: modelBuilder.Entity<Aviso>().HasMany(a => a.TagsBuscados).WithMany();
             //UNO A MUCHOS:    modelBuilder.Entity<UsuarioEmpresa>().HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
             //MUCHOS A UNO:    modelBuilder.Entity<Like>().HasRequired(l => l.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
+            modelBuilder.Entity<Aptitud>().HasKey(a => a.Id).ToTable("Aptitudes");
 
             modelBuilder.Entity<Aviso>().HasKey(a => a.Id).ToTable("Avisos");
             modelBuilder.Entity<Aviso>().HasRequired(a => a.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
-            modelBuilder.Entity<Aviso>().HasMany(a => a.TagsBuscados).WithMany();
+            modelBuilder.Entity<Aviso>().HasMany(a => a.AptitudesBuscadas).WithRequired().HasForeignKey(ab => ab.Aviso_Id);
+
+            modelBuilder.Entity<AptitudPorAviso>().HasKey(x => new { x.Aptitud_Id, x.Aviso_Id })
+                .ToTable("AptitudesPorAviso");
+            modelBuilder.Entity<AptitudPorAviso>().HasRequired(x => x.Aptitud).WithMany().HasForeignKey(a => a.Aptitud_Id);
 
             modelBuilder.Entity<Encuentro>().HasKey(e => e.Id).ToTable("Encuentros");
             modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
@@ -62,9 +68,6 @@ namespace TallerIV.Datos
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
             modelBuilder.Entity<UsuarioEmpresa>()
                 .HasMany(u => u.Reclutadores).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
-
-            //modelBuilder.Entity<UsuarioReclutador>().ToTable("Usuarios")
-            //    .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioReclutador_Id);
         }
 
         public static TallerIVDbContext Create()

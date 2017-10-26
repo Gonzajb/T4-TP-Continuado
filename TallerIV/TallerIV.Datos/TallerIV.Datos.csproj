@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201710010708086_cartaDePresentacionPostulante.Designer.cs">
       <DependentUpon>201710010708086_cartaDePresentacionPostulante.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710262257085_aptitudPorAviso.cs" />
+    <Compile Include="Migrations\201710262257085_aptitudPorAviso.Designer.cs">
+      <DependentUpon>201710262257085_aptitudPorAviso.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\BaseRepository.cs" />
     <Compile Include="TallerIVDbContext.cs" />
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710010708086_cartaDePresentacionPostulante.resx">
       <DependentUpon>201710010708086_cartaDePresentacionPostulante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710262257085_aptitudPorAviso.resx">
+      <DependentUpon>201710262257085_aptitudPorAviso.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

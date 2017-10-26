@@ -144,7 +144,7 @@ namespace TallerIV.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            BaseService<Tag> tagsService = new BaseService<Tag>();
+            BaseService<Aptitud> tagsService = new BaseService<Aptitud>();
             ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
             return View(new RegisterPostulanteViewModel());
         }

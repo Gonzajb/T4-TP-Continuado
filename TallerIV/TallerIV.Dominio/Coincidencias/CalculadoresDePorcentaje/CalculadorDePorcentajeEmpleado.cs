@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Dominio.Avisos;
 
 namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
 {
@@ -18,16 +19,16 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
             int PuntajeMaximo = CalcularPuntajeMaximo(aviso);
             int PuntajeEmpleado = 0;
             Coincidencia coincidencia;
-            if (Empleado.Tags != null && aviso.TagsBuscados != null)
+            if (Empleado.Tags != null && aviso.AptitudesBuscadas != null)
             {
-                foreach (Tag tag in aviso.TagsBuscados)
+                foreach (AptitudPorAviso aptitud in aviso.AptitudesBuscadas)
                 {
                     int i = 0;
-                    while (tag.Titulo != Empleado.Tags[i].Titulo && i < Empleado.Tags.Count)
+                    while (aptitud.Aptitud.Titulo != Empleado.Tags[i].Titulo && i < Empleado.Tags.Count)
                     {
                         i++;
                     }
-                    if (tag.Titulo == Empleado.Tags[i].Titulo)
+                    if (aptitud.Aptitud.Titulo == Empleado.Tags[i].Titulo)
                     {
                         //PuntajeEmpleado += tag.Prioridad;
                     }

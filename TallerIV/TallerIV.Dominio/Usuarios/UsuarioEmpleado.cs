@@ -12,9 +12,9 @@ namespace TallerIV.Dominio
     {
         public UsuarioEmpleado(){}
 
-        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string cartaDePresentacion, List<Tag> tags = null) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
+        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string cartaDePresentacion, List<Aptitud> tags = null) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
         {
-            this.Tags = new List<Tag>();
+            this.Tags = new List<Aptitud>();
 
             this.Nombre = nombre;
             this.Apellido = apellido;
@@ -25,7 +25,7 @@ namespace TallerIV.Dominio
                 this.Tags.AddRange(tags);
         }
         public string CartaDePresentacion { get; set; }
-        public virtual List<Tag> Tags { get; set; }
+        public virtual List<Aptitud> Tags { get; set; }
         public virtual BusquedaUsuarioPostulante Busqueda { get; set; }
         public long? Busqueda_Id { get; set; }
         [NotMapped]
