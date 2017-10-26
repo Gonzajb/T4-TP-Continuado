@@ -25,39 +25,46 @@ namespace TallerIV.Datos.Migrations
             base.Seed(db);
         }
         public static void InicializarAvisos(TallerIVDbContext db) {
+
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
-            UsuarioEmpresa usuarioEmpresa = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault();
+            string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id.;
 
-           Aviso aviso = new Aviso(
-               "primer aviso", 
-               "es tu primer trabajo", 
-               DateTime.Now, 
-               usuarioReclutador, null, 
-               TipoRelacionDeTrabajo.Dependencia,
-               Dominio.Usuarios.Prioridad.Baja,
-               8,
-               Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresa.Id);
-
-
-            Aviso otroAviso = new Aviso(
-               "segundo aviso",
-               "es tu primer trabajo",
+            Aviso aviso = new Aviso(
+               "Este es un Aviso de .Net",
+               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
                DateTime.Now,
-               usuarioReclutador, null,
-               TipoRelacionDeTrabajo.Dependencia,
+               usuarioReclutador,
+               null,
+               TipoRelacionDeTrabajo.Monotributo,
                Dominio.Usuarios.Prioridad.Baja,
                8,
                Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresa.Id);
+               usuarioEmpresaId);
+               
+
+
+            //Aviso otroAviso = new Aviso(
+            //   "segundo aviso",
+            //   "es tu primer trabajo",
+            //   DateTime.Now,
+            //   usuarioReclutador, null,
+            //   TipoRelacionDeTrabajo.Dependencia,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   8,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   usuarioEmpresa.Id);
+
+
+            db.Aviso.Add(aviso);
+            //db.Aviso.Add(otroAviso);
 
             if (!db.Avisos.Any(X=> X.Titulo == "primer aviso"))
             {
-                db.Avisos.Add(aviso);
+                db.Avisos.Add(aviso1);
             }
             if (!db.Avisos.Any(X => X.Titulo == "segundo aviso"))
             {
-                db.Avisos.Add(otroAviso);
+                db.Avisos.Add(aviso2);
             }
 
         }
