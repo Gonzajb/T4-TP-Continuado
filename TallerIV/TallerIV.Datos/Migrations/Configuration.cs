@@ -53,11 +53,11 @@ namespace TallerIV.Datos.Migrations
 
             if (!db.Avisos.Any(X=> X.Titulo == "primer aviso"))
             {
-                db.Avisos.Add(aviso1);
+                db.Avisos.Add(aviso);
             }
             if (!db.Avisos.Any(X => X.Titulo == "segundo aviso"))
             {
-                db.Avisos.Add(aviso2);
+                db.Avisos.Add(otroAviso);
             }
 
         }

@@ -250,6 +250,8 @@
     <Content Include="Content\Selectize\js\selectize.min.js" />
     <Content Include="Content\Selectize\js\standalone\selectize.js" />
     <Content Include="Content\Selectize\js\standalone\selectize.min.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="favicon.ico" />
@@ -281,6 +283,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ViewModels\AptitudesPorAvisoViewModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
