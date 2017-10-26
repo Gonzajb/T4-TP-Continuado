@@ -18,7 +18,7 @@ namespace TallerIV.Negocio.Servicios
         }
         public IEnumerable<Aviso> GetAllByReclutador(string IdReclutador, bool filtrarFinalizados)
         {
-            IQueryable<Aviso> avisos = this.GetAll().Where(a => a.UsuarioReclutadorAsignado_Id == IdReclutador);
+            IQueryable<Aviso> avisos = this.GetAll().Where(a => a.UsuarioReclutador_Id == IdReclutador);
             if (filtrarFinalizados)
                 avisos = avisos.Where(a => !a.FechaFin.HasValue);
 
@@ -28,7 +28,7 @@ namespace TallerIV.Negocio.Servicios
         public void ReasignarAviso(long idAviso, string idReclutador)
         {
             Aviso aviso = this.GetById(idAviso);
-            aviso.UsuarioReclutadorAsignado_Id = idReclutador;
+            aviso.UsuarioReclutador_Id = idReclutador;
             this.UpdateEntity(aviso);
         }
     }
