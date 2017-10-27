@@ -22,11 +22,13 @@ namespace TallerIV.Dominio.Coincidencias
             CalculadorDePorcentajeAviso calculadorDePorcentaje = new CalculadorDePorcentajeAviso(avisoOrigen);
 
             //Se filtran todos los empleados que cumplan con los parámetros excluyentes
-            List<UsuarioEmpleado> listCandidatos = usuariosEmpleado.Where(x =>
-                x.Busqueda_Id.HasValue
-                && (avisoOrigen.HorasTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.HorasTrabajo == x.Busqueda.HorasTrabajo : true)
-                && (avisoOrigen.SueldoOfrecidoPrioridad == Prioridad.Excluyente ? avisoOrigen.SueldoOfrecido >= x.Busqueda.SueldoMinimo : true)
-                && (avisoOrigen.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.TipoRelacionDeTrabajo == x.Busqueda.TipoRelacionDeTrabajo : true)
+            List<UsuarioEmpleado> listCandidatos = usuariosEmpleado.Where(usEmp =>
+                usEmp.Busqueda_Id.HasValue
+                && (avisoOrigen.HorasTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.HorasTrabajo == usEmp.Busqueda.HorasTrabajo : true)
+                && (avisoOrigen.SueldoOfrecidoPrioridad == Prioridad.Excluyente ? avisoOrigen.SueldoOfrecido >= usEmp.Busqueda.SueldoMinimo : true)
+                && (avisoOrigen.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.TipoRelacionDeTrabajo == usEmp.Busqueda.TipoRelacionDeTrabajo : true)
+                && !avisoOrigen.UsuariosEmpleadoAprobados.Any(aviso => aviso.Id == usEmp.Id)
+                && !avisoOrigen.UsuariosEmpleadoDesaprobados.Any(aviso => aviso.Id == usEmp.Id)
             ).ToList();
             
             //Se generan las coincidencias
@@ -62,7 +64,9 @@ namespace TallerIV.Dominio.Coincidencias
                 && (busqueda.HorasTrabajoPrioridad == Prioridad.Excluyente ? busqueda.HorasTrabajo == aviso.HorasTrabajo : true)
                 && (busqueda.SueldoMinimoPrioridad == Prioridad.Excluyente ? busqueda.SueldoMinimo <= aviso.SueldoOfrecido : true)
                 && (busqueda.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? busqueda.TipoRelacionDeTrabajo == aviso.TipoRelacionDeTrabajo : true)
-            ).ToList();
+                && !usuarioEmpleadoOrigen.AvisosAprobados.Any(usEmp => usEmp.Id == aviso.Id)
+                && !usuarioEmpleadoOrigen.AvisosDesaprobados.Any(usEmp => usEmp.Id == aviso.Id)
+                ).ToList();
 
             //Se generan las coincidencias
             foreach (var aviso in listCandidatos)

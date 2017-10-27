@@ -43,6 +43,8 @@ namespace TallerIV.Datos
             modelBuilder.Entity<Aviso>().HasKey(a => a.Id).ToTable("Avisos");
             modelBuilder.Entity<Aviso>().HasRequired(a => a.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
             modelBuilder.Entity<Aviso>().HasMany(a => a.AptitudesBuscadas).WithRequired().HasForeignKey(ab => ab.Aviso_Id);
+            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoAprobados).WithMany();
+            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoDesaprobados).WithMany();
 
             modelBuilder.Entity<AptitudPorAviso>().HasKey(x => new { x.Aptitud_Id, x.Aviso_Id })
                 .ToTable("AptitudesPorAviso");
@@ -60,9 +62,11 @@ namespace TallerIV.Datos
             modelBuilder.Entity<IdentityUserRole>().HasKey(u => new { u.UserId, u.RoleId });
 
             modelBuilder.Entity<UsuarioEmpleado>().ToTable("Usuarios")
-                .HasMany(u => u.Tags).WithMany();
+                .HasMany(u => u.Aptitud).WithMany();
             modelBuilder.Entity<UsuarioEmpleado>()
                 .HasOptional(u => u.Busqueda).WithMany().HasForeignKey(x => x.Busqueda_Id);
+            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosAprobados);
+            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosDesaprobados);
 
             modelBuilder.Entity<UsuarioEmpresa>().ToTable("Usuarios")
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);

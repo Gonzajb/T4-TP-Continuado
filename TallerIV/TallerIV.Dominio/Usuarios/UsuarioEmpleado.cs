@@ -14,7 +14,7 @@ namespace TallerIV.Dominio
 
         public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string cartaDePresentacion, List<Aptitud> tags = null) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
         {
-            this.Tags = new List<Aptitud>();
+            this.Aptitud = new List<Aptitud>();
 
             this.Nombre = nombre;
             this.Apellido = apellido;
@@ -22,18 +22,20 @@ namespace TallerIV.Dominio
             this.CartaDePresentacion = cartaDePresentacion;
 
             if (tags != null)
-                this.Tags.AddRange(tags);
+                this.Aptitud.AddRange(tags);
         }
         public string CartaDePresentacion { get; set; }
-        public virtual List<Aptitud> Tags { get; set; }
+        public virtual List<Aptitud> Aptitud { get; set; }
         public virtual BusquedaUsuarioPostulante Busqueda { get; set; }
         public long? Busqueda_Id { get; set; }
+        public virtual List<Aviso> AvisosAprobados { get; set; }
+        public virtual List<Aviso> AvisosDesaprobados { get; set; }
         [NotMapped]
         public string TagsText
         {
             get
             {
-                return String.Join(",", this.Tags.Select(x => x.Titulo));
+                return String.Join(",", this.Aptitud.Select(x => x.Titulo));
             }
         }
         //public virtual ParametrosBusquedaUsuario ParametrosBusqueda { get; set; }

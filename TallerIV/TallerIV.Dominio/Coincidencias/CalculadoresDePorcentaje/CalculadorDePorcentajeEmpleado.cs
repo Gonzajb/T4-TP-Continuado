@@ -19,18 +19,18 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
             int PuntajeMaximo = CalcularPuntajeMaximo(aviso);
             int PuntajeEmpleado = 0;
             Coincidencia coincidencia;
-            if (Empleado.Tags != null && aviso.AptitudesBuscadas != null)
+            if (Empleado.Aptitud != null && aviso.AptitudesBuscadas != null)
             {
-                foreach (AptitudPorAviso aptitud in aviso.AptitudesBuscadas)
+                foreach (AptitudPorAviso aptitudAviso in aviso.AptitudesBuscadas)
                 {
                     int i = 0;
-                    while (aptitud.Aptitud.Titulo != Empleado.Tags[i].Titulo && i < Empleado.Tags.Count)
+                    while (aptitudAviso.Aptitud.Id != Empleado.Aptitud[i].Id && i < Empleado.Aptitud.Count)
                     {
                         i++;
                     }
-                    if (aptitud.Aptitud.Titulo == Empleado.Tags[i].Titulo)
+                    if (aptitudAviso.Aptitud.Id == Empleado.Aptitud[i].Id)
                     {
-                        //PuntajeEmpleado += tag.Prioridad;
+                        PuntajeEmpleado += (int)aptitudAviso.Prioridad;
                     }
                 }
                 coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, Empleado, aviso);
@@ -41,6 +41,6 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
             }
             return coincidencia;
         }
-        public UsuarioEmpleado Empleado { get; set; }
+        public UsuarioEmpleado Empleado { get; }
     }
 }

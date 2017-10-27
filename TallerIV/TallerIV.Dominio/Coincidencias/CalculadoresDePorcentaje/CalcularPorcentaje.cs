@@ -11,12 +11,12 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
     {
         protected int CalcularPuntajeMaximo(Aviso aviso)
         {
-            int puntajeMaximo = 0;
+            int PuntajeMaximo = 0;
             foreach (AptitudPorAviso aptitud in aviso.AptitudesBuscadas)
             {
-                //PuntajeMaximo += (int)aviso.TagsBuscadosPrioridad;
+                PuntajeMaximo += (int)aptitud.Prioridad;
             }
-            return puntajeMaximo;
+            return PuntajeMaximo;
         }
         //public abstract Coincidencia GenerarCoincidencia(Aviso aviso);
         //public abstract Coincidencia GenerarCoicidencia(UsuarioEmpleado empleado);

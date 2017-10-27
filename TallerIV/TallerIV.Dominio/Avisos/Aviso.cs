@@ -42,5 +42,7 @@ namespace TallerIV.Dominio
         public int HorasTrabajo { get; set; }
         public Prioridad HorasTrabajoPrioridad { get; set; }
         public string UsuarioEmpresa_Id { get; set; }
+        public virtual List<UsuarioEmpleado> UsuariosEmpleadoAprobados { get; set; }
+        public virtual List<UsuarioEmpleado> UsuariosEmpleadoDesaprobados { get; set; }
     }
 }

@@ -172,7 +172,7 @@ namespace TallerIV.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     var user2 = usuariosService.GetAll().FirstOrDefault(x => x.Id == user.Id);
-                    user2.Tags.AddRange(tagsService.GetTagsByString(model.Tags));
+                    user2.Aptitud.AddRange(tagsService.GetTagsByString(model.Tags));
                     usuariosService.UpdateEntity(user);
 
                     
@@ -451,8 +451,8 @@ namespace TallerIV.Controllers
                 user.Nombre = model.Nombre;
                 user.CartaDePresentacion = model.CartaDePresentacion;
                 var tags = tagsService.GetTagsByString(model.Tags);
-                user.Tags.Clear();
-                user.Tags.AddRange(tags);
+                user.Aptitud.Clear();
+                user.Aptitud.AddRange(tags);
                 usuariosService.UpdateEntity(user);
                 return RedirectToAction("Index", "Home");
             }
