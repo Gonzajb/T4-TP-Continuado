@@ -43,29 +43,14 @@ namespace TallerIV.Datos.Migrations
                
 
 
-            //Aviso otroAviso = new Aviso(
-            //   "segundo aviso",
-            //   "es tu primer trabajo",
-            //   DateTime.Now,
-            //   usuarioReclutador, null,
-            //   TipoRelacionDeTrabajo.Dependencia,
-            //   Dominio.Usuarios.Prioridad.Baja,
-            //   8,
-            //   Dominio.Usuarios.Prioridad.Baja,
-            //   usuarioEmpresa.Id);
+          
 
-
-            db.Avisos.Add(aviso);
-            //db.Aviso.Add(otroAviso);
-
-            //if (!db.Avisos.Any(X=> X.Titulo == "primer aviso"))
-            //{
-            //    db.Avisos.Add(aviso1);
-            //}
-            //if (!db.Avisos.Any(X => X.Titulo == "segundo aviso"))
-            //{
-            //    db.Avisos.Add(aviso2);
-            //}
+            if (!db.Avisos.Any(X=> X.Titulo == aviso.Titulo))
+            {
+                db.Avisos.Add(aviso);
+                db.SaveChanges();
+            }
+            
 
         }
         public static void InicializarTags(TallerIVDbContext db) {
