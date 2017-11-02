@@ -24,16 +24,17 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                 foreach (AptitudPorAviso aptitudAviso in aviso.AptitudesBuscadas)
                 {
                     int i = 0;
-                    while (aptitudAviso.Aptitud.Id != Empleado.Aptitud[i].Id && i < Empleado.Aptitud.Count)
+                    while (i < Empleado.Aptitud.Count)
                     {
+                        if (aptitudAviso.Aptitud.Id == Empleado.Aptitud[i].Id)
+                        {
+                            PuntajeEmpleado += (int)aptitudAviso.Prioridad;
+                        }
                         i++;
                     }
-                    if (aptitudAviso.Aptitud.Id == Empleado.Aptitud[i].Id)
-                    {
-                        PuntajeEmpleado += (int)aptitudAviso.Prioridad;
-                    }
+                    
                 }
-                coincidencia = new Coincidencia(PuntajeMaximo / PuntajeEmpleado, Empleado, aviso);
+                coincidencia = new Coincidencia(PuntajeEmpleado / PuntajeMaximo , Empleado, aviso);
             }
             else
             {
