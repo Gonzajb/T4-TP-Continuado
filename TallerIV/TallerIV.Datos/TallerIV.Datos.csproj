@@ -125,6 +125,10 @@
     <Compile Include="Migrations\201710262305008_inicial.Designer.cs">
       <DependentUpon>201710262305008_inicial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs" />
+    <Compile Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.Designer.cs">
+      <DependentUpon>201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\BaseRepository.cs" />
     <Compile Include="TallerIVDbContext.cs" />
@@ -150,6 +154,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710262305008_inicial.resx">
       <DependentUpon>201710262305008_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.resx">
+      <DependentUpon>201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

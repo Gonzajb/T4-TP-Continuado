@@ -65,8 +65,8 @@ namespace TallerIV.Datos
                 .HasMany(u => u.Aptitud).WithMany();
             modelBuilder.Entity<UsuarioEmpleado>()
                 .HasOptional(u => u.Busqueda).WithMany().HasForeignKey(x => x.Busqueda_Id);
-            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosAprobados);
-            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosDesaprobados);
+            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosAprobados).WithMany();
+            modelBuilder.Entity<UsuarioEmpleado>().HasMany(x => x.AvisosDesaprobados).WithMany();
 
             modelBuilder.Entity<UsuarioEmpresa>().ToTable("Usuarios")
                 .HasMany(u => u.Avisos).WithRequired().HasForeignKey(a => a.UsuarioEmpresa_Id);
