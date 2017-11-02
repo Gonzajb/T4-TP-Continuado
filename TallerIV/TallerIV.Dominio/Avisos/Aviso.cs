@@ -16,7 +16,7 @@ namespace TallerIV.Dominio
         {
             this.Titulo = titulo;
             this.Descripcion = descripcion;
-            this.FechaInicio = FechaInicio;
+            this.FechaInicio = fechaInicio;
             //this.UsuarioReclutador_Id = usuarioreclutador_id;
             this.UsuarioReclutador = usuarioReclutador;
             this.AptitudesBuscadas = aptitudesBuscados;

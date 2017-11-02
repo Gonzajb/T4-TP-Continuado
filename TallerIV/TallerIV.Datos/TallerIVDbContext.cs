@@ -43,8 +43,8 @@ namespace TallerIV.Datos
             modelBuilder.Entity<Aviso>().HasKey(a => a.Id).ToTable("Avisos");
             modelBuilder.Entity<Aviso>().HasRequired(a => a.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
             modelBuilder.Entity<Aviso>().HasMany(a => a.AptitudesBuscadas).WithRequired().HasForeignKey(ab => ab.Aviso_Id);
-            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoAprobados).WithMany();
-            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoDesaprobados).WithMany();
+            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoAprobados).WithMany().Map(x => x.ToTable("AvisoUsuariosEmpleadosAprobados"));
+            modelBuilder.Entity<Aviso>().HasMany(a => a.UsuariosEmpleadoDesaprobados).WithMany().Map(x => x.ToTable("AvisoUsuariosEmpleadosDesaprobados"));
 
             modelBuilder.Entity<AptitudPorAviso>().HasKey(x => new { x.Aptitud_Id, x.Aviso_Id })
                 .ToTable("AptitudesPorAviso");
