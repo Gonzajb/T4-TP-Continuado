@@ -1,7 +1,7 @@
 ﻿@model List<TallerIV.Dominio.Aviso>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+    Layout = "~/Views/Shared/_LayoutProuiEmpleado.cshtml";
 }
 
 
@@ -10,24 +10,33 @@
     <div class="header-section">
         <div class="row">
             <!-- Main Title (hidden on small devices for the statistics to fit) -->
-            <div class="col-md-4 col-lg-6">
+            <div class="col-md-4 col-lg-7">
                 <h1>Bienvenido </h1>
             </div>
             <!-- END Main Title -->
             <!-- Top Stats -->
-            <div class="col-md-8 col-lg-6">
+            <div class="col-md-4 col-lg-8">
                 @foreach (var item in Model)
                 {
                     <text>
                         @item.Titulo 
-                        @item.FechaInicio
-                        @item.FechaFin 
-                        @item.Descripcion
-                        @item.AptitudesBuscadas
-                        @item.HorasTrabajo
-                        @item.TipoRelacionDeTrabajo
-                        @item.UsuarioEmpresa_Nombre
-                        @item.SueldoOfrecido
+                        <br />@item.FechaInicio
+                        <br />@item.FechaFin 
+                        <br />@item.Descripcion
+                
+                    </text>
+
+                    foreach (var aptitud in item.AptitudesBuscadas)
+                    {
+                        <text>
+                        <br />@aptitud.Aptitud.Titulo 
+                        </text>
+                    }
+                    <text>
+                        <br />@item.HorasTrabajo
+                        <br />@item.TipoRelacionDeTrabajo
+                        <br />@item.UsuarioEmpresa_Nombre
+                        <br />@item.SueldoOfrecido
                     </text>
                 }
             </div>

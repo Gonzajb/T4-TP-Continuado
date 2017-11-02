@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TallerIV.Datos;
 using TallerIV.Dominio;
+using TallerIV.Dominio.Avisos;
 
 namespace TallerIV.Controllers
 {
@@ -42,13 +43,29 @@ namespace TallerIV.Controllers
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
             string usuarioNombre = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().RazonSocial;
+            AptitudPorAviso aptitud = new AptitudPorAviso(
+                2, 
+                db.Aptitudes.FirstOrDefault().Id, 
+                db.Aptitudes.FirstOrDefault(), 
+                Dominio.Usuarios.Prioridad.Baja
+            );
+            //var aptitudOtro = db.Aptitudes.OrderByDescending(x=> x.Id).Take(3).ToList()[2];
+              //  AptitudPorAviso aptitud2 = new AptitudPorAviso(
+                //2, 
+            //    aptitudOtro.Id,
+            //    aptitudOtro, 
+              //  Dominio.Usuarios.Prioridad.Normal);
+            List<AptitudPorAviso> aptitudes = new List<AptitudPorAviso>();
+
+            aptitudes.Add(aptitud);
+            //aptitudes.Add(aptitud2);
 
             Aviso aviso = new Aviso(
                "Este es un Aviso de .Net",
                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
                DateTime.Now,
                usuarioReclutador,
-               null,
+               aptitudes,
                TipoRelacionDeTrabajo.Monotributo,
                Dominio.Usuarios.Prioridad.Baja,
                8,
