@@ -138,7 +138,12 @@ namespace TallerIV.Controllers
             this.avisoService.RemoveEntity(aviso);
             return RedirectToAction("Index");
         }
-
+        public JsonResult SearchTags(string term)
+        {
+            TagsService tagsService = new TagsService();
+            var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, label = x.Titulo });
+            return Json(tags, JsonRequestBehavior.AllowGet);
+        }
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

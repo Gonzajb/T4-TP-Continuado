@@ -70,7 +70,7 @@
                 <a href="javascript:void(0)" id="link-reminder-login"><small>Olvidaste tu contraseña</small></a>
             </div>
             <div class="col-xs-6 text-center">
-                <a href="#" onclick="registrar()" id="link-reminder-login"><small>Quiero registrarme</small></a>
+                <a href="@Url.Action("Index","RegisterAccount")" @*onclick="registrar()"*@ id="link-reminder-login"><small>Quiero registrarme</small></a>
             </div>
         </div>
     }
@@ -115,14 +115,10 @@
 $(document).ready(function () {
     $('label.remember-me').children('input[type=hidden]').insertAfter('label.remember-me');
 });
-var registrar = function () {
+@*var registrar = function () {
     var dialog = bootbox.dialog({
         message: '<p class="text-center">Please wait while we do something...</p>',
         closeButton: false
     });
-    @*var dialog = bootbox.dialog({
-        message: '<div class="col-md-12"><h5>Crear un nuevo usuario.</h5></div><div class="col-md-12"><a class="btn btn-primary col-md-6" href="@Url.Action("Register", "Account")">Quiero postularme.</a><a class="btn btn-primary col-md-6" href="@Url.Action("Register", "AccountEmpresa")">Quiero registrar mi empresa.</a></div>',
-        closeButton: true
-    });*@
-};
+};*@
 </script>

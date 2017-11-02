@@ -2,12 +2,12 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
 <h2>Create</h2>
 
-
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaInicio, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,17 +43,45 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FechaFin, new { htmlAttributes = new { @class = "form-control", @type="date" } })
                 @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
             </div>
-            @ViewBag.Nombre
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UsuarioReclutador_Id, "UsuarioReclutador_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+            
+            @Html.Label("Aptitudes necesarias", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("UsuarioReclutador_Id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UsuarioReclutador_Id, "", new { @class = "text-danger" })
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Aptitud</th>
+                            <th>Prioridad</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:aptitudes">
+                        <tr>
+                            <td>
+                                <input type="text" class="Tags form-control" data-bind="autoComplete:{options:'@Url.Action("SearchTags")'}" />
+                            </td>
+                            <td>
+                                <select type="text" class="form-control" data-bind="options: prioridades, value: prioridadSeleccionada, optionsText: 'label', optionsValue: 'value'"></select>
+                            </td>
+                            <td>
+                                <a href="#" data-bind="click:$parent.remove">Eliminar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <a href="#" data-bind="click:add">Agregar</a>
+                            </td>
+
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
 
@@ -72,3 +100,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="~/Scripts/ViewModels/AptitudesPorAvisoViewModel.js"></script>
+<script>
+    var aptitudesPorAviso = new AptitudesPorAviso();
+    ko.applyBindings(aptitudesPorAviso);
+</script>

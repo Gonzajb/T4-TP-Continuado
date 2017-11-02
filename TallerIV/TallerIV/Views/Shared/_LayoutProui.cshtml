@@ -6,6 +6,7 @@
 @{
     bool userIsEmpresa = this.User.IsInRole("Empresa");
     bool userIsPostulante = this.User.IsInRole("Empleado");
+    bool userIsReclutador = this.User.IsInRole("Reclutador");
 }
 
 <html class="no-js">
@@ -145,6 +146,7 @@
                     </div>
                     <!-- END User Info -->
                     <!-- Sidebar Navigation -->
+                    
                     <ul class="sidebar-nav">
                         <li>
                             <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
@@ -152,6 +154,11 @@
                         @if (userIsPostulante) {
                             <li>
                                 <a href="@Url.Action("Edit","BusquedaUsuarioPostulantes")" class="dashboard"><i class="gi gi-search sidebar-nav-icon"></i>Administrar búsqueda</a>
+                            </li>
+                        }
+                        @if (userIsReclutador) {
+                            <li>
+                                <a href="@Url.Action("Index","Aviso")" class="dashboard">@*<i class="gi gi-search sidebar-nav-icon"></i>*@Administrar avisos</a>
                             </li>
                         }
                         <li>

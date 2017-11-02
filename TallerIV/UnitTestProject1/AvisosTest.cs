@@ -20,7 +20,7 @@ namespace UnitTestProject1
             List<Aviso> Avisos = new List<Aviso>();
             for (int i =0; i < 5; i++)
             {
-                Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, null, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa");
+                Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, null, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa", "La Empresa");
                 Avisos.Add(a);
             }
             List <UsuarioEmpleado> Empleados = new List<UsuarioEmpleado>();
@@ -31,7 +31,6 @@ namespace UnitTestProject1
             }
             GeneradorCoincidencias GC = new GeneradorCoincidencias();
             GC.GenerarListadoCoincidencias(Avisos[0], Empleados.AsQueryable());
-
         }
     }
 }
