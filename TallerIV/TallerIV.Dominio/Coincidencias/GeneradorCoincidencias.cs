@@ -16,6 +16,25 @@ namespace TallerIV.Dominio.Coincidencias
         /// <param name="avisoOrigen"></param>
         /// <param name="usuariosEmpleado"></param>
         /// <returns>Listado de coincidencias</returns>
+        /// 
+        public List<Coincidencia> GenerarListadoCoincidencias(Aviso avisoOrigen, List<UsuarioEmpleado> listCandidatos)
+        {
+            //Inicialización
+            List<Coincidencia> listCoincidencias = new List<Coincidencia>();
+            CalculadorDePorcentajeAviso calculadorDePorcentaje = new CalculadorDePorcentajeAviso(avisoOrigen);
+
+            //Se generan las coincidencias
+            foreach (var empleado in listCandidatos)
+            {
+                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia(empleado);
+                listCoincidencias.Add(coincidencia);
+            }
+
+            //Se ordenan las coincidencias
+            listCoincidencias = listCoincidencias.OrderBy(x => x.Porcentaje).ToList();
+
+            return listCoincidencias;
+        }
         public List<Coincidencia> GenerarListadoCoincidencias(Aviso avisoOrigen, IQueryable<UsuarioEmpleado> usuariosEmpleado) {
             //Inicialización
             List<Coincidencia> listCoincidencias = new List<Coincidencia>();
