@@ -7,18 +7,18 @@ namespace TallerIV.Datos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class busquedaUsuarioPostulante : IMigrationMetadata
+    public sealed partial class modificacionRelacionUsuarioEmpleadoAvisos : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(busquedaUsuarioPostulante));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(modificacionRelacionUsuarioEmpleadoAvisos));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709302308441_busquedaUsuarioPostulante"; }
+            get { return "201711020121239_modificacionRelacionUsuarioEmpleadoAvisos"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

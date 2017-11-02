@@ -144,7 +144,7 @@ namespace TallerIV.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            BaseService<Tag> tagsService = new BaseService<Tag>();
+            BaseService<Aptitud> tagsService = new BaseService<Aptitud>();
             ViewBag.Tags = new SelectList(tagsService.GetAll(), "Id", "Titulo");
             return View(new RegisterPostulanteViewModel());
         }
@@ -172,7 +172,7 @@ namespace TallerIV.Controllers
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     var user2 = usuariosService.GetAll().FirstOrDefault(x => x.Id == user.Id);
-                    user2.Tags.AddRange(tagsService.GetTagsByString(model.Tags));
+                    user2.Aptitud.AddRange(tagsService.GetTagsByString(model.Tags));
                     usuariosService.UpdateEntity(user);
 
                     
@@ -182,7 +182,7 @@ namespace TallerIV.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "HomeEmpleado");
                 }
                 AddErrors(result);
             }
@@ -451,8 +451,8 @@ namespace TallerIV.Controllers
                 user.Nombre = model.Nombre;
                 user.CartaDePresentacion = model.CartaDePresentacion;
                 var tags = tagsService.GetTagsByString(model.Tags);
-                user.Tags.Clear();
-                user.Tags.AddRange(tags);
+                user.Aptitud.Clear();
+                user.Aptitud.AddRange(tags);
                 usuariosService.UpdateEntity(user);
                 return RedirectToAction("Index", "Home");
             }
@@ -460,6 +460,7 @@ namespace TallerIV.Controllers
                 return View(model);
             }
         }
+        [AllowAnonymous]
         public JsonResult SearchTags(string term) {
             TagsService tagsService = new TagsService();
             var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, text = x.Titulo });
@@ -511,7 +512,7 @@ namespace TallerIV.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "HomeEmpleado");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

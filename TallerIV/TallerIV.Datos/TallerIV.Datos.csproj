@@ -121,25 +121,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201709120121535_inicial.cs" />
-    <Compile Include="Migrations\201709120121535_inicial.Designer.cs">
-      <DependentUpon>201709120121535_inicial.cs</DependentUpon>
+    <Compile Include="Migrations\201710262305008_inicial.cs" />
+    <Compile Include="Migrations\201710262305008_inicial.Designer.cs">
+      <DependentUpon>201710262305008_inicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709142255569_fechaFinAvisoNulleable.cs" />
-    <Compile Include="Migrations\201709142255569_fechaFinAvisoNulleable.Designer.cs">
-      <DependentUpon>201709142255569_fechaFinAvisoNulleable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709302210253_nuevasPropiedadesAviso.cs" />
-    <Compile Include="Migrations\201709302210253_nuevasPropiedadesAviso.Designer.cs">
-      <DependentUpon>201709302210253_nuevasPropiedadesAviso.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709302308441_busquedaUsuarioPostulante.cs" />
-    <Compile Include="Migrations\201709302308441_busquedaUsuarioPostulante.Designer.cs">
-      <DependentUpon>201709302308441_busquedaUsuarioPostulante.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710010708086_cartaDePresentacionPostulante.cs" />
-    <Compile Include="Migrations\201710010708086_cartaDePresentacionPostulante.Designer.cs">
-      <DependentUpon>201710010708086_cartaDePresentacionPostulante.cs</DependentUpon>
+    <Compile Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs" />
+    <Compile Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.Designer.cs">
+      <DependentUpon>201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\BaseRepository.cs" />
@@ -164,20 +152,11 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709120121535_inicial.resx">
-      <DependentUpon>201709120121535_inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710262305008_inicial.resx">
+      <DependentUpon>201710262305008_inicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709142255569_fechaFinAvisoNulleable.resx">
-      <DependentUpon>201709142255569_fechaFinAvisoNulleable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709302210253_nuevasPropiedadesAviso.resx">
-      <DependentUpon>201709302210253_nuevasPropiedadesAviso.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709302308441_busquedaUsuarioPostulante.resx">
-      <DependentUpon>201709302308441_busquedaUsuarioPostulante.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710010708086_cartaDePresentacionPostulante.resx">
-      <DependentUpon>201710010708086_cartaDePresentacionPostulante.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.resx">
+      <DependentUpon>201711020121239_modificacionRelacionUsuarioEmpleadoAvisos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

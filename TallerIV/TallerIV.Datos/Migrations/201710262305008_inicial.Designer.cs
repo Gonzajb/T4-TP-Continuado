@@ -7,13 +7,13 @@ namespace TallerIV.Datos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class nuevasPropiedadesAviso : IMigrationMetadata
+    public sealed partial class inicial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(nuevasPropiedadesAviso));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(inicial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709302210253_nuevasPropiedadesAviso"; }
+            get { return "201710262305008_inicial"; }
         }
         
         string IMigrationMetadata.Source

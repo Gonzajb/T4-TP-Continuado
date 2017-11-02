@@ -8,32 +8,51 @@ namespace TallerIV.Datos.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Aptitudes",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        Titulo = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.AptitudesPorAviso",
+                c => new
+                    {
+                        Aptitud_Id = c.Long(nullable: false),
+                        Aviso_Id = c.Long(nullable: false),
+                        Prioridad = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Aptitud_Id, t.Aviso_Id })
+                .ForeignKey("dbo.Aptitudes", t => t.Aptitud_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Avisos", t => t.Aviso_Id, cascadeDelete: true)
+                .Index(t => t.Aptitud_Id)
+                .Index(t => t.Aviso_Id);
+            
+            CreateTable(
                 "dbo.Avisos",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Long(nullable: false, identity: true),
                         Titulo = c.String(),
                         Descripcion = c.String(),
                         FechaInicio = c.DateTime(nullable: false),
-                        FechaFin = c.DateTime(nullable: false),
+                        FechaFin = c.DateTime(),
                         UsuarioReclutador_Id = c.String(nullable: false, maxLength: 128),
+                        SueldoOfrecido = c.Single(),
+                        SueldoOfrecidoPrioridad = c.Int(),
+                        TipoRelacionDeTrabajo = c.Int(nullable: false),
+                        TipoRelacionDeTrabajoPrioridad = c.Int(nullable: false),
+                        HorasTrabajo = c.Int(nullable: false),
+                        HorasTrabajoPrioridad = c.Int(nullable: false),
                         UsuarioEmpresa_Id = c.String(nullable: false, maxLength: 128),
-                        UsuarioReclutadorAsignado_Id = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.IdentityUser", t => t.UsuarioReclutador_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpresa_Id)
                 .Index(t => t.UsuarioReclutador_Id)
                 .Index(t => t.UsuarioEmpresa_Id);
-            
-            CreateTable(
-                "dbo.Tag",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Titulo = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.IdentityUser",
@@ -56,8 +75,8 @@ namespace TallerIV.Datos.Migrations
                         Apellido = c.String(),
                         FechaDeNacimiento = c.DateTime(),
                         Edad = c.Int(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                         UsuarioEmpresa_Id = c.String(maxLength: 128),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpresa_Id)
@@ -106,6 +125,20 @@ namespace TallerIV.Datos.Migrations
                 .Index(t => t.IdentityUser_Id);
             
             CreateTable(
+                "dbo.BusquedaUsuarioPostulante",
+                c => new
+                    {
+                        Id = c.Long(nullable: false, identity: true),
+                        SueldoMinimo = c.Double(nullable: false),
+                        SueldoMinimoPrioridad = c.Int(nullable: false),
+                        TipoRelacionDeTrabajo = c.Int(nullable: false),
+                        TipoRelacionDeTrabajoPrioridad = c.Int(nullable: false),
+                        HorasTrabajo = c.Int(nullable: false),
+                        HorasTrabajoPrioridad = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Encuentros",
                 c => new
                     {
@@ -146,48 +179,40 @@ namespace TallerIV.Datos.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.AvisoTag",
-                c => new
-                    {
-                        Aviso_Id = c.Int(nullable: false),
-                        Tag_Id = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Aviso_Id, t.Tag_Id })
-                .ForeignKey("dbo.Avisos", t => t.Aviso_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Tag", t => t.Tag_Id, cascadeDelete: true)
-                .Index(t => t.Aviso_Id)
-                .Index(t => t.Tag_Id);
-            
-            CreateTable(
-                "dbo.UsuarioEmpleadoTag",
+                "dbo.UsuarioEmpleadoAptitud",
                 c => new
                     {
                         UsuarioEmpleado_Id = c.String(nullable: false, maxLength: 128),
-                        Tag_Id = c.Int(nullable: false),
+                        Aptitud_Id = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UsuarioEmpleado_Id, t.Tag_Id })
+                .PrimaryKey(t => new { t.UsuarioEmpleado_Id, t.Aptitud_Id })
                 .ForeignKey("dbo.Usuarios", t => t.UsuarioEmpleado_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Tag", t => t.Tag_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Aptitudes", t => t.Aptitud_Id, cascadeDelete: true)
                 .Index(t => t.UsuarioEmpleado_Id)
-                .Index(t => t.Tag_Id);
+                .Index(t => t.Aptitud_Id);
             
             CreateTable(
                 "dbo.Usuarios",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        CartaDePresentacion = c.String(),
+                        Busqueda_Id = c.Long(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Cuit = c.String(),
                         RazonSocial = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.IdentityUser", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.BusquedaUsuarioPostulante", t => t.Busqueda_Id)
+                .Index(t => t.Id)
+                .Index(t => t.Busqueda_Id);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Usuarios", "Busqueda_Id", "dbo.BusquedaUsuarioPostulante");
             DropForeignKey("dbo.Usuarios", "Id", "dbo.IdentityUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityUser_Id", "dbo.IdentityUser");
             DropForeignKey("dbo.IdentityUserLogin", "IdentityUser_Id", "dbo.IdentityUser");
@@ -199,16 +224,15 @@ namespace TallerIV.Datos.Migrations
             DropForeignKey("dbo.Likes", "UsuarioEmpleado_Id", "dbo.Usuarios");
             DropForeignKey("dbo.Encuentros", "UsuarioReclutador_Id", "dbo.IdentityUser");
             DropForeignKey("dbo.Encuentros", "UsuarioEmpleado_Id1", "dbo.Usuarios");
-            DropForeignKey("dbo.UsuarioEmpleadoTag", "Tag_Id", "dbo.Tag");
-            DropForeignKey("dbo.UsuarioEmpleadoTag", "UsuarioEmpleado_Id", "dbo.Usuarios");
+            DropForeignKey("dbo.UsuarioEmpleadoAptitud", "Aptitud_Id", "dbo.Aptitudes");
+            DropForeignKey("dbo.UsuarioEmpleadoAptitud", "UsuarioEmpleado_Id", "dbo.Usuarios");
             DropForeignKey("dbo.Avisos", "UsuarioReclutador_Id", "dbo.IdentityUser");
-            DropForeignKey("dbo.AvisoTag", "Tag_Id", "dbo.Tag");
-            DropForeignKey("dbo.AvisoTag", "Aviso_Id", "dbo.Avisos");
+            DropForeignKey("dbo.AptitudesPorAviso", "Aviso_Id", "dbo.Avisos");
+            DropForeignKey("dbo.AptitudesPorAviso", "Aptitud_Id", "dbo.Aptitudes");
+            DropIndex("dbo.Usuarios", new[] { "Busqueda_Id" });
             DropIndex("dbo.Usuarios", new[] { "Id" });
-            DropIndex("dbo.UsuarioEmpleadoTag", new[] { "Tag_Id" });
-            DropIndex("dbo.UsuarioEmpleadoTag", new[] { "UsuarioEmpleado_Id" });
-            DropIndex("dbo.AvisoTag", new[] { "Tag_Id" });
-            DropIndex("dbo.AvisoTag", new[] { "Aviso_Id" });
+            DropIndex("dbo.UsuarioEmpleadoAptitud", new[] { "Aptitud_Id" });
+            DropIndex("dbo.UsuarioEmpleadoAptitud", new[] { "UsuarioEmpleado_Id" });
             DropIndex("dbo.Likes", new[] { "UsuarioEmpleado_Id" });
             DropIndex("dbo.Likes", new[] { "UsuarioReclutador_Id" });
             DropIndex("dbo.Encuentros", new[] { "UsuarioEmpleado_Id1" });
@@ -220,18 +244,21 @@ namespace TallerIV.Datos.Migrations
             DropIndex("dbo.IdentityUser", new[] { "UsuarioEmpresa_Id" });
             DropIndex("dbo.Avisos", new[] { "UsuarioEmpresa_Id" });
             DropIndex("dbo.Avisos", new[] { "UsuarioReclutador_Id" });
+            DropIndex("dbo.AptitudesPorAviso", new[] { "Aviso_Id" });
+            DropIndex("dbo.AptitudesPorAviso", new[] { "Aptitud_Id" });
             DropTable("dbo.Usuarios");
-            DropTable("dbo.UsuarioEmpleadoTag");
-            DropTable("dbo.AvisoTag");
+            DropTable("dbo.UsuarioEmpleadoAptitud");
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Likes");
             DropTable("dbo.Encuentros");
+            DropTable("dbo.BusquedaUsuarioPostulante");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.IdentityUser");
-            DropTable("dbo.Tag");
             DropTable("dbo.Avisos");
+            DropTable("dbo.AptitudesPorAviso");
+            DropTable("dbo.Aptitudes");
         }
     }
 }

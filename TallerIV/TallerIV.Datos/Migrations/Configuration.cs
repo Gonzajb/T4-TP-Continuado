@@ -12,7 +12,8 @@ namespace TallerIV.Datos.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
         //var user = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj", "Nicolas", "Sabaj", new DateTime(1995, 9, 23));
 
@@ -20,20 +21,52 @@ namespace TallerIV.Datos.Migrations
         {
             InicializarTags(db);
             InicializarUsuarios(db);
+            InicializarAvisos(db);
             base.Seed(db);
         }
+        public static void InicializarAvisos(TallerIVDbContext db) {
+
+            UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
+            string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
+            string usuarioNombre = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().RazonSocial;
+
+            Aviso aviso = new Aviso(
+               "Este es un Aviso de .Net",
+               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+               DateTime.Now,
+               usuarioReclutador,
+               null,
+               TipoRelacionDeTrabajo.Monotributo,
+               Dominio.Usuarios.Prioridad.Baja,
+               8,
+               Dominio.Usuarios.Prioridad.Baja,
+               usuarioEmpresaId,
+               usuarioNombre);
+               
+
+
+          
+
+            if (!db.Avisos.Any(X=> X.Titulo == aviso.Titulo))
+            {
+                db.Avisos.Add(aviso);
+                db.SaveChanges();
+            }
+            
+
+        }
         public static void InicializarTags(TallerIVDbContext db) {
-            if (!db.Tags.Any(x => x.Titulo == "ASP.NET"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "ASP.NET"))
             {
-                db.Tags.Add(new Tag { Titulo = "ASP.NET" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "ASP.NET" });
             }
-            if (!db.Tags.Any(x => x.Titulo == "SQL SERVER"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "SQL SERVER"))
             {
-                db.Tags.Add(new Tag { Titulo = "SQL SERVER" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "SQL SERVER" });
             }
-            if (!db.Tags.Any(x => x.Titulo == "JAVA"))
+            if (!db.Aptitudes.Any(x => x.Titulo == "JAVA"))
             {
-                db.Tags.Add(new Tag { Titulo = "JAVA" });
+                db.Aptitudes.Add(new Aptitud { Titulo = "JAVA" });
             }
             db.SaveChanges();
         }
@@ -84,14 +117,23 @@ namespace TallerIV.Datos.Migrations
                     userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
                 }
 
-                user = userManager.FindByName("laempresa1");
-                if (user == null)
+                var usuarioEmpresa = userManager.FindByName("laempresa1");
+                if (usuarioEmpresa == null)
                 {
-                    var usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
+                    usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
                     userManager.Create(usuarioEmpresa, "Le12345!");
                     //userManager.SetLockoutEnabled(usuarioEmpresa.Id, false);
                     userManager.AddToRole(usuarioEmpresa.Id, "Empresa");
                 }
+                user = userManager.FindByName("Relutador1");
+                if (user == null)
+                {
+                    var usuarioReclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "rec1@gmail.com", "Rec1", "TE", DateTime.Now,usuarioEmpresa.Id);
+                    userManager.Create(usuarioReclutador, "Le12345!");
+                    userManager.AddToRole(usuarioReclutador.Id, "Reclutador");
+
+                }
+
             //}
         }
     }

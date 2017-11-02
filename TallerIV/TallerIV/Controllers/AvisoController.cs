@@ -14,19 +14,32 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace TallerIV.Controllers
 {
+    [Authorize(Roles = "Empresa,Reclutador")]
     public class AvisoController : Controller
     {
         private AvisosService avisoService;
+        private UsuarioReclutadorService reclutadorService;
         public AvisoController()
         {
             avisoService = new AvisosService();
+            reclutadorService = new UsuarioReclutadorService();
         }
 
         // GET: Aviso
         public ActionResult Index()
         {
+            List<Aviso> avisos;
             string id = this.User.Identity.GetUserId();
-            return View(this.avisoService.GetAllByEmpresa(id, false));
+
+            if (User.IsInRole("Empresa"))
+            {
+                avisos = this.avisoService.GetAllByEmpresa(id, false).ToList();
+                ViewBag.UsuarioReclutador = reclutadorService.GetAllByEmpresa(id);
+            }
+
+            else
+                avisos = this.avisoService.GetAllByReclutador(id, false).ToList();
+            return View(avisos);
         }
 
         // GET: Aviso/Details/5
@@ -50,7 +63,11 @@ namespace TallerIV.Controllers
             ViewBag.Nombre = "asda";
             return View();
         }
-
+        [HttpPost]
+        public ActionResult ReasignarAviso(long idAviso, string idReclutador){
+           avisoService.ReasignarAviso(idAviso, idReclutador);
+            return RedirectToAction("Index");
+        }
         // POST: Aviso/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
