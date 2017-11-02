@@ -9,13 +9,14 @@ namespace TallerIV.Dominio.Avisos
 {
     public class AptitudPorAviso
     {
-        public AptitudPorAviso() { }
-        public AptitudPorAviso(long Aviso_Id, long Aptitud_Id, Aptitud Aptitud, Prioridad Prioridad)
+        private AptitudPorAviso() { }
+        public AptitudPorAviso(long AvisoId, long AptitudId, Aptitud aptitud, Prioridad p)
         {
-            this.Aviso_Id = Aviso_Id;
-            this.Aptitud_Id = Aptitud_Id;
-            this.Aptitud = Aptitud;
-            this.Prioridad = Prioridad; 
+            this.Aviso_Id = AvisoId;
+            this.Aptitud_Id = AptitudId;
+            this.Aptitud = aptitud;
+            this.Prioridad = p;
+
         }
         public long Aviso_Id { get; set; }
         public long Aptitud_Id { get; set; }
