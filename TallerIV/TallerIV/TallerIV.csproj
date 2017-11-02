@@ -249,6 +249,8 @@
     <Content Include="Content\Selectize\js\selectize.min.js" />
     <Content Include="Content\Selectize\js\standalone\selectize.js" />
     <Content Include="Content\Selectize\js\standalone\selectize.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="favicon.ico" />
