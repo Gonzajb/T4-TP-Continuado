@@ -28,6 +28,7 @@ namespace TallerIV.Datos.Migrations
 
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
+            string usuarioNombre = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().RazonSocial;
 
             Aviso aviso = new Aviso(
                "Este es un Aviso de .Net",
@@ -39,7 +40,8 @@ namespace TallerIV.Datos.Migrations
                Dominio.Usuarios.Prioridad.Baja,
                8,
                Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresaId);
+               usuarioEmpresaId,
+               usuarioNombre);
                
 
 

@@ -11,7 +11,7 @@
         <div class="row">
             <!-- Main Title (hidden on small devices for the statistics to fit) -->
             <div class="col-md-4 col-lg-6">
-                <h1>Bienvenido Pete Dedicate A otra cosa</h1>
+                <h1>Bienvenido </h1>
             </div>
             <!-- END Main Title -->
             <!-- Top Stats -->
@@ -19,8 +19,15 @@
                 @foreach (var item in Model)
                 {
                     <text>
-                        @item.Titulo <br /> @item.SueldoOfrecidoPrioridad <br />
-
+                        @item.Titulo 
+                        @item.FechaInicio
+                        @item.FechaFin 
+                        @item.Descripcion
+                        @item.AptitudesBuscadas
+                        @item.HorasTrabajo
+                        @item.TipoRelacionDeTrabajo
+                        @item.UsuarioEmpresa_Nombre
+                        @item.SueldoOfrecido
                     </text>
                 }
             </div>
