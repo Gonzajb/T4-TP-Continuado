@@ -34,7 +34,7 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                     }
                     
                 }
-                coincidencia = new Coincidencia(PuntajeEmpleado / PuntajeMaximo , Empleado, aviso);
+                coincidencia = new Coincidencia((float)PuntajeEmpleado / (float)PuntajeMaximo, Empleado, aviso);
             }
             else
             {

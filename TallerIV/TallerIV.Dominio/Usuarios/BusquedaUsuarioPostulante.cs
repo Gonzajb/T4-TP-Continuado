@@ -29,10 +29,10 @@ namespace TallerIV.Dominio.Usuarios
     public enum Prioridad
     {
         [Display(Name = "Prioridad baja")]
-        Baja = 0,
+        Baja = 1,
         [Display(Name = "Prioridad normal")]
-        Normal = 1,
+        Normal = 2,
         [Display(Name = "Prioridad excluyente")]
-        Excluyente = 2,
+        Excluyente = 3,
     }
 }

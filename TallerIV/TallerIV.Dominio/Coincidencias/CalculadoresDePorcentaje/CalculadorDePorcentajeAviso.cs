@@ -46,16 +46,9 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                         }
                         i++;
                     }
-                    
-                }
-                if (PuntajeEmpleado == 0)
-                {
-                    coincidencia = new Coincidencia(0.00f, empleado, Aviso);
-                } else
-                {
-                    coincidencia = new Coincidencia(PuntajeEmpleado / PuntajeMaximo, empleado, Aviso);
 
                 }
+                coincidencia = new Coincidencia((float)PuntajeEmpleado / (float)PuntajeMaximo, empleado, Aviso);                
             }
             else
             {
