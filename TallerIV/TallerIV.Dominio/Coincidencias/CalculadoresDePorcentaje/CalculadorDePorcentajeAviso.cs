@@ -38,13 +38,13 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                 foreach (AptitudPorAviso aptitudAviso in Aviso.AptitudesBuscadas)
                 {
                     int i = 0;
-                    while (i < empleado.Aptitud.Count)
+                    while (i < empleado.Aptitud.Count && aptitudAviso.Aptitud.Id != empleado.Aptitud[i].Id)
                     {
-                        if (aptitudAviso.Aptitud.Id == empleado.Aptitud[i].Id)
-                        {
-                            PuntajeEmpleado += (int)aptitudAviso.Prioridad;
-                        }
                         i++;
+                    }
+                    if (i != empleado.Aptitud.Count)
+                    {
+                        PuntajeEmpleado += (int)aptitudAviso.Prioridad;
                     }
 
                 }
