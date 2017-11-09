@@ -67,11 +67,14 @@
   <ItemGroup>
     <Compile Include="Avisos\AptitudPorAviso.cs" />
     <Compile Include="Avisos\Aviso.cs" />
+    <Compile Include="Coincidencias\AprobadorAviso.cs" />
+    <Compile Include="Coincidencias\AprobadorPostulante.cs" />
     <Compile Include="Coincidencias\CalculadoresDePorcentaje\CalculadorDePorcentajeAviso.cs" />
     <Compile Include="Coincidencias\CalculadoresDePorcentaje\CalculadorDePorcentajeEmpleado.cs" />
     <Compile Include="Coincidencias\CalculadoresDePorcentaje\CalcularPorcentaje.cs" />
     <Compile Include="Coincidencias\Coincidencia.cs" />
     <Compile Include="Coincidencias\GeneradorCoincidencias.cs" />
+    <Compile Include="Coincidencias\IAprobador.cs" />
     <Compile Include="Encuentro.cs" />
     <Compile Include="Like.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

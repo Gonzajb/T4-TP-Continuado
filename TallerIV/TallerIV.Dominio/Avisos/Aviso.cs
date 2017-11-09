@@ -46,5 +46,8 @@ namespace TallerIV.Dominio
         public string UsuarioEmpresa_Nombre { get; set; }
         public virtual List<UsuarioEmpleado> UsuariosEmpleadoAprobados { get; set; }
         public virtual List<UsuarioEmpleado> UsuariosEmpleadoDesaprobados { get; set; }
+        public bool ComprobarUsuarioAprobado(UsuarioEmpleado usuarioEmpleado) {
+            return this.UsuariosEmpleadoAprobados.Contains(usuarioEmpleado);
+        }
     }
 }
