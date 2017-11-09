@@ -28,15 +28,22 @@ namespace TallerIV.Controllers
             return View(coincidenciasList);
         }
         
-        public string Like(int id)
+        public JsonResult Like(int id)
         {
-            string uid = this.User.Identity.GetUserId();
-            TallerIVDbContext db = new TallerIVDbContext();
+            try
+            {
+                string uid = this.User.Identity.GetUserId();
+                TallerIVDbContext db = new TallerIVDbContext();
+                AprobadorAviso avisoAprobado = new AprobadorAviso();
+                UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
+                Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
+                avisoAprobado.Aprobar(empleado, aviso);
+                return Json(new { error = false, message = "Aprobación exitosa" });
+            }
+            catch (Exception e) {
+                return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." });
+            }
 
-            db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault().AvisosAprobados.Add(db.Avisos.Where(x => x.Id == id).FirstOrDefault());
-            db.SaveChanges();
-
-            return "Se guardo"  ;
         }    
 
     }
