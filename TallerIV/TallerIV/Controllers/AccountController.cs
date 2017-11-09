@@ -453,7 +453,6 @@ namespace TallerIV.Controllers
                 var tags = tagsService.GetTagsByString(model.Tags);
                 user.Aptitud.Clear();
                 user.Aptitud.AddRange(tags);
-                usuariosService.UpdateEntity(user);
                 return RedirectToAction("Index", "Home");
             }
             else {

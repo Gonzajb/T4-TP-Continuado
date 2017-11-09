@@ -23,5 +23,5 @@ namespace TallerIV.Models
         [Display(Name = "Avisos")]
         public virtual List<Aviso> Avisos { get; set; }
 
-}
+    }
 }

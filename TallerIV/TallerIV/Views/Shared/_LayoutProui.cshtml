@@ -132,22 +132,28 @@
                     <!-- User Info -->
                     <div class="sidebar-section sidebar-user clearfix">
                         <div class="sidebar-user-avatar">
-                            <a href="@Url.Action("Edit","Account")">
-                                <img src="~/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="img-circle">
-                            </a>
+                            @if (userIsEmpresa)
+                            {
+                                <a href="@Url.Action("Edit","AccountEmpresa")">
+                                    <img src="~/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="img-circle">
+                                </a>
+                            }
+                            else if (userIsPostulante)
+                            {
+                                <a href="@Url.Action("Edit","Account")">
+                                    <img src="~/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="img-circle">
+                                </a>
+                            }
+                            
                         </div>
                         <div class="">
                             @Html.Raw(string.Format(User.Identity.Name))
                         </div>
                         <div class="sidebar-user-links">
-                            @if (userIsPostulante)
-                            {
+
                             <a href="@Url.Action("Edit", "Account")" data-toggle="tooltip" data-placement="bottom" title="Mi Perfil"><i class="gi gi-user"></i></a>
-                            }
-                            @if (userIsEmpresa)
-                            {
-                                <a href="@Url.Action("Edit", "Account")" data-toggle="tooltip" data-placement="bottom" title="Mi Perfil"><i class="gi gi-user"></i></a>
-                            }
+
+
                             <a href="@Url.Action("LogOff","Account")" data-toggle="tooltip" data-placement="bottom" title="Cerrar Sesión"><i class="gi gi-exit"></i></a>
                         </div>
                     </div>

@@ -369,7 +369,7 @@
     <Content Include="Views\BusquedaUsuarioPostulantes\Index.cshtml" />
     <Content Include="Views\HomeEmpleado\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiEmpleado.cshtml" />
-    <Content Include="Views\AccountReclutador\Edit.cshtml" />
+    <Content Include="Views\AccountEmpresa\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

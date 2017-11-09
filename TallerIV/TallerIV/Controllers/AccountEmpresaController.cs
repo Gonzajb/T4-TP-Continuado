@@ -153,6 +153,8 @@ namespace TallerIV.Controllers
         {
             if (ModelState.IsValid)
             {
+                TallerIVDbContext db = new TallerIVDbContext();
+                BaseService<UsuarioEmpresa> usuariosService = new BaseService<UsuarioEmpresa>(db);
                 var user = new UsuarioEmpresa(model.Cuit, model.RazonSocial, DateTime.Now, model.Email, model.Email);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 UserManager.AddToRole(user.Id, "Empresa");
@@ -402,8 +404,7 @@ namespace TallerIV.Controllers
             string id = this.User.Identity.GetUserId();
             BaseService<UsuarioEmpresa> usuariosService = new BaseService<UsuarioEmpresa>();
             var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == id);
-            EditEmpresaViewModel model = new EditEmpresaViewModel()
-            {
+            EditEmpresaViewModel model = new EditEmpresaViewModel(){
                 RazonSocial = user.RazonSocial,
                 Email = user.Email,
                 Id = user.Id,
