@@ -366,8 +366,8 @@
     <Content Include="Views\BusquedaUsuarioPostulantes\Details.cshtml" />
     <Content Include="Views\BusquedaUsuarioPostulantes\Edit.cshtml" />
     <Content Include="Views\BusquedaUsuarioPostulantes\Index.cshtml" />
-    <Content Include="Views\HomeEmpleado\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiEmpleado.cshtml" />
+    <Content Include="Views\HomeEmpleado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
