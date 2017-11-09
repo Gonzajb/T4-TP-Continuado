@@ -38,6 +38,9 @@ namespace TallerIV.Dominio
                 return String.Join(",", this.Aptitud.Select(x => x.Titulo));
             }
         }
+        public bool ComprobarAvisoAprobado(Aviso aviso) {
+            return this.AvisosAprobados.Contains(aviso);
+        }
         //public virtual ParametrosBusquedaUsuario ParametrosBusqueda { get; set; }
         //public long? ParametrosBusqueda_Id { get; set; }
     }

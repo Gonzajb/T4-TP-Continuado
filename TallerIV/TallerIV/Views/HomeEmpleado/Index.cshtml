@@ -1,4 +1,4 @@
-﻿@model List<TallerIV.Dominio.Aviso>
+﻿@model List<TallerIV.Dominio.Coincidencia>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
@@ -16,37 +16,32 @@
             <div class="col-md-4 col-lg-8">
                 @foreach (var item in Model)
                 {
-                    <text>
-                              Empresa:  @item.UsuarioEmpresa_Nombre 
+                    <div id="@item.Aviso.Id">
+                        Empresa:  @item.Aviso.UsuarioEmpresa_Nombre
                         <br />
-                        <br />Titulo:  @item.Titulo
-                        <br />Fecha inicio:  @item.FechaInicio
-                        <br />Fecha fin:  @item.FechaFin
-                        <br />Descripcion:  @item.Descripcion
+                        <br />Titulo:  @item.Aviso.Titulo
+                        <br />Fecha inicio:  @item.Aviso.FechaInicio
+                        <br />Fecha fin:  @item.Aviso.FechaFin
+                        <br />Descripcion:  @item.Aviso.Descripcion
 
-                    </text>
-
-                    foreach (var aptitud in item.AptitudesBuscadas)
-                    {
-                        if (aptitud.Aptitud != null) {
-                            <text>
-                            <br />@aptitud.Aptitud.Titulo 
-                            </text>
+                        @foreach (var aptitud in item.Aviso.AptitudesBuscadas)
+                        {
+                            if (aptitud.Aptitud != null)
+                            {
+                                <br />@aptitud.Aptitud.Titulo
+                            }
                         }
-                    }
-                    <text>
-                        <br />Horas de trabajo:  @item.HorasTrabajo
-                        <br />Relacion labora:  @item.TipoRelacionDeTrabajo
-                        <br />Sueldo ofrecido: @item.SueldoOfrecido
+                        <br />Horas de trabajo:  @item.Aviso.HorasTrabajo
+                        <br />Relacion labora:  @item.Aviso.TipoRelacionDeTrabajo
+                        <br />Sueldo ofrecido: @item.Aviso.SueldoOfrecido
                         <br />
-                        <button onclick="LlamarLike(@item.Id)">Like!</button>
+                        <button onclick="LlamarLike(@item.Aviso.Id)">Like!</button>
                         <button>Dislike</button>
                         <br />
                         <br />
                         <br />
-                        <br />   
-                    </text>
-                    
+                        <br />
+                    </div>
                 }
             </div>
             <!-- END Top Stats -->
@@ -63,10 +58,15 @@
             // edit to add steve's suggestion.
             //url: "/ControllerName/ActionName",
             url: '/HomeEmpleado/Like/' + id,
-            success: function (data) {
+            success: (data) => {
                 // your data could be a View or Json or what ever you returned in your action method 
                 // parse your data here
-                alert(data);
+                if(!data.error){
+                    alert(data.message);
+                    $("#" + id).remove();
+                }else{
+                    alert(data.message);
+                }
             },
             error: function(req, status, errorObj) {
                 alert('error');

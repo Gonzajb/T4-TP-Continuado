@@ -51,7 +51,9 @@ namespace TallerIV.Datos
             modelBuilder.Entity<AptitudPorAviso>().HasRequired(x => x.Aptitud).WithMany().HasForeignKey(a => a.Aptitud_Id);
 
             modelBuilder.Entity<Encuentro>().HasKey(e => e.Id).ToTable("Encuentros");
-            modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
+            modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Encuentro>().HasRequired(e => e.Aviso).WithMany().HasForeignKey(a => a.Aviso_Id).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioEmpleado).WithMany().HasForeignKey(a => a.UsuarioEmpleado_Id).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Like>().HasKey(l => l.Id).ToTable("Likes");
             modelBuilder.Entity<Like>().HasRequired(l => l.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);
