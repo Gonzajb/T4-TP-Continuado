@@ -1,38 +1,29 @@
 ﻿@model IEnumerable<TallerIV.Dominio.Aviso>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado de avisos";
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listado de avisos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <table class="table">
     <tr>
         @*Poner nombre y apelido*@
         <th>
-            @("NOmbre reclutador")
+            Reclutador
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UsuarioReclutador.Email)
+            Título
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Titulo)
+            Fecha de inicio
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaInicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaFin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioReclutador_Id)
+            Fecha de fin
         </th>
         <th></th>
     </tr>
@@ -43,29 +34,19 @@
             @(item.UsuarioReclutador.Nombre + " " + item.UsuarioReclutador.Apellido)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UsuarioReclutador.Email)
+            @item.Titulo
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
+            @item.FechaInicio.ToShortDateString()
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
+            @(item.FechaFin.HasValue ? item.FechaFin.Value.ToShortDateString() : "")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioReclutador_Id)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Editar", "Edit", new { id=item.Id }) |*@
+            @Html.ActionLink("Detalle", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
-
 </table>

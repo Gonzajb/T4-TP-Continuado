@@ -9,7 +9,7 @@ namespace TallerIV.Dominio.Avisos
 {
     public class AptitudPorAviso
     {
-        private AptitudPorAviso() { }
+        public AptitudPorAviso() { }
         public AptitudPorAviso(long AvisoId, long AptitudId, Aptitud aptitud, Prioridad p)
         {
             this.Aviso_Id = AvisoId;

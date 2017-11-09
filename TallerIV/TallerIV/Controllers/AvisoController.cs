@@ -73,11 +73,16 @@ namespace TallerIV.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,Descripcion,FechaInicio,FechaFin,UsuarioReclutador_Id,UsuarioEmpresa_Id,UsuarioReclutadorAsignado_Id")] Aviso aviso)
+        public ActionResult Create(Aviso aviso)
         {
             if (ModelState.IsValid)
             {
-                aviso.UsuarioEmpresa_Id = this.User.Identity.GetUserId();
+                aviso.UsuarioReclutador_Id = this.User.Identity.GetUserId();
+
+                BaseService<UsuarioEmpresa> usuarioEmpresaService = new BaseService<UsuarioEmpresa>();
+                UsuarioEmpresa empresa = usuarioEmpresaService.GetAll().FirstOrDefault(x => x.Reclutadores.Any(r => r.Id == aviso.UsuarioReclutador_Id));
+                aviso.UsuarioEmpresa_Id = empresa.Id;
+
                 this.avisoService.AddEntity(aviso);
                 return RedirectToAction("Index");
             }
@@ -141,7 +146,7 @@ namespace TallerIV.Controllers
         public JsonResult SearchTags(string term)
         {
             TagsService tagsService = new TagsService();
-            var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Titulo, label = x.Titulo });
+            var tags = tagsService.GetTagsByTitulo(term).Select(x => new { value = x.Id, label = x.Titulo });
             return Json(tags, JsonRequestBehavior.AllowGet);
         }
         //protected override void Dispose(bool disposing)

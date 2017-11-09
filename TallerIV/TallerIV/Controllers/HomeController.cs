@@ -73,6 +73,44 @@ namespace TallerIV.Controllers
                usuarioEmpresaId,
                usuarioNombre);
 
+            Aviso aviso2 = new Aviso(
+               "Ee .Net",
+               "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+               DateTime.Now,
+               usuarioReclutador,
+               aptitudes,
+               TipoRelacionDeTrabajo.Monotributo,
+               Dominio.Usuarios.Prioridad.Baja,
+               8,
+               Dominio.Usuarios.Prioridad.Baja,
+               usuarioEmpresaId,
+               usuarioNombre);
+
+            Aviso aviso3 = new Aviso(
+               "AVISO 3",
+               "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+               DateTime.Now,
+               usuarioReclutador,
+               aptitudes,
+               TipoRelacionDeTrabajo.Monotributo,
+               Dominio.Usuarios.Prioridad.Baja,
+               8,
+               Dominio.Usuarios.Prioridad.Baja,
+               usuarioEmpresaId,
+               usuarioNombre);
+
+            Aviso aviso4 = new Aviso(
+               "AVIGADSG",
+               "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+               DateTime.Now,
+               usuarioReclutador,
+               aptitudes,
+               TipoRelacionDeTrabajo.Monotributo,
+               Dominio.Usuarios.Prioridad.Baja,
+               8,
+               Dominio.Usuarios.Prioridad.Baja,
+               usuarioEmpresaId,
+               usuarioNombre);
 
 
 
@@ -80,6 +118,21 @@ namespace TallerIV.Controllers
             if (!db.Avisos.Any(X => X.Titulo == aviso.Titulo))
             {
                 db.Avisos.Add(aviso);
+                db.SaveChanges();
+            }
+            if (!db.Avisos.Any(X => X.Titulo == aviso2.Titulo))
+            {
+                db.Avisos.Add(aviso2);
+                db.SaveChanges();
+            }
+            if (!db.Avisos.Any(X => X.Titulo == aviso3.Titulo))
+            {
+                db.Avisos.Add(aviso3);
+                db.SaveChanges();
+            }
+            if (!db.Avisos.Any(X => X.Titulo == aviso4.Titulo))
+            {
+                db.Avisos.Add(aviso4);
                 db.SaveChanges();
             }
 
