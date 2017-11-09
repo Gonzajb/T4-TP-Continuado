@@ -1,12 +1,12 @@
 ﻿var prioridades = [{
-    name: 'Excluyente',
-    id: 0
-}, {
-    name: 'Normal',
+    name: 'Baja',
     id: 1
 }, {
-    name: 'Baja',
+    name: 'Normal',
     id: 2
+}, {
+    name: 'Excluyente',
+    id: 3
 }];
 
 var AptitudPorAviso = function () {
@@ -67,7 +67,7 @@ ko.bindingHandlers.autoComplete = {
             // Update our SelectedOption observable
             if (typeof ui.item !== "undefined") {
                 // ui.item - label|value|...
-                selectedOption(ui.item);
+                selectedOption(ui.item.value);
             }
         };
 

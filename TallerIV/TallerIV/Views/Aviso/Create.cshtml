@@ -63,10 +63,11 @@
                     <tbody data-bind="foreach:aptitudes">
                         <tr>
                             <td>
-                                <input type="text" class="Tags form-control" data-bind="autoComplete:{options:'@Url.Action("SearchTags")'}" />
+                                <input type="text" class="Tags form-control" data-bind="autoComplete:{selected: aptitud_id,options:'@Url.Action("SearchTags")'}" />
+                                <input type="hidden" data-bind="value:aptitud_id,attr:{name:'AptitudesBuscadas['+$index()+'].Aptitud_Id'}" />
                             </td>
                             <td>
-                                <select type="text" class="form-control" data-bind="options: prioridades, value: prioridadSeleccionada, optionsText: 'label', optionsValue: 'value'"></select>
+                                <select type="text" class="form-control" data-bind="options: prioridades, value: prioridadSeleccionada, optionsText: 'label', optionsValue: 'value',attr:{name:'AptitudesBuscadas['+$index()+'].Prioridad'}"></select>
                             </td>
                             <td>
                                 <a href="#" data-bind="click:$parent.remove">Eliminar</a>

@@ -26,6 +26,7 @@
 @{ 
     bool userIsEmpresa = this.User.IsInRole("Empresa");
     bool userIsPostulante = this.User.IsInRole("Empleado");
+    bool userIsReclutador = this.User.IsInRole("Reclutador");
 }
 
 @*<body>
@@ -95,7 +96,7 @@
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                    @if (userIsEmpresa)
+                    @if (userIsReclutador)
                     {
                         <li>@Html.ActionLink("Mis avisos", "Index", "Aviso")</li>
                     }

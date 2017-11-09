@@ -1,75 +1,71 @@
 ﻿@model TallerIV.Dominio.Aviso
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Detalle de aviso";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalle de aviso</h2>
 
 <div>
-    <h4>Aviso</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.UsuarioReclutador.Email)
+            Título
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UsuarioReclutador.Email)
+            @Model.Titulo
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
+            Descripción
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Titulo)
+            @Model.Descripcion
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            Fecha de inicio
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descripcion)
+            @Model.FechaInicio.ToShortDateString()
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaInicio)
+            Fecha de fin
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FechaInicio)
+            @(Model.FechaFin.HasValue ? Model.FechaFin.Value.ToShortDateString() : "")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FechaFin)
+            Aptitudes necesarias
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FechaFin)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Aptitud</th>
+                        <th>Prioridad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var aptitud in Model.AptitudesBuscadas) {
+                    <tr>
+                        <td>@aptitud.Aptitud.Titulo</td>
+                        <td>@aptitud.Prioridad</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UsuarioEmpresa_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UsuarioEmpresa_Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UsuarioReclutadorAsignado_Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UsuarioReclutadorAsignado_Id)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver al listado", "Index")
 </p>
