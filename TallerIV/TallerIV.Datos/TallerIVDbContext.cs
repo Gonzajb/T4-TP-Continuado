@@ -82,5 +82,6 @@ namespace TallerIV.Datos
         public System.Data.Entity.DbSet<TallerIV.Dominio.Usuarios.BusquedaUsuarioPostulante> BusquedaUsuarioPostulantes { get; set; }
 
         public System.Data.Entity.DbSet<TallerIV.Dominio.UsuarioReclutador> IdentityUsers { get; set; }
+
     }
 }

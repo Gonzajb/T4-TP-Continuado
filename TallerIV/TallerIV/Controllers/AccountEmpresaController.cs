@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TallerIV.Models;
 using TallerIV.Dominio;
+using TallerIV.Negocio.Servicios;
+using TallerIV.Datos;
 
 namespace TallerIV.Controllers
 {
@@ -393,6 +395,41 @@ namespace TallerIV.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            string id = this.User.Identity.GetUserId();
+            BaseService<UsuarioEmpresa> usuariosService = new BaseService<UsuarioEmpresa>();
+            var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == id);
+            EditEmpresaViewModel model = new EditEmpresaViewModel()
+            {
+                RazonSocial = user.RazonSocial,
+                Email = user.Email,
+                Id = user.Id,
+                Cuit = user.Cuit,
+                Reclutadores = user.Reclutadores,
+                Avisos = user.Avisos,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(EditEmpresaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TallerIVDbContext db = new TallerIVDbContext();
+                BaseService<UsuarioEmpresa> usuariosService = new BaseService<UsuarioEmpresa>(db);
+                TagsService tagsService = new TagsService(db);
+                var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == model.Id);
+                user.RazonSocial = model.RazonSocial;
+                user.Cuit = model.Cuit;                
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         //
