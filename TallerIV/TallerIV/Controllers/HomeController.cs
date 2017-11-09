@@ -43,6 +43,7 @@ namespace TallerIV.Controllers
             UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
             string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
             string usuarioNombre = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().RazonSocial;
+
             AptitudPorAviso aptitud = new AptitudPorAviso(
                 2, 
                 db.Aptitudes.FirstOrDefault().Id, 
@@ -118,23 +119,23 @@ namespace TallerIV.Controllers
             if (!db.Avisos.Any(X => X.Titulo == aviso.Titulo))
             {
                 db.Avisos.Add(aviso);
-                db.SaveChanges();
+                
             }
             if (!db.Avisos.Any(X => X.Titulo == aviso2.Titulo))
             {
                 db.Avisos.Add(aviso2);
-                db.SaveChanges();
+                
             }
             if (!db.Avisos.Any(X => X.Titulo == aviso3.Titulo))
             {
                 db.Avisos.Add(aviso3);
-                db.SaveChanges();
-            }
+            }    
             if (!db.Avisos.Any(X => X.Titulo == aviso4.Titulo))
             {
                 db.Avisos.Add(aviso4);
-                db.SaveChanges();
+                
             }
+            db.SaveChanges();
 
 
         }
