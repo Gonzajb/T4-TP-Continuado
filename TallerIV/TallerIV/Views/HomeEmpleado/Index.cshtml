@@ -4,26 +4,26 @@
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-
-
-<div class="content-header content-header-media">
+<div class="row">
     <div class="header-section">
         <div class="row">
             <!-- Main Title (hidden on small devices for the statistics to fit) -->
-            <div class="col-md-4 col-lg-7">
+            <!--<div class="col-md-4 col-lg-7">
                 <h1>Bienvenido </h1>
-            </div>
+            </div>-->
             <!-- END Main Title -->
             <!-- Top Stats -->
             <div class="col-md-4 col-lg-8">
                 @foreach (var item in Model)
                 {
                     <text>
-                        @item.Titulo 
-                        <br />@item.FechaInicio
-                        <br />@item.FechaFin 
-                        <br />@item.Descripcion
-                
+                              Empresa:  @item.UsuarioEmpresa_Nombre 
+                        <br />
+                        <br />Titulo:  @item.Titulo
+                        <br />Fecha inicio:  @item.FechaInicio
+                        <br />Fecha fin:  @item.FechaFin
+                        <br />Descripcion:  @item.Descripcion
+
                     </text>
 
                     foreach (var aptitud in item.AptitudesBuscadas)
@@ -35,16 +35,42 @@
                         }
                     }
                     <text>
-                        <br />@item.HorasTrabajo
-                        <br />@item.TipoRelacionDeTrabajo
-                        <br />@item.UsuarioEmpresa_Nombre
-                        <br />@item.SueldoOfrecido
+                        <br />Horas de trabajo:  @item.HorasTrabajo
+                        <br />Relacion labora:  @item.TipoRelacionDeTrabajo
+                        <br />Sueldo ofrecido: @item.SueldoOfrecido
+                        <br />
+                        <button onclick="LlamarLike(@item.Id)">Like!</button>
+                        <button>Dislike</button>
+                        <br />
+                        <br />
+                        <br />
+                        <br />   
                     </text>
+                    
                 }
             </div>
             <!-- END Top Stats -->
         </div>
     </div>
     <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
-    <img class="animation-pulseSlow" alt="header image" src="~/Content/themes/img/background-dashboard.png">
 </div>
+
+<script>
+    function LlamarLike(id)
+    {
+        alert("like!");
+        $.ajax({
+            // edit to add steve's suggestion.
+            //url: "/ControllerName/ActionName",
+            url: '/HomeEmpleado/Like/' + id,
+            success: function (data) {
+                // your data could be a View or Json or what ever you returned in your action method 
+                // parse your data here
+                alert(data);
+            },
+            error: function(req, status, errorObj) {
+                alert('error');
+            }
+        });
+    }
+</script>
