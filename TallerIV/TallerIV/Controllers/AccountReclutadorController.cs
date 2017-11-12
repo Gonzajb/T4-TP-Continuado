@@ -154,11 +154,12 @@ namespace TallerIV.Controllers
             {
                 var user = new UsuarioReclutador(DateTime.Now, model.Email, model.Email, model.Nombre, model.Apellido, model.FechaDeNacimiento, this.User.Identity.GetUserId());
                 var result = await UserManager.CreateAsync(user, model.Password);
-                UserManager.AddToRole(user.Id, "Reclutador");
+                
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Reclutador");
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    
+
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

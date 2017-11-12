@@ -157,9 +157,10 @@ namespace TallerIV.Controllers
                 BaseService<UsuarioEmpresa> usuariosService = new BaseService<UsuarioEmpresa>(db);
                 var user = new UsuarioEmpresa(model.Cuit, model.RazonSocial, DateTime.Now, model.Email, model.Email);
                 var result = await UserManager.CreateAsync(user, model.Password);
-                UserManager.AddToRole(user.Id, "Empresa");
+                
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Empresa");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
