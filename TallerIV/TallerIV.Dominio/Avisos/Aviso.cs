@@ -12,7 +12,7 @@ namespace TallerIV.Dominio
         public Aviso()
         {
         }
-        public Aviso(string titulo, string descripcion, DateTime fechaInicio, UsuarioReclutador usuarioReclutador, List<AptitudPorAviso> aptitudesBuscados, TipoRelacionDeTrabajo relacionTrabajo, Prioridad relacionTrabajoPrioridad, int horasTrabajo, Prioridad horasTrabajoPrioridad, string usuarioEmpresaId, string usuarioNombre)
+        public Aviso(string titulo, string descripcion, DateTime fechaInicio, UsuarioReclutador usuarioReclutador, List<AptitudPorAviso> aptitudesBuscados, float sueldoOfrencido, Prioridad sueldoOfrecidoPrioridad, TipoRelacionDeTrabajo relacionTrabajo, Prioridad relacionTrabajoPrioridad, int horasTrabajo, Prioridad horasTrabajoPrioridad, string usuarioEmpresaId, string usuarioNombre)
         {
             this.Titulo = titulo;
             this.Descripcion = descripcion;
@@ -26,7 +26,8 @@ namespace TallerIV.Dominio
             this.HorasTrabajoPrioridad = HorasTrabajoPrioridad;
             this.UsuarioEmpresa_Id = usuarioEmpresaId;
             this.UsuarioEmpresa_Nombre = usuarioNombre;
-
+            this.SueldoOfrecido = sueldoOfrencido;
+            this.SueldoOfrecidoPrioridad = sueldoOfrecidoPrioridad;
         }
         public long Id { get; set; }
         public string Titulo { get; set; }

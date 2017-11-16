@@ -70,33 +70,35 @@ namespace TallerIV.Dominio.Coincidencias
         /// <returns>Listado de coincidencias</returns>
         public List<Coincidencia> GenerarListadoCoincidencias(UsuarioEmpleado usuarioEmpleadoOrigen, IQueryable<Aviso> avisos)
         {
-            //Inicialización
-            DateTime fechaActual = DateTime.Now;
             List<Coincidencia> listCoincidencias = new List<Coincidencia>();
-            CalculadorDePorcentajeEmpleado calculadorDePorcentaje = new CalculadorDePorcentajeEmpleado(usuarioEmpleadoOrigen);
             BusquedaUsuarioPostulante busqueda = usuarioEmpleadoOrigen.Busqueda;
 
-            //Se filtran todos los avisos que cumplan con los parámetros excluyentes
-            List<Aviso> listCandidatos = avisos.Where(aviso =>
-                aviso.FechaInicio <= fechaActual
-                && (aviso.FechaFin.HasValue ? aviso.FechaFin >= fechaActual : true)
-                && (busqueda.HorasTrabajoPrioridad == Prioridad.Excluyente ? busqueda.HorasTrabajo == aviso.HorasTrabajo : true)
-                && (busqueda.SueldoMinimoPrioridad == Prioridad.Excluyente ? busqueda.SueldoMinimo <= aviso.SueldoOfrecido : true)
-                && (busqueda.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? busqueda.TipoRelacionDeTrabajo == aviso.TipoRelacionDeTrabajo : true)
-                && !usuarioEmpleadoOrigen.AvisosAprobados.Any(usEmp => usEmp.Id == aviso.Id)
-                && !usuarioEmpleadoOrigen.AvisosDesaprobados.Any(usEmp => usEmp.Id == aviso.Id)
-                ).ToList();
+            if (busqueda != null) {
+                //Inicialización
+                DateTime fechaActual = DateTime.Now;
+                CalculadorDePorcentajeEmpleado calculadorDePorcentaje = new CalculadorDePorcentajeEmpleado(usuarioEmpleadoOrigen);
 
-            //Se generan las coincidencias
-            foreach (var aviso in listCandidatos)
-            {                
-                Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia(aviso);
-                listCoincidencias.Add(coincidencia);
+                //Se filtran todos los avisos que cumplan con los parámetros excluyentes
+                List<Aviso> listCandidatos = avisos.Where(aviso =>
+                    aviso.FechaInicio <= fechaActual
+                    && (aviso.FechaFin.HasValue ? aviso.FechaFin >= fechaActual : true)
+                    && (busqueda.HorasTrabajoPrioridad == Prioridad.Excluyente ? busqueda.HorasTrabajo == aviso.HorasTrabajo : true)
+                    && (busqueda.SueldoMinimoPrioridad == Prioridad.Excluyente ? busqueda.SueldoMinimo <= aviso.SueldoOfrecido : true)
+                    && (busqueda.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? busqueda.TipoRelacionDeTrabajo == aviso.TipoRelacionDeTrabajo : true)
+                    && !usuarioEmpleadoOrigen.AvisosAprobados.Any(usEmp => usEmp.Id == aviso.Id)
+                    && !usuarioEmpleadoOrigen.AvisosDesaprobados.Any(usEmp => usEmp.Id == aviso.Id)
+                    ).ToList();
+
+                //Se generan las coincidencias
+                foreach (var aviso in listCandidatos)
+                {                
+                    Coincidencia coincidencia = calculadorDePorcentaje.GenerarCoincidencia(aviso);
+                    listCoincidencias.Add(coincidencia);
+                }
+
+                //Se ordenan las coincidencias
+                listCoincidencias = listCoincidencias.OrderBy(x => x.Porcentaje).ToList();
             }
-
-            //Se ordenan las coincidencias
-            listCoincidencias = listCoincidencias.OrderBy(x => x.Porcentaje).ToList();
-
             return listCoincidencias;
         }
     }
