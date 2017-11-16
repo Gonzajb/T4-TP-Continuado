@@ -84,8 +84,11 @@ namespace TallerIV.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index", "Home");
-                    //return RedirectToLocal(returnUrl);
+                    if(this.User.IsInRole("Postulante"))
+                        return RedirectToAction("Index", "HomeEmpleado");
+                    else
+                        return RedirectToAction("Index", "Home");
+                //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

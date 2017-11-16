@@ -8,6 +8,7 @@ namespace TallerIV.Dominio
 {
     public class Encuentro
     {
+        public Encuentro() { }
         public Encuentro(UsuarioReclutador usuarioReclutador, UsuarioEmpleado usuarioEmpleado, Aviso aviso) {
             this.UsuarioReclutador = usuarioReclutador;
             this.UsuarioEmpleado = usuarioEmpleado;

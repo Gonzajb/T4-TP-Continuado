@@ -214,6 +214,8 @@
     <Compile Include="Controllers\AccountReclutadorController.cs" />
     <Compile Include="Controllers\AvisoController.cs" />
     <Compile Include="Controllers\BusquedaUsuarioPostulantesController.cs" />
+    <Compile Include="Controllers\EncuentrosPostulanteController.cs" />
+    <Compile Include="Controllers\EncuentrosReclutadorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeEmpleadoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -370,6 +372,8 @@
     <Content Include="Views\HomeEmpleado\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiEmpleado.cshtml" />
     <Content Include="Views\AccountEmpresa\Edit.cshtml" />
+    <Content Include="Views\EncuentrosReclutador\Index.cshtml" />
+    <Content Include="Views\EncuentrosPostulante\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

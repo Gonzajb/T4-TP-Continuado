@@ -114,31 +114,24 @@ namespace TallerIV.Controllers
                usuarioNombre);
 
 
+            var avisos = db.Avisos.ToList();
 
-
-            if (!db.Avisos.Any(X => X.Titulo == aviso.Titulo))
-            {
-                db.Avisos.Add(aviso);
-                db.SaveChanges();
-
-            }
-            if (!db.Avisos.Any(X => X.Titulo == aviso2.Titulo))
-            {
-                db.Avisos.Add(aviso2);
-                db.SaveChanges();
-
-            }
-            if (!db.Avisos.Any(X => X.Titulo == aviso3.Titulo))
-            {
-                db.Avisos.Add(aviso3);
-                db.SaveChanges();
-            }    
-            if (!db.Avisos.Any(X => X.Titulo == aviso4.Titulo))
-            {
-                db.Avisos.Add(aviso4);
-                db.SaveChanges();
-
-            }
+            //if (!avisos.Any(X => X.Titulo == aviso.Titulo))
+            //{
+            //    db.Set<Aviso>().Add(aviso);
+            //}
+            //if (!avisos.Any(X => X.Titulo == aviso2.Titulo))
+            //{
+            //    db.Set<Aviso>().Add(aviso2);
+            //}
+            //if (!avisos.Any(X => X.Titulo == aviso3.Titulo))
+            //{
+            //    db.Set<Aviso>().Add(aviso3);
+            //}    
+            //if (!avisos.Any(X => X.Titulo == aviso4.Titulo))
+            //{
+            //    db.Set<Aviso>().Add(aviso4);
+            //}
             db.SaveChanges();
 
 
