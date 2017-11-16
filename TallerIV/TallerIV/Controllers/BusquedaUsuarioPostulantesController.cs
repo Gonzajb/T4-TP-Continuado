@@ -55,7 +55,7 @@ namespace TallerIV.Controllers
                 usuario.Busqueda = busquedaUsuarioPostulante;
                 usuariosService.UpdateEntity(usuario);
                 //busquedaService.AddEntity(busquedaUsuarioPostulante);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(busquedaUsuarioPostulante);
@@ -84,7 +84,7 @@ namespace TallerIV.Controllers
             if (ModelState.IsValid)
             {
                 busquedaService.UpdateEntity(busquedaUsuarioPostulante);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
             return View(busquedaUsuarioPostulante);
         }

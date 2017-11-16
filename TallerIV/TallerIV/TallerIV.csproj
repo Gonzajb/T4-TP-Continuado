@@ -228,6 +228,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EditEmpresaViewModel.cs" />
     <Compile Include="Models\EditPostulanteViewModel.cs" />
+    <Compile Include="Models\EditReclutadorViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterEmpresaViewModel.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Views\AccountEmpresa\Edit.cshtml" />
     <Content Include="Views\EncuentrosReclutador\Index.cshtml" />
     <Content Include="Views\EncuentrosPostulante\Index.cshtml" />
+    <Content Include="Views\AccountReclutador\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

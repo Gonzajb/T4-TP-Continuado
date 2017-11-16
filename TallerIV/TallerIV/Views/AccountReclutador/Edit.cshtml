@@ -1,0 +1,104 @@
+﻿@model TallerIV.Models.EditReclutadorViewModel
+@{
+    ViewBag.Title = "Editar";
+}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-user"></i>Administrar cuenta.<br><small>Editar datos de cuenta y perfil profesional.</small>
+        </h1>
+    </div>
+</div>
+
+@using (Html.BeginForm("Edit", "AccountEmpresa", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<h4>Editar cuenta.</h4>
+        <hr />*@
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Email)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <p class="form-control-static">@Model.Email</p>
+            @*@Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })*@
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FechaDeNacimiento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBox("FechaDeNacimiento", Model.FechaDeNacimiento.HasValue ? Model.FechaDeNacimiento.Value.ToString("yyyy-MM-dd") : "", new { @type = "date", min = "1910-04-01", max = "2017-01-01", @class = "form-control" })
+        </div>
+    </div>     
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>*@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Editar" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(function () {
+        $('#Tags').selectize({
+            delimiter: ',',
+            persist: false,
+            searchField:'value',
+            create: function (input) {
+                return {
+                    value: input,
+                    text: input
+                }
+            },
+            load: function (query, callback) {
+                if (!query.length) return callback();
+                //callback([
+                //    { key: 1, value: 'One', text: 'One' },
+                //    { key: 2, value: 'Two' },
+                //    { key: 3, value: 'Three' },
+                //    { key: 4, value: 'Four' },
+                //    { key: 5, value: 'Five' },
+                //        ]);
+                $.ajax({
+                    url: '@Url.Action("SearchTags")?term=' + query,
+                    error: function () {
+                        callback();
+                    },
+                    success: function (res) {
+                        callback(res);
+                    }
+                });
+            }
+        });
+    });
+</script>
