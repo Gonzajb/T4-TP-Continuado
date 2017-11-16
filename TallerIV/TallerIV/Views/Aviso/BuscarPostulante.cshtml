@@ -1,0 +1,106 @@
+﻿@model List<TallerIV.Dominio.Coincidencia>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+}
+
+<div class="row">
+    <div class="header-section">
+        <div class="row">
+            <!-- Main Title (hidden on small devices for the statistics to fit) -->
+            <!--<div class="col-md-4 col-lg-7">
+                <h1>Bienvenido </h1>
+            </div>-->
+            <!-- END Main Title -->
+            <!-- Top Stats -->
+            <div class="col-md-4 col-lg-8">
+                @foreach (var item in Model)
+                {
+                    <div id="@item.Empleado.Id">
+                        <br />
+                        <br />Nombre:  @item.Empleado.Nombre
+                        <br />Apellido:  @item.Empleado.Apellido
+                        <br />Fecha de nacimiento:  @item.Empleado.FechaDeNacimiento
+                        <br />Edad:  @item.Empleado.Edad
+                        <br />Descripcion:  @item.Aviso.Descripcion
+
+                        @foreach (var aptitud in item.Empleado.Aptitud)
+                        {
+                            if (aptitud != null)
+                            {
+                                <br />@aptitud.Titulo
+                            }
+                        }
+                        <br />Horas de trabajo:  @item.Empleado.Busqueda.HorasTrabajo
+                        <br />Relacion labora:  @item.Empleado.Busqueda.TipoRelacionDeTrabajo
+                        <br />Sueldo ofrecido: @item.Empleado.Busqueda.SueldoMinimo
+                        <br />
+                        <button onclick="LlamarLike(@item.Aviso.Id,@item.Empleado.Id)">Like!</button>
+                        <button onclick="LlamarDisLike(@item.Aviso.Id,@item.Empleado.Id)">Dislike</button>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                }
+            </div>
+            <!-- END Top Stats -->
+        </div>
+    </div>
+    <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+</div>
+
+<script>
+    function LlamarLike(ida, id)
+    {
+        alert("like!");
+        $.ajax({
+            // edit to add steve's suggestion.
+            //url: "/ControllerName/ActionName",
+            url: '/Aviso/Like/',
+            data: { 
+                id: id, 
+                aid: ida
+            },
+            success: (data) => {
+                // your data could be a View or Json or what ever you returned in your action method
+                // parse your data here
+                if(!data.error){
+                    alert(data.message);
+                    $("#" + id).remove();
+                }else{
+                    alert(data.message);
+                }
+            },
+            error: function(req, status, errorObj) {
+                alert('error');
+            }
+        });
+    }
+    function LlamarDisLike(id)
+    {
+        alert("DisLike");
+        $.ajax({
+            // edit to add steve's suggestion.
+            //url: "/ControllerName/ActionName",
+            url: '/Aviso/DisLike/',
+            data: { 
+            id: id, 
+            aid: ida
+        },
+            success: (data) => {
+                // your data could be a View or Json or what ever you returned in your action method
+                // parse your data here
+                if(!data.error){
+                    alert(data.message);
+                    $("#" + id).remove();
+                }else{
+                    alert(data.message);
+                }
+            },
+            error: function(req, status, errorObj) {
+                alert('error');
+            }
+        });
+    }
+</script>

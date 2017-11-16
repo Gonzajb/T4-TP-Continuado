@@ -11,6 +11,8 @@ using TallerIV.Dominio;
 using TallerIV.Negocio.Servicios;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using TallerIV.Dominio.Coincidencias;
+using TallerIV.Dominio.Usuarios;
 
 namespace TallerIV.Controllers
 {
@@ -133,6 +135,59 @@ namespace TallerIV.Controllers
             }
             return View(aviso);
         }
+
+        // GET: HomeEmpleado
+        public ActionResult BuscarPostulantes(long aid)
+        {
+            TallerIVDbContext db = new TallerIVDbContext();
+            BaseService<UsuarioEmpleado> usuarioService = new BaseService<UsuarioEmpleado>(db);
+            IQueryable<UsuarioEmpleado> queryEmpleados = usuarioService.GetAll();
+            Aviso aviso = db.Users.OfType<Aviso>().Where(x => x.Id == aid).FirstOrDefault();
+            GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
+            List<Coincidencia> coincidenciasList = generadorCoincidencias.GenerarListadoCoincidencias(aviso, queryEmpleados);
+            return View(coincidenciasList);
+        }
+
+        public JsonResult Like(string id, long aid)
+        {
+            try
+            {
+                string uid = this.User.Identity.GetUserId();
+                TallerIVDbContext db = new TallerIVDbContext();
+                AprobadorPostulante postulanteAprobado = new AprobadorPostulante();
+                UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == id).FirstOrDefault();
+                Aviso aviso = db.Avisos.Where(x => x.Id == aid).FirstOrDefault();
+                postulanteAprobado.Aprobar(empleado, aviso);
+                return Json(new { error = false, message = "Aprobación exitosa" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." });
+            }
+
+        }
+        public JsonResult DisLike(string id, long aid)
+        {
+            try
+            {
+                string uid = this.User.Identity.GetUserId();
+                TallerIVDbContext db = new TallerIVDbContext();
+                AprobadorPostulante postulanteAprobado = new AprobadorPostulante();
+
+                UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == id).FirstOrDefault();
+                Aviso aviso = db.Avisos.Where(x => x.Id == aid).FirstOrDefault();
+
+                aviso.UsuariosEmpleadoDesaprobados.Add(empleado);
+                db.SaveChanges();
+                return Json(new { error = false, message = "Desaprobación exitosa" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = true, message = "No pudo desaprobar el aviso. Vuelva a intentarlo." });
+            }
+
+        }
+
 
         // POST: Aviso/Delete/5
         [HttpPost, ActionName("Delete")]
