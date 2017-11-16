@@ -33,7 +33,7 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                         PuntajeEmpleado += (int)aptitudAviso.Prioridad;
                     }
                 }
-                coincidencia = new Coincidencia((float)PuntajeEmpleado / (float)PuntajeMaximo, Empleado, aviso);
+                coincidencia = new Coincidencia((float)PuntajeEmpleado / (float)PuntajeMaximo * 100, Empleado, aviso);
             }
             else
             {

@@ -41,7 +41,53 @@
         <dd>
             @(Model.FechaFin.HasValue ? Model.FechaFin.Value.ToShortDateString() : "")
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoOfrecido)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.SueldoOfrecido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SueldoOfrecidoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SueldoOfrecidoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoRelacionDeTrabajoPrioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorasTrabajoPrioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorasTrabajoPrioridad)
+        </dd>
         <dt>
             Aptitudes necesarias
         </dt>

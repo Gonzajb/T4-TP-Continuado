@@ -97,7 +97,7 @@ namespace TallerIV.Dominio.Coincidencias
                 }
 
                 //Se ordenan las coincidencias
-                listCoincidencias = listCoincidencias.OrderBy(x => x.Porcentaje).ToList();
+                listCoincidencias = listCoincidencias.OrderByDescending(x => x.Porcentaje).ToList();
             }
             return listCoincidencias;
         }
