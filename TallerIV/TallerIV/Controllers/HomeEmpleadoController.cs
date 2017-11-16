@@ -43,7 +43,28 @@ namespace TallerIV.Controllers
                 return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." });
             }
 
-        }    
+        }
+        public JsonResult DisLike(int id)
+        {
+            try
+            {
+                string uid = this.User.Identity.GetUserId();
+                TallerIVDbContext db = new TallerIVDbContext();
+                AprobadorAviso avisoAprobado = new AprobadorAviso();
+
+                UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
+                Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
+
+                empleado.AvisosDesaprobados.Add(aviso);
+                db.SaveChanges();
+                return Json(new { error = false, message = "Desaprobación exitosa" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = true, message = "No pudo desaprobar el aviso. Vuelva a intentarlo." });
+            }
+
+        }
 
     }
 }

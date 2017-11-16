@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TallerIV.Dominio.Encuentro>
+
+@{
+    ViewBag.Title = "Mis encuentros";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+}
+
+<h2>Mis encuentros</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Aviso
+        </th>
+        <th>
+            Nombre empleado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Aviso.Titulo
+        </td>
+        <td>
+            @item.UsuarioEmpleado.Nombre
+        </td>
+        <td>
+            <a href="#">Contactar</a>
+        </td>
+    </tr>
+}
+</table>
