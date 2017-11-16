@@ -124,10 +124,20 @@
                 <!-- Sidebar Content -->
                 <div class="sidebar-content">
                     <!-- Brand -->
-                    <a href="@Url.Action("Index","Home")" class="sidebar-brand">
-                        <i class="gi gi-flash"></i>Taller<strong>IV</strong>
-                        @*<img src="~/Content/themes/img/logo-dark100.png" />*@
-                    </a>
+                    @if (userIsPostulante)
+                    {
+                        <a href="@Url.Action("Index","HomeEmpleado")" class="sidebar-brand">
+                            <i class="gi gi-flash"></i>Taller<strong>IV</strong>
+                            @*<img src="~/Content/themes/img/logo-dark100.png" />*@
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index","Home")" class="sidebar-brand">
+                            <i class="gi gi-flash"></i>Taller<strong> IV</strong>
+                        </a>
+                    }
+                    
                     <!-- END Brand -->
                     <!-- User Info -->
                     <div class="sidebar-section sidebar-user clearfix">
@@ -177,11 +187,11 @@
                     <!-- Sidebar Navigation -->
                     
                     <ul class="sidebar-nav">
-                        <li>
-                            <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
-                        </li>
+                        
                         @if (userIsPostulante)
-                        {
+                        {                            <li>
+                                <a href="@Url.Action("Index","HomeEmpleado")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                            </li>
                             <li>
                                 <a href="@Url.Action("Edit","BusquedaUsuarioPostulantes")" class="dashboard"><i class="gi gi-search sidebar-nav-icon"></i>Administrar búsqueda</a>
                             </li>
@@ -189,11 +199,17 @@
                         @if (userIsReclutador)
                         {
                             <li>
+                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                            </li>
+                            <li>
                                 <a href="@Url.Action("Index","Aviso")" class="dashboard">@*<i class="gi gi-search sidebar-nav-icon"></i>*@Administrar avisos</a>
                             </li>
                         }
                         @if (userIsEmpresa)
                         {
+                            <li>
+                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                            </li>
                             <li>
                                 <a href="@Url.Action("Register", "AccountReclutador")" class="dashboard"><i class="gi gi-flash"></i>Nuevo Reclutador</a>
                             </li>

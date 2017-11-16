@@ -15,12 +15,11 @@ namespace TallerIV.Controllers
     {
 
         // GET: HomeEmpleado
-        private AvisosService avisoService;
         public ActionResult Index()
         {
             TallerIVDbContext db = new TallerIVDbContext();
             BaseService<Aviso> avisosService = new BaseService<Aviso>(db);
-            IQueryable<Aviso> queryAvisos = avisoService.GetAll();
+            IQueryable<Aviso> queryAvisos = avisosService.GetAll();
             string uid = this.User.Identity.GetUserId();
             UsuarioEmpleado usuario = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
             GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
