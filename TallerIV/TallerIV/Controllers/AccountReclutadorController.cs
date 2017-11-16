@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using TallerIV.Models;
 using TallerIV.Dominio;
 using TallerIV.Negocio.Servicios;
+using TallerIV.Datos;
 
 namespace TallerIV.Controllers
 {
@@ -396,6 +397,42 @@ namespace TallerIV.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            string id = this.User.Identity.GetUserId();
+            BaseService<UsuarioReclutador> usuariosService = new BaseService<UsuarioReclutador>();
+            var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == id);
+            EditReclutadorViewModel model = new EditReclutadorViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Nombre = user.Nombre,
+                Apellido = user.Apellido,
+                FechaDeNacimiento = user.FechaDeNacimiento
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(EditReclutadorViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TallerIVDbContext db = new TallerIVDbContext();
+                BaseService<UsuarioReclutador> usuariosService = new BaseService<UsuarioReclutador>(db);
+                TagsService tagsService = new TagsService(db);
+                var user = usuariosService.GetAll().FirstOrDefault(x => x.Id == model.Id);
+                user.FechaDeNacimiento = model.FechaDeNacimiento;
+                user.Nombre = model.Nombre;
+                user.Apellido = model.Apellido;
+                return RedirectToAction("Index", "Home");
+
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         //
