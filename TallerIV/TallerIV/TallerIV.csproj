@@ -376,7 +376,7 @@
     <Content Include="Views\EncuentrosReclutador\Index.cshtml" />
     <Content Include="Views\EncuentrosPostulante\Index.cshtml" />
     <Content Include="Views\AccountReclutador\Edit.cshtml" />
-    <Content Include="Views\Aviso\BuscarPostulante.cshtml" />
+    <Content Include="Views\Aviso\BuscarPostulantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

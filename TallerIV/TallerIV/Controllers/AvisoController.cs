@@ -137,14 +137,20 @@ namespace TallerIV.Controllers
         }
 
         // GET: HomeEmpleado
-        public ActionResult BuscarPostulantes(long aid)
+        public ActionResult BuscarPostulantes(long id)
         {
             TallerIVDbContext db = new TallerIVDbContext();
+
             BaseService<UsuarioEmpleado> usuarioService = new BaseService<UsuarioEmpleado>(db);
+
             IQueryable<UsuarioEmpleado> queryEmpleados = usuarioService.GetAll();
-            Aviso aviso = db.Users.OfType<Aviso>().Where(x => x.Id == aid).FirstOrDefault();
+
+            Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
+
             GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
+
             List<Coincidencia> coincidenciasList = generadorCoincidencias.GenerarListadoCoincidencias(aviso, queryEmpleados);
+
             return View(coincidenciasList);
         }
 

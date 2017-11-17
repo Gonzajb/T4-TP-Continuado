@@ -48,11 +48,11 @@ namespace UnitTestProject1
             {
                 if (i > 2)
                 {
-                    Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, AptitudesAviso, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa", "DS");
+                    Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, AptitudesAviso,1000, Prioridad.Baja, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa", "DS");
                     Avisos.Add(a);
                 } else
                 {
-                    Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, null, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa", "DS");
+                    Aviso a = new Aviso("Titulo" + i, "Desc" + i, DateTime.Now, UR, AptitudesAviso, 1000, Prioridad.Baja, TipoRelacionDeTrabajo.Dependencia, TallerIV.Dominio.Usuarios.Prioridad.Normal, 4, TallerIV.Dominio.Usuarios.Prioridad.Normal, "dsasa", "DS");
                     Avisos.Add(a);
                 }
                 
