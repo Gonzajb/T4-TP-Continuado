@@ -36,11 +36,14 @@ namespace TallerIV.Controllers
                 AprobadorAviso avisoAprobado = new AprobadorAviso();
                 UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
                 Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
-                avisoAprobado.Aprobar(empleado, aviso);
-                return Json(new { error = false, message = "Aprobación exitosa" });
+                Encuentro encuentro = avisoAprobado.Aprobar(empleado, aviso);
+                if (encuentro != null)
+                    db.Encuentros.Add(encuentro);
+                db.SaveChanges();
+                return Json(new { error = false, message = "Aprobación exitosa" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e) {
-                return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." });
+                return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." }, JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -57,11 +60,11 @@ namespace TallerIV.Controllers
 
                 empleado.AvisosDesaprobados.Add(aviso);
                 db.SaveChanges();
-                return Json(new { error = false, message = "Desaprobación exitosa" });
+                return Json(new { error = false, message = "Desaprobación exitosa" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                return Json(new { error = true, message = "No pudo desaprobar el aviso. Vuelva a intentarlo." });
+                return Json(new { error = true, message = "No pudo desaprobar el aviso. Vuelva a intentarlo." }, JsonRequestBehavior.AllowGet);
             }
 
         }

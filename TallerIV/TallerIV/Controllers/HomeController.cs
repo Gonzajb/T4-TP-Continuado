@@ -36,7 +36,7 @@ namespace TallerIV.Controllers
             var db = new TallerIVDbContext();
             InicializarTags(db);
             InicializarUsuarios(db);
-            InicializarAvisos(db);
+            //InicializarAvisos(db);
         }
 
         protected static List<AptitudPorAviso> GenerarAptitudes(TallerIVDbContext db)
@@ -54,8 +54,8 @@ namespace TallerIV.Controllers
 
         public static void InicializarAvisos(TallerIVDbContext db)
         {
-            UsuarioReclutador usuarioReclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
-            string usuarioEmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
+            UsuarioReclutador Reclutador = db.Users.OfType<UsuarioReclutador>().FirstOrDefault();
+            string EmpresaId = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().Id;
             string usuarioNombre = db.Users.OfType<UsuarioEmpresa>().FirstOrDefault().RazonSocial;
 
             
@@ -64,68 +64,68 @@ namespace TallerIV.Controllers
 
             //aptitudes.Add(aptitud);
 
-            Aviso aviso = new Aviso(
-               "Este es un Aviso de .Net",
-               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
-               DateTime.Now,
-               usuarioReclutador,
-               HomeController.GenerarAptitudes(db),
-               1000,
-               Dominio.Usuarios.Prioridad.Normal,
-               TipoRelacionDeTrabajo.Monotributo,
-               Dominio.Usuarios.Prioridad.Baja,
-               8,
-               Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresaId,
-               usuarioNombre);
+            //Aviso aviso = new Aviso(
+            //   "Este es un Aviso de .Net",
+            //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+            //   DateTime.Now,
+            //   Reclutador,
+            //   HomeController.GenerarAptitudes(db),
+            //   1000,
+            //   Dominio.Usuarios.Prioridad.Normal,
+            //   TipoRelacionDeTrabajo.Monotributo,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   8,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   EmpresaId,
+            //   usuarioNombre);
 
-            Aviso avisoOtro = new Aviso(
-               "Ee .Net",
-               "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
-               DateTime.Now,
-               usuarioReclutador,
-               HomeController.GenerarAptitudes(db),
-               1000,
-               Dominio.Usuarios.Prioridad.Normal,
-               TipoRelacionDeTrabajo.Monotributo,
-               Dominio.Usuarios.Prioridad.Baja,
-               8,
-               Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresaId,
-               usuarioNombre);
+            //Aviso avisoOtro = new Aviso(
+            //   "Ee .Net",
+            //   "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+            //   DateTime.Now,
+            //   Reclutador,
+            //   HomeController.GenerarAptitudes(db),
+            //   1000,
+            //   Dominio.Usuarios.Prioridad.Normal,
+            //   TipoRelacionDeTrabajo.Monotributo,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   8,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   EmpresaId,
+            //   usuarioNombre);
 
-            Aviso avisoOtroOtro = new Aviso(
-               "AVISO 3",
-               "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
-               DateTime.Now,
-               usuarioReclutador,
-               HomeController.GenerarAptitudes(db),
-               1000,
-               Dominio.Usuarios.Prioridad.Normal,
-               TipoRelacionDeTrabajo.Monotributo,
-               Dominio.Usuarios.Prioridad.Baja,
-               8,
-               Dominio.Usuarios.Prioridad.Baja,
-               usuarioEmpresaId,
-               usuarioNombre);
+            //Aviso avisoOtroOtro = new Aviso(
+            //   "AVISO 3",
+            //   "Ldipiscing elit. Suspendisse ornare, lectus vitae rutrum blandit, tortor velit auctor ipsum, nec pretium dui lorem ac neque. Pellentesque fringilla diam vitae mi tempor elementum. Quisque cursus felis odio, eu ornare lacus malesuada ac. Maecenas rhoncus eros nec imperdiet rutrum. Curabitur id ipsum ac eros varius hendrerit non at erat. Phasellus eget massa finibus, imperdiet odio at, fringilla ex. Nulla pretium, dolor eu viverra efficitur, felis nisi lacinia erat, aliquet consectetur massa lorem viverra lectus. Etiam consectetur mi arcu, eget convallis erat egestas sed. Duis vehicula lacus sed orci rhoncus, vitae rhoncus lectus viverra. Sed in varius neque, at elementum ex.",
+            //   DateTime.Now,
+            //   Reclutador,
+            //   HomeController.GenerarAptitudes(db),
+            //   1000,
+            //   Dominio.Usuarios.Prioridad.Normal,
+            //   TipoRelacionDeTrabajo.Monotributo,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   8,
+            //   Dominio.Usuarios.Prioridad.Baja,
+            //   EmpresaId,
+            //   usuarioNombre);
 
-            if (!db.Avisos.Any(X => X.Titulo == aviso.Titulo))
-            {
+            //if (!db.Avisos.Any(X => X.Titulo == aviso.Titulo))
+            //{
 
-                db.Avisos.Add(aviso);
-            }
+            //    db.Avisos.Add(aviso);
+            //}
 
-            if (!db.Avisos.Any(X => X.Titulo == avisoOtro.Titulo))
-            {
+            //if (!db.Avisos.Any(X => X.Titulo == avisoOtro.Titulo))
+            //{
 
-                db.Avisos.Add(avisoOtro);
-            }
+            //    db.Avisos.Add(avisoOtro);
+            //}
 
-            if (!db.Avisos.Any(X => X.Titulo == avisoOtroOtro.Titulo))
-            {
+            //if (!db.Avisos.Any(X => X.Titulo == avisoOtroOtro.Titulo))
+            //{
 
-                db.Avisos.Add(avisoOtroOtro);
-            }
+            //    db.Avisos.Add(avisoOtroOtro);
+            //}
             db.SaveChanges();
         }
         public static void InicializarTags(TallerIVDbContext db)
@@ -185,47 +185,47 @@ namespace TallerIV.Controllers
 
             if (userSabaj == null)
             {
-                var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23), "Mi nombre es Nicolás.");
-                userManager.Create(usuarioEmpleado, "Ns12345!");
-                userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23), "Mi nombre es Nicolás.");
+                userManager.Create(Empleado, "Ns12345!");
+                userManager.AddToRole(Empleado.Id, "Empleado");
             }
 
             var userGoyano = userManager.FindByName("ngoyano@gmail.com");
 
             if (userGoyano == null)
             {
-                var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "ngoyano@gmail.com", "ngoyano@gmail.com", "Nicolas", "Goyano", new DateTime(1996, 6, 29), "Mi nombre es Nicolás Goyano.");
-                userManager.Create(usuarioEmpleado, "Ng12345!");
-                userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "ngoyano@gmail.com", "ngoyano@gmail.com", "Nicolas", "Goyano", new DateTime(1996, 6, 29), "Mi nombre es Nicolás Goyano.");
+                userManager.Create(Empleado, "Ng12345!");
+                userManager.AddToRole(Empleado.Id, "Empleado");
             }
 
             var userBangueses = userManager.FindByName("gonzajb@gmail.com");
 
             if (userBangueses == null)
             {
-                var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "gonzajb@gmail.com", "gonzajb@gmail.com", "Gonzalo", "Bangueses", new DateTime(1985, 6, 20), "Mi nombre es Gonza.");
-                userManager.Create(usuarioEmpleado, "Gb12345!");
-                userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "gonzajb@gmail.com", "gonzajb@gmail.com", "Gonzalo", "Bangueses", new DateTime(1985, 6, 20), "Mi nombre es Gonza.");
+                userManager.Create(Empleado, "Gb12345!");
+                userManager.AddToRole(Empleado.Id, "Empleado");
             }
 
             var userFraiman = userManager.FindByName("brailf@gmail.com");
 
             if (userBangueses == null)
             {
-                var usuarioEmpleado = new UsuarioEmpleado(DateTime.Now, "brailf@gmail.com", "brailf@gmail.com", "Brian", "Fraiman", new DateTime(1995, 5, 3), "Mi nombre es Brian.");
-                userManager.Create(usuarioEmpleado, "Bf12345!");
-                userManager.AddToRole(usuarioEmpleado.Id, "Empleado");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "brailf@gmail.com", "brailf@gmail.com", "Brian", "Fraiman", new DateTime(1995, 5, 3), "Mi nombre es Brian.");
+                userManager.Create(Empleado, "Bf12345!");
+                userManager.AddToRole(Empleado.Id, "Empleado");
             }
 
             #endregion
 
             #region Empresa
-            var usuarioEmpresa = userManager.FindByName("laempresa1@hotmail.com");
-            if (usuarioEmpresa == null)
+            var Empresa = userManager.FindByName("laempresa1@hotmail.com");
+            if (Empresa == null)
             {
-                usuarioEmpresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
-                userManager.Create(usuarioEmpresa, "Le12345!");
-                userManager.AddToRole(usuarioEmpresa.Id, "Empresa");
+                Empresa = new UsuarioEmpresa("1234321", "La Empresa 1", DateTime.Now, "laempresa1@hotmail.com", "laempresa1@hotmail.com");
+                userManager.Create(Empresa, "Le12345!");
+                userManager.AddToRole(Empresa.Id, "Empresa");
             }
 
             #endregion
@@ -234,9 +234,9 @@ namespace TallerIV.Controllers
 
             if (user == null)
             {
-                var usuarioReclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "rec1@gmail.com", "Rec1", "TE", DateTime.Now, usuarioEmpresa.Id);
-                userManager.Create(usuarioReclutador, "Le12345!");
-                userManager.AddToRole(usuarioReclutador.Id, "Reclutador");
+                var Reclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "rec1@gmail.com", "Rec1", "TE", DateTime.Now, Empresa.Id);
+                userManager.Create(Reclutador, "Le12345!");
+                userManager.AddToRole(Reclutador.Id, "Reclutador");
 
             }
 

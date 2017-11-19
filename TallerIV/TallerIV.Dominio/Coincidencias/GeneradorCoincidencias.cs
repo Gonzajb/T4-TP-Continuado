@@ -77,6 +77,8 @@ namespace TallerIV.Dominio.Coincidencias
                 //Inicialización
                 DateTime fechaActual = DateTime.Now;
                 CalculadorDePorcentajeEmpleado calculadorDePorcentaje = new CalculadorDePorcentajeEmpleado(usuarioEmpleadoOrigen);
+                List<Aviso> avisosAprobados = usuarioEmpleadoOrigen.AvisosAprobados;
+                List<Aviso> avisosDesaprobados = usuarioEmpleadoOrigen.AvisosDesaprobados;
 
                 //Se filtran todos los avisos que cumplan con los parámetros excluyentes
                 List<Aviso> listCandidatos = avisos.Where(aviso =>
@@ -84,10 +86,12 @@ namespace TallerIV.Dominio.Coincidencias
                     && (aviso.FechaFin.HasValue ? aviso.FechaFin >= fechaActual : true)
                     && (busqueda.HorasTrabajoPrioridad == Prioridad.Excluyente ? busqueda.HorasTrabajo == aviso.HorasTrabajo : true)
                     && (busqueda.SueldoMinimoPrioridad == Prioridad.Excluyente ? busqueda.SueldoMinimo <= aviso.SueldoOfrecido : true)
-                    && (busqueda.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? busqueda.TipoRelacionDeTrabajo == aviso.TipoRelacionDeTrabajo : true)
-                    && !usuarioEmpleadoOrigen.AvisosAprobados.Any(usEmp => usEmp.Id == aviso.Id)
-                    && !usuarioEmpleadoOrigen.AvisosDesaprobados.Any(usEmp => usEmp.Id == aviso.Id)
-                    ).ToList();
+                    && (busqueda.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? busqueda.TipoRelacionDeTrabajo == aviso.TipoRelacionDeTrabajo : true))
+                    .ToList();
+                listCandidatos = listCandidatos.Where(aviso =>
+                    !avisosAprobados.Any(avisoAprobado => avisoAprobado.Id == aviso.Id)
+                    && !avisosDesaprobados.Any(avisoDesaprobado => avisoDesaprobado.Id == aviso.Id))
+                    .ToList();
 
                 //Se generan las coincidencias
                 foreach (var aviso in listCandidatos)

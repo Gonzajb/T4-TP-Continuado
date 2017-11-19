@@ -35,8 +35,8 @@
                         <br />Relacion labora:  @item.Empleado.Busqueda.TipoRelacionDeTrabajo
                         <br />Sueldo ofrecido: @item.Empleado.Busqueda.SueldoMinimo
                         <br />
-                        <button onclick="LlamarLike(@item.Aviso.Id,@item.Empleado.Id)">Like!</button>
-                        <button onclick="LlamarDisLike(@item.Aviso.Id,@item.Empleado.Id)">Dislike</button>
+                        <button onclick="LlamarLike(@item.Aviso.Id,'@item.Empleado.Id')">Like!</button>
+                        <button onclick="LlamarDisLike(@item.Aviso.Id,'@item.Empleado.Id')">Dislike</button>
                         <br />
                         <br />
                         <br />
@@ -53,7 +53,6 @@
 <script>
     function LlamarLike(ida, id)
     {
-        alert("like!");
         $.ajax({
             // edit to add steve's suggestion.
             //url: "/ControllerName/ActionName",
@@ -79,7 +78,6 @@
     }
     function LlamarDisLike(id)
     {
-        alert("DisLike");
         $.ajax({
             // edit to add steve's suggestion.
             //url: "/ControllerName/ActionName",

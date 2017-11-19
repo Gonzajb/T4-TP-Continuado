@@ -189,20 +189,27 @@
                     <ul class="sidebar-nav">
                         
                         @if (userIsPostulante)
-                        {                            <li>
+                        {   
+                            <li>
                                 <a href="@Url.Action("Index","HomeEmpleado")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Edit","BusquedaUsuarioPostulantes")" class="dashboard"><i class="gi gi-search sidebar-nav-icon"></i>Administrar búsqueda</a>
                             </li>
+                            <li>
+                                <a href="@Url.Action("Index","EncuentrosPostulante")" class="dashboard"><i class="gi gi-group sidebar-nav-icon"></i> Mis encuentros</a>
+                            </li>
                         }
                         @if (userIsReclutador)
                         {
                             <li>
-                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i> Inicio</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index","Aviso")" class="dashboard">@*<i class="gi gi-search sidebar-nav-icon"></i>*@Administrar avisos</a>
+                                <a href="@Url.Action("Index","Aviso")" class="dashboard"><i class="gi gi-align_left sidebar-nav-icon"></i> Administrar avisos</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","EncuentrosReclutador")" class="dashboard"><i class="gi gi-group sidebar-nav-icon"></i> Mis encuentros</a>
                             </li>
                         }
                         @if (userIsEmpresa)
