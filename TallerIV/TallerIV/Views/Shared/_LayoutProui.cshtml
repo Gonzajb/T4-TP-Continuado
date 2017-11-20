@@ -21,7 +21,7 @@
     <meta name="robots" content="noindex, nofollow">
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
-
+    
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
     <link href="~/Content/themes/img/isotipo-60.png" rel="apple-touch-icon" />
@@ -63,6 +63,7 @@
     <script type="text/javascript" src="~/Content/themes/proui/js/datepicker-locales/bootstrap-datepicker.es.js" charset="UTF-8"></script>
     <script src="~/Content/themes/js/functions.js"></script>
     <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
 
     @Styles.Render("~/Content/Selectize/css")
     <link href="~/Content/Selectize/css/selectize.css" rel="stylesheet" />
@@ -191,19 +192,19 @@
                         @if (userIsPostulante)
                         {   
                             <li>
-                                <a href="@Url.Action("Index","HomeEmpleado")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                                <a href="@Url.Action("Index","HomeEmpleado")" class="dashboard"><i class="fa fa-briefcase sidebar-nav-icon"></i>Buscar trabajo</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Edit","BusquedaUsuarioPostulantes")" class="dashboard"><i class="gi gi-search sidebar-nav-icon"></i>Administrar búsqueda</a>
                             </li>
-                            <li>
+                            @*<li>
                                 <a href="@Url.Action("Index","EncuentrosPostulante")" class="dashboard"><i class="gi gi-group sidebar-nav-icon"></i> Mis encuentros</a>
-                            </li>
+                            </li>*@
                         }
                         @if (userIsReclutador)
                         {
                             <li>
-                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i> Inicio</a>
+                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="fa fa-home sidebar-nav-icon"></i> Inicio</a>
                             </li>
                             <li>
                                 <a href="@Url.Action("Index","Aviso")" class="dashboard"><i class="gi gi-align_left sidebar-nav-icon"></i> Administrar avisos</a>
@@ -215,15 +216,19 @@
                         @if (userIsEmpresa)
                         {
                             <li>
-                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Inicio</a>
+                                <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Panel de control</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Register", "AccountReclutador")" class="dashboard"><i class="gi gi-flash"></i>Nuevo Reclutador</a>
+                                <a href="@Url.Action("Index", "UsuariosReclutadores")" class="dashboard">Reclutadores</a>
+                                @*<a href="@Url.Action("Register", "AccountReclutador")" class="dashboard">Reclutadores</a>*@
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Aviso")" class="dashboard">Avisos</a>
                             </li>
                         }
-                        <li>
+                        @*<li>
                             <a href="@Url.Action("Index","Agenda")" class="dashboard"><i class="gi gi-calendar sidebar-nav-icon"></i>Agenda</a>
-                        </li>
+                        </li>*@
                     </ul>
                     <!-- END Sidebar Navigation -->
 

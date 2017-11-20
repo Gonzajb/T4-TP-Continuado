@@ -222,6 +222,7 @@
     <Compile Include="Controllers\RegisterAccountController.cs" />
     <Compile Include="Controllers\RegisterReclutadorController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\UsuariosReclutadoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -377,6 +378,11 @@
     <Content Include="Views\EncuentrosPostulante\Index.cshtml" />
     <Content Include="Views\AccountReclutador\Edit.cshtml" />
     <Content Include="Views\Aviso\BuscarPostulantes.cshtml" />
+    <Content Include="Views\UsuariosReclutadores\Create.cshtml" />
+    <Content Include="Views\UsuariosReclutadores\Delete.cshtml" />
+    <Content Include="Views\UsuariosReclutadores\Details.cshtml" />
+    <Content Include="Views\UsuariosReclutadores\Edit.cshtml" />
+    <Content Include="Views\UsuariosReclutadores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,50 +4,101 @@
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-<div class="row">
+<div class="content-header">
     <div class="header-section">
-        <div class="row">
-            <!-- Main Title (hidden on small devices for the statistics to fit) -->
-            <!--<div class="col-md-4 col-lg-7">
-                <h1>Bienvenido </h1>
-            </div>-->
-            <!-- END Main Title -->
-            <!-- Top Stats -->
-            <div class="col-md-4 col-lg-8">
-                @foreach (var item in Model)
-                {
-                    <div id="@item.Empleado.Id">
-                        <br />
-                        <br />Nombre:  @item.Empleado.Nombre
-                        <br />Apellido:  @item.Empleado.Apellido
-                        <br />Fecha de nacimiento:  @item.Empleado.FechaDeNacimiento
-                        <br />Edad:  @item.Empleado.Edad
-                        <br />Descripcion:  @item.Aviso.Descripcion
+        <h1>
+            <i class="fa fa-briefcase"></i>@ViewBag.Aviso.Titulo<br><small>Búsqueda de postulantes</small>
+        </h1>
+    </div>
+</div>
+<div class="row">
 
-                        @foreach (var aptitud in item.Empleado.Aptitud)
-                        {
-                            if (aptitud != null)
-                            {
-                                <br />@aptitud.Titulo
-                            }
-                        }
-                        <br />Horas de trabajo:  @item.Empleado.Busqueda.HorasTrabajo
-                        <br />Relacion labora:  @item.Empleado.Busqueda.TipoRelacionDeTrabajo
-                        <br />Sueldo ofrecido: @item.Empleado.Busqueda.SueldoMinimo
-                        <br />
-                        <button onclick="LlamarLike(@item.Aviso.Id,'@item.Empleado.Id')">Like!</button>
-                        <button onclick="LlamarDisLike(@item.Aviso.Id,'@item.Empleado.Id')">Dislike</button>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+    <div>
+        <div class="col-lg-12">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6" id="@item.Empleado.Id">
+                    <!-- Advanced Active Theme Color Widget Alternative -->
+                    <div class="widget">
+                        <div class="widget-advanced widget-advanced-alt">
+                            <!-- Widget Header -->
+                            <div class="widget-header text-center themed-background-dark">
+                                <div class="widget-options-left">
+                                    <button class="btn btn-lg btn-success" data-toggle="tooltip" title="" data-original-title="Aprobar" onclick="LlamarLike(@item.Aviso.Id,'@item.Empleado.Id')"><i class="fa fa-thumbs-o-up"></i></button>
+                                </div>
+                                <div class="widget-options">
+                                    <button class="btn btn-lg btn-danger" data-toggle="tooltip" title="" data-original-title="Desaprobar" onclick="LlamarDisLike(@item.Aviso.Id,'@item.Empleado.Id')"><i class="fa fa-thumbs-o-down"></i></button>
+                                </div>
+                                <a href="page_ready_user_profile.html">
+                                    <img src="/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="widget-image img-circle">
+                                </a>
+                                <h4 class="widget-content-light">
+                                    <a href="page_ready_user_profile.html">@item.Empleado.Nombre @item.Empleado.Apellido</a><br />
+                                    <a style="font-size:12px;" href="#" onclick="bootbox.alert('@item.Empleado.CartaDePresentacion')">Ver carta de presentación</a><br>
+                                    @*<small><i class="gi gi-pin"></i> New York</small>*@
+                                </h4>
+                            </div>
+                            <!-- END Widget Header -->
+                            <!-- Widget Main -->
+                            <div class="widget-main">
+                                <div class="row text-center">
+                                    <div class="col-lg-12"><h3 style="margin-top:0px;">Coincidencia @item.Porcentaje%</h3></div>
+                                    @*<div class="col-lg-6"></div>*@
+                                </div>
+                                <div class="list-group remove-margin">
+                                    <div class="list-group-item">
+                                        <span class="pull-right"><strong>@item.Empleado.Edad</strong></span>
+                                        <h4 class="list-group-item-heading remove-margin">@*<i class="fa fa-heart fa-fw"></i>*@Edad</h4>
+                                        <p class="list-group-item-text"></p>
+                                    </div>
+                                </div>
+                                <div class="list-group remove-margin">
+                                    <div class="list-group-item">
+                                        <span class="pull-right">
+                                            <strong>
+                                                @{
+                                                    var aptitudes = String.Join(", ", item.Empleado.Aptitud.Select(x => x.Titulo));
+                                                    <text>
+                                                        @aptitudes
+                                                    </text>
+                                                }
+                                            </strong>
+                                        </span>
+                                        <h4 class="list-group-item-heading remove-margin">Aptitudes</h4>
+                                        <p class="list-group-item-text"></p>
+                                    </div>
+                                </div>
+                                <div class="list-group remove-margin">
+                                    <div class="list-group-item">
+                                        <span class="pull-right">
+                                            <strong>
+                                                @item.Empleado.Busqueda.HorasTrabajo
+                                            </strong>
+                                        </span>
+                                        <h4 class="list-group-item-heading remove-margin">Horas de trabajo deseadas</h4>
+                                        <p class="list-group-item-text"></p>
+                                    </div>
+                                </div>
+                                <div class="list-group remove-margin">
+                                    <div class="list-group-item">
+                                        <span class="pull-right">
+                                            <strong>
+                                                @item.Empleado.Busqueda.TipoRelacionDeTrabajo
+                                            </strong>
+                                        </span>
+                                        <h4 class="list-group-item-heading remove-margin">Relación de trabajo deseada</h4>
+                                        <p class="list-group-item-text"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END Widget Main -->
+                        </div>
                     </div>
-                }
-            </div>
-            <!-- END Top Stats -->
+                    <!-- END Advanced Active Theme Color Widget Alternative -->
+                </div>
+            }
         </div>
     </div>
-    <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
 </div>
 
 <script>
@@ -65,10 +116,13 @@
                 // your data could be a View or Json or what ever you returned in your action method
                 // parse your data here
                 if(!data.error){
-                    alert(data.message);
-                    $("#" + id).remove();
+                    if (data.encuentro) {
+                        bootbox.alert("Se ha generado un encuentro! Ingrese al menú Mis Encuentros para ver los datos de contacto o iniciar una conversación con el postulante.")
+                    }
+                    $("#" + id).fadeOut(300, function() { $(this).remove(); });
+                    //$("#" + id).remove();
                 }else{
-                    alert(data.message);
+                    bootbox.alert(data.message);
                 }
             },
             error: function(req, status, errorObj) {
@@ -76,7 +130,7 @@
             }
         });
     }
-    function LlamarDisLike(id)
+    function LlamarDisLike(ida,id)
     {
         $.ajax({
             // edit to add steve's suggestion.

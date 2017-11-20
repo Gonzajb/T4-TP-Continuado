@@ -12,10 +12,9 @@ namespace TallerIV.Dominio
     {
         public UsuarioEmpleado(){}
 
-        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string cartaDePresentacion, List<Aptitud> tags = null) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
+        public UsuarioEmpleado(DateTime fechaDeResgistro, string email, string telefono, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string cartaDePresentacion, List<Aptitud> tags = null) : base(fechaDeResgistro, email,telefono, userName,nombre,apellido,fechaDeNacimiento)
         {
             this.Aptitud = new List<Aptitud>();
-
             this.Nombre = nombre;
             this.Apellido = apellido;
             this.FechaDeNacimiento = fechaDeNacimiento;
@@ -38,6 +37,7 @@ namespace TallerIV.Dominio
                 return String.Join(",", this.Aptitud.Select(x => x.Titulo));
             }
         }
+
         public bool ComprobarAvisoAprobado(Aviso aviso) {
             return this.AvisosAprobados.Contains(aviso);
         }

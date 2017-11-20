@@ -3,52 +3,93 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
-
-<div class="row">
+<div class="content-header">
     <div class="header-section">
-        <div class="row">
-            <!-- Main Title (hidden on small devices for the statistics to fit) -->
-            <!--<div class="col-md-4 col-lg-7">
-                <h1>Bienvenido </h1>
-            </div>-->
-            <!-- END Main Title -->
-            <!-- Top Stats -->
-            <div class="col-md-4 col-lg-8">
-                @foreach (var item in Model)
-                {
-                    <div id="@item.Aviso.Id">
-                        Porcentaje coincidencia: @item.Porcentaje%
-                        <br />Empresa:  @item.Aviso.UsuarioEmpresa_Nombre
-                        <br />Titulo:  @item.Aviso.Titulo
-                        <br />Fecha inicio:  @item.Aviso.FechaInicio
-                        <br />Fecha fin:  @item.Aviso.FechaFin
-                        <br />Descripcion:  @item.Aviso.Descripcion
-
-                        @foreach (var aptitud in item.Aviso.AptitudesBuscadas)
-                        {
-                            if (aptitud.Aptitud != null)
-                            {
-                                <br />@aptitud.Aptitud.Titulo
-                            }
-                        }
-                        <br />Horas de trabajo:  @item.Aviso.HorasTrabajo
-                        <br />Relacion labora:  @item.Aviso.TipoRelacionDeTrabajo
-                        <br />Sueldo ofrecido: @item.Aviso.SueldoOfrecido
-                        <br />
-                        <button onclick="LlamarLike(@item.Aviso.Id)">Like!</button>
-                        <button onclick="LlamarDisLike(@item.Aviso.Id)">Dislike</button>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                    </div>
-                }
-            </div>
-            <!-- END Top Stats -->
-        </div>
+        <h1>
+            <i class="fa fa-briefcase"></i>Búsqueda de trabajo
+        </h1>
     </div>
-    <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
 </div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6" id="@item.Aviso.Id">
+            <!-- Advanced Active Theme Color Widget Alternative -->
+            <div class="widget">
+                <div class="widget-advanced widget-advanced-alt">
+                    <!-- Widget Header -->
+                    <div class="widget-header text-center themed-background-dark">
+                        <div class="widget-options-left">
+                            <button class="btn btn-lg btn-success" data-toggle="tooltip" title="" data-original-title="Aprobar" onclick="LlamarLike('@item.Aviso.Id')"><i class="fa fa-thumbs-o-up"></i></button>
+                        </div>
+                        <div class="widget-options">
+                            <button class="btn btn-lg btn-danger" data-toggle="tooltip" title="" data-original-title="Desaprobar" onclick="LlamarDisLike('@item.Aviso.Id')"><i class="fa fa-thumbs-o-down"></i></button>
+                        </div>
+                        <a href="page_ready_user_profile.html">
+                            <img src="/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="widget-image img-circle">
+                        </a>
+                        <h4 class="widget-content-light">
+                            <a href="page_ready_user_profile.html">@item.Aviso.UsuarioEmpresa_Nombre</a><br />
+                            <a href="page_ready_user_profile.html">@item.Aviso.Titulo</a><br />
+                            <a style="font-size:12px;" href="#" onclick="bootbox.alert('@item.Aviso.Descripcion')">Ver descripción</a><br />
+                            @*<small><i class="gi gi-pin"></i> New York</small>*@
+                        </h4>
+                    </div>
+                    <!-- END Widget Header -->
+                    <!-- Widget Main -->
+                    <div class="widget-main">
+                        <div class="row text-center">
+                            <div class="col-lg-12"><h3 style="margin-top:0px;">Coincidencia @item.Porcentaje%</h3></div>
+                            @*<div class="col-lg-6"></div>*@
+                        </div>
+                        <div class="list-group remove-margin">
+                            <div class="list-group-item">
+                                <span class="pull-right">
+                                    <strong>
+                                        @{
+                                            var aptitudes = String.Join(", ", item.Aviso.AptitudesBuscadas.Select(x => x.Aptitud.Titulo));
+                                            <text>
+                                                @aptitudes
+                                            </text>
+                                        }
+                                    </strong>
+                                </span>
+                                <h4 class="list-group-item-heading remove-margin">Aptitudes</h4>
+                                <p class="list-group-item-text"></p>
+                            </div>
+                        </div>
+                        <div class="list-group remove-margin">
+                            <div class="list-group-item">
+                                <span class="pull-right">
+                                    <strong>
+                                        @item.Aviso.HorasTrabajo
+                                    </strong>
+                                </span>
+                                <h4 class="list-group-item-heading remove-margin">Horas de trabajo</h4>
+                                <p class="list-group-item-text"></p>
+                            </div>
+                        </div>
+                        <div class="list-group remove-margin">
+                            <div class="list-group-item">
+                                <span class="pull-right">
+                                    <strong>
+                                        @item.Aviso.TipoRelacionDeTrabajo
+                                    </strong>
+                                </span>
+                                <h4 class="list-group-item-heading remove-margin">Relación de trabajo</h4>
+                                <p class="list-group-item-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Widget Main -->
+                </div>
+            </div>
+            <!-- END Advanced Active Theme Color Widget Alternative -->
+        </div>
+    }
+</div>
+
+
 
 <script>
     function LlamarLike(id)
@@ -61,10 +102,12 @@
                 // your data could be a View or Json or what ever you returned in your action method 
                 // parse your data here
                 if(!data.error){
-                    alert(data.message);
-                    $("#" + id).remove();
+                    if (data.encuentro) {
+                        bootbox.alert("Se ha generado un encuentro! Le hemos enviado un aviso al reclutador así el mismo se contacta contigo.");
+                    }
+                    $("#" + id).fadeOut(300, function () { $(this).remove(); });
                 }else{
-                    alert(data.message);
+                    bootbox.alert(data.message);
                 }
             },
             error: function(req, status, errorObj) {

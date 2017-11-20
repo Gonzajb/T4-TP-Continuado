@@ -42,7 +42,7 @@ namespace UnitTestProject1
             ListaPrueba.Add(Ap1);
                        
             UsuarioEmpresa UE = new UsuarioEmpresa("3066552214", "Razon Social", DateTime.Now, "aa@gmail.com", "aa@gmail.com");
-            UsuarioReclutador UR = new UsuarioReclutador(DateTime.Now, "dsa@gmail.com", "dsa@gmail.com", "GG", "dsad", DateTime.Now, "dsa");
+            UsuarioReclutador UR = new UsuarioReclutador(DateTime.Now, "dsa@gmail.com", "", "dsa@gmail.com", "GG", "dsad", DateTime.Now, "dsa");
             List<Aviso> Avisos = new List<Aviso>();
             for (int i =0; i < 5; i++)
             {
@@ -62,11 +62,11 @@ namespace UnitTestProject1
             {
                 if (i == 2)
                 {
-                    UsuarioEmpleado UEmp = new UsuarioEmpleado(DateTime.Now, "aa@gmail.com", "AA" + i, "dd", "asa", DateTime.Now, "SA", AptitudesPostulante);
+                    UsuarioEmpleado UEmp = new UsuarioEmpleado(DateTime.Now, "aa@gmail.com", "", "AA" + i, "dd", "asa", DateTime.Now, "SA", AptitudesPostulante);
                     Empleados.Add(UEmp);
                 } else
                 {
-                    UsuarioEmpleado UEmp = new UsuarioEmpleado(DateTime.Now, "aa@gmail.com", "AA" + i, "dd", "asa", DateTime.Now, "SA", ListaPrueba);
+                    UsuarioEmpleado UEmp = new UsuarioEmpleado(DateTime.Now, "aa@gmail.com", "", "AA" + i, "dd", "asa", DateTime.Now, "SA", ListaPrueba);
                     Empleados.Add(UEmp);
 
                 }

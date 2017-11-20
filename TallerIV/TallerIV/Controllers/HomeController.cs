@@ -185,7 +185,7 @@ namespace TallerIV.Controllers
 
             if (userSabaj == null)
             {
-                var Empleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23), "Mi nombre es Nicolás.");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "nsabaj@hotmail.com", "1150437641", "nsabaj@hotmail.com", "Nicolas", "Sabaj", new DateTime(1995, 9, 23), "Mi nombre es Nicolás.");
                 userManager.Create(Empleado, "Ns12345!");
                 userManager.AddToRole(Empleado.Id, "Empleado");
             }
@@ -194,7 +194,7 @@ namespace TallerIV.Controllers
 
             if (userGoyano == null)
             {
-                var Empleado = new UsuarioEmpleado(DateTime.Now, "ngoyano@gmail.com", "ngoyano@gmail.com", "Nicolas", "Goyano", new DateTime(1996, 6, 29), "Mi nombre es Nicolás Goyano.");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "ngoyano@gmail.com", "1163656732", "ngoyano@gmail.com", "Nicolas", "Goyano", new DateTime(1996, 6, 29), "Mi nombre es Nicolás Goyano.");
                 userManager.Create(Empleado, "Ng12345!");
                 userManager.AddToRole(Empleado.Id, "Empleado");
             }
@@ -203,7 +203,7 @@ namespace TallerIV.Controllers
 
             if (userBangueses == null)
             {
-                var Empleado = new UsuarioEmpleado(DateTime.Now, "gonzajb@gmail.com", "gonzajb@gmail.com", "Gonzalo", "Bangueses", new DateTime(1985, 6, 20), "Mi nombre es Gonza.");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "gonzajb@gmail.com","1153258745", "gonzajb@gmail.com", "Gonzalo", "Bangueses", new DateTime(1985, 6, 20), "Mi nombre es Gonza.");
                 userManager.Create(Empleado, "Gb12345!");
                 userManager.AddToRole(Empleado.Id, "Empleado");
             }
@@ -212,7 +212,7 @@ namespace TallerIV.Controllers
 
             if (userBangueses == null)
             {
-                var Empleado = new UsuarioEmpleado(DateTime.Now, "brailf@gmail.com", "brailf@gmail.com", "Brian", "Fraiman", new DateTime(1995, 5, 3), "Mi nombre es Brian.");
+                var Empleado = new UsuarioEmpleado(DateTime.Now, "brailf@gmail.com", "1136456567", "brailf@gmail.com", "Brian", "Fraiman", new DateTime(1995, 5, 3), "Mi nombre es Brian.");
                 userManager.Create(Empleado, "Bf12345!");
                 userManager.AddToRole(Empleado.Id, "Empleado");
             }
@@ -234,7 +234,7 @@ namespace TallerIV.Controllers
 
             if (user == null)
             {
-                var Reclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "rec1@gmail.com", "Rec1", "TE", DateTime.Now, Empresa.Id);
+                var Reclutador = new UsuarioReclutador(DateTime.Now, "rec1@gmail.com", "1151235476", "rec1@gmail.com", "Rec1", "TE", DateTime.Now, Empresa.Id);
                 userManager.Create(Reclutador, "Le12345!");
                 userManager.AddToRole(Reclutador.Id, "Reclutador");
 

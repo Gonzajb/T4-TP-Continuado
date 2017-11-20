@@ -84,7 +84,10 @@ namespace TallerIV.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if(this.User.IsInRole("Empleado"))
+                    TallerIVDbContext db = new TallerIVDbContext();
+                    var userid = this.User.Identity.GetUserId();
+                    Usuario usuario = db.Users.FirstOrDefault(x => x.Id == userid);
+                    if(usuario is UsuarioEmpleado)
                         return RedirectToAction("Index", "HomeEmpleado");
                     else
                         return RedirectToAction("Index", "Home");
@@ -166,7 +169,7 @@ namespace TallerIV.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento, model.CartaDePresentacion)  {
+                var user = new UsuarioEmpleado(DateTime.Now, model.Email, model.Telefono, model.Email,model.Nombre, model.Apellido, model.FechaDeNacimiento, model.CartaDePresentacion)  {
                     FechaRegistro = DateTime.Now
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);

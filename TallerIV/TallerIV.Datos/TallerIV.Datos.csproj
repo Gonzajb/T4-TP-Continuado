@@ -137,6 +137,10 @@
     <Compile Include="Migrations\201711092302520_modificacionEncuentro.Designer.cs">
       <DependentUpon>201711092302520_modificacionEncuentro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711192154179_telefonoUsuarioPersona.cs" />
+    <Compile Include="Migrations\201711192154179_telefonoUsuarioPersona.Designer.cs">
+      <DependentUpon>201711192154179_telefonoUsuarioPersona.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositorios\BaseRepository.cs" />
     <Compile Include="TallerIVDbContext.cs" />
@@ -171,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711092302520_modificacionEncuentro.resx">
       <DependentUpon>201711092302520_modificacionEncuentro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192154179_telefonoUsuarioPersona.resx">
+      <DependentUpon>201711192154179_telefonoUsuarioPersona.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,6 +11,7 @@ namespace TallerIV.Dominio.Coincidencias
         public Encuentro Aprobar(UsuarioEmpleado postulante, Aviso avisoAAprobar)
         {
             //Se agrega el aviso a aprobar
+            avisoAAprobar.UsuariosEmpleadoAprobados.Add(postulante);
 
             Encuentro encuentro = null;
             bool huboEncuentro = postulante.ComprobarAvisoAprobado(avisoAAprobar);

@@ -84,7 +84,7 @@ namespace TallerIV.Controllers
                 BaseService<UsuarioEmpresa> usuarioEmpresaService = new BaseService<UsuarioEmpresa>();
                 UsuarioEmpresa empresa = usuarioEmpresaService.GetAll().FirstOrDefault(x => x.Reclutadores.Any(r => r.Id == aviso.UsuarioReclutador_Id));
                 aviso.UsuarioEmpresa_Id = empresa.Id;
-
+                aviso.UsuarioEmpresa_Nombre = empresa.RazonSocial;
                 this.avisoService.AddEntity(aviso);
                 return RedirectToAction("Index");
             }
@@ -140,17 +140,12 @@ namespace TallerIV.Controllers
         public ActionResult BuscarPostulantes(long id)
         {
             TallerIVDbContext db = new TallerIVDbContext();
-
             BaseService<UsuarioEmpleado> usuarioService = new BaseService<UsuarioEmpleado>(db);
-
             IQueryable<UsuarioEmpleado> queryEmpleados = usuarioService.GetAll();
-
             Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
-
             GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
-
             List<Coincidencia> coincidenciasList = generadorCoincidencias.GenerarListadoCoincidencias(aviso, queryEmpleados);
-
+            ViewBag.Aviso = aviso;
             return View(coincidenciasList);
         }
 
@@ -158,16 +153,19 @@ namespace TallerIV.Controllers
         {
             try
             {
+                bool huboEncuentro = false;
                 string uid = this.User.Identity.GetUserId();
                 TallerIVDbContext db = new TallerIVDbContext();
                 AprobadorPostulante postulanteAprobado = new AprobadorPostulante();
                 UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == id).FirstOrDefault();
                 Aviso aviso = db.Avisos.Where(x => x.Id == aid).FirstOrDefault();
                 Encuentro encuentro = postulanteAprobado.Aprobar(empleado, aviso);
-                if (encuentro != null)
+                if (encuentro != null) {
                     db.Encuentros.Add(encuentro);
+                    huboEncuentro = true;
+                }
                 db.SaveChanges();
-                return Json(new { error = false, message = "Aprobación exitosa" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = false, message = "Aprobación exitosa", encuentro = huboEncuentro }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

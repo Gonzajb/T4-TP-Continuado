@@ -5,30 +5,100 @@
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-<h2>Mis encuentros</h2>
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-group"></i>Mis encuentros
+        </h1>
+    </div>
+</div>
+<div class="row">
+    @foreach (var encuentro in Model)
+    {
+        <div class="col-lg-4" id="@encuentro.Id">
+            <!-- Simple Widget with Post Input - Variation 2 -->
+            <div class="widget">
+                <div class="widget-simple themed-background-fire">
+                    <a href="page_ready_user_profile.html">
+                        <img src="/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="widget-image img-circle pull-left">
+                    </a>
+                    <h4 class="widget-content widget-content-light text-right">
+                        <a href="page_ready_user_profile.html" class="themed-color-dark-fire">
+                            <strong>@encuentro.UsuarioEmpleado.Nombre @encuentro.UsuarioEmpleado.Apellido</strong>
+                        </a>
+                        <small>(@encuentro.Aviso.Titulo)</small>
+                    </h4>
+                </div>
+                <div class="widget-extra-full">
+                    <form action="page_widgets_social.html" method="post" class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <textarea id="widget-post2" name="widget-post2" rows="4" class="form-control" placeholder="Comienza una conversación..."></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group remove-margin-bottom">
+                            <div class="col-xs-3 text-right">
+                                <button onclick="descartar(@encuentro.Id)" class="btn btn-default"><i class="fa fa-times"></i> Descartar</button>
+                            </div>
+                            <div class="col-lg-offset-3 col-xs-6 text-right">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> Contactar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="widget-extra themed-background-dark-fire">
+                    <div class="row text-center">
+                        <div class="col-xs-6">
+                            <h4 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>Email</strong></a><br>
+                                <small>@encuentro.UsuarioEmpleado.UserName</small>
+                            </h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <h4 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>Teléfono</strong></a><br>
+                                <small>@encuentro.UsuarioEmpleado.Telefono</small>
+                            </h4>
+                        </div>
+                        @*<div class="col-xs-4">
+                            <h3 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>150</strong></a><br>
+                                <small>Following</small>
+                            </h3>
+                        </div>
+                        <div class="col-xs-4">
+                            <h3 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>10.5k</strong></a><br>
+                                <small>Followers</small>
+                            </h3>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            <!-- END Simple Widget with Post Input - Variation 2 -->
+        </div>
+    }
+</div>
 
-<table class="table table-bordered">
-    <tr>
-        <th>
-            Aviso
-        </th>
-        <th>
-            Nombre empleado
-        </th>
-        <th></th>
-    </tr>
+<script>
+    var descartar = function (id) {
+        $.ajax({
+            // edit to add steve's suggestion.
+            //url: "/ControllerName/ActionName",
+            url: '/EncuentrosReclutador/Descartar/' + id,
+            success: (data) => {
+                // your data could be a View or Json or what ever you returned in your action method 
+                // parse your data here
+                if (!data.error) {
+                    $("#" + id).fadeOut(300, function () { $(this).remove(); });
+                } else {
+                    bootbox.alert(data.message);
+                }
+            },
+            error: function (req, status, errorObj) {
+                alert('error');
+            }
+        });
+    }
+</script>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.Aviso.Titulo
-        </td>
-        <td>
-            @item.UsuarioEmpleado.Nombre
-        </td>
-        <td>
-            <a href="#">Contactar</a>
-        </td>
-    </tr>
-}
-</table>

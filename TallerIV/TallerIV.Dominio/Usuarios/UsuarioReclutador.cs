@@ -10,7 +10,7 @@ namespace TallerIV.Dominio
     {
         public UsuarioReclutador() { }
 
-        public UsuarioReclutador (DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string usuarioEmpresa_Id) : base(fechaDeResgistro, email, userName,nombre,apellido,fechaDeNacimiento)
+        public UsuarioReclutador (DateTime fechaDeResgistro, string email, string telefono, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento, string usuarioEmpresa_Id) : base(fechaDeResgistro, email, telefono, userName,nombre,apellido,fechaDeNacimiento)
         {
             UsuarioEmpresa_Id = usuarioEmpresa_Id;
         }

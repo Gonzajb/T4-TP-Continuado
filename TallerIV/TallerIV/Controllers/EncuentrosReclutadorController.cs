@@ -24,6 +24,22 @@ namespace TallerIV.Controllers
             var encuentros = db.Encuentros.Include(e => e.Aviso).Include(e => e.UsuarioEmpleado).Include(e => e.UsuarioReclutador).Where(x => x.UsuarioReclutador_Id == userid);
             return View(encuentros.ToList());
         }
+        public JsonResult Descartar(long id)
+        {
+            try
+            {
+                TallerIVDbContext db = new TallerIVDbContext();
+                Encuentro encuentro = db.Encuentros.FirstOrDefault(x => x.Id == id);
+                db.Encuentros.Remove(encuentro);
+                db.SaveChanges();
+                return Json(new { error = false, message = "Descartado exitoso" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { error = true, message = "No pudo descartarse el encuentro. Vuelva a intentarlo." }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

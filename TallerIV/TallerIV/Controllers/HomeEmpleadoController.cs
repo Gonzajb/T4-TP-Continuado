@@ -31,16 +31,19 @@ namespace TallerIV.Controllers
         {
             try
             {
+                bool huboEncuentro = false;
                 string uid = this.User.Identity.GetUserId();
                 TallerIVDbContext db = new TallerIVDbContext();
                 AprobadorAviso avisoAprobado = new AprobadorAviso();
                 UsuarioEmpleado empleado = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
                 Aviso aviso = db.Avisos.Where(x => x.Id == id).FirstOrDefault();
                 Encuentro encuentro = avisoAprobado.Aprobar(empleado, aviso);
-                if (encuentro != null)
+                if (encuentro != null) {
                     db.Encuentros.Add(encuentro);
+                    huboEncuentro = true;
+                }
                 db.SaveChanges();
-                return Json(new { error = false, message = "Aprobación exitosa" }, JsonRequestBehavior.AllowGet);
+                return Json(new { error = false, message = "Aprobación exitosa", encuentro = huboEncuentro }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e) {
                 return Json(new { error = true, message = "No pudo aprobarse el aviso. Vuelva a intentarlo." }, JsonRequestBehavior.AllowGet);

@@ -9,11 +9,13 @@ namespace TallerIV.Dominio
     public abstract class UsuarioPersona: Usuario
     {
         public UsuarioPersona() { }
-        public UsuarioPersona(DateTime fechaDeResgistro, string email, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento) : base(fechaDeResgistro, email,userName) {
+        public UsuarioPersona(DateTime fechaDeResgistro, string email, string telefono, string userName, string nombre, string apellido, DateTime? fechaDeNacimiento) : base(fechaDeResgistro, email,userName) {
             Nombre = nombre;
             Apellido = apellido;
             FechaDeNacimiento = fechaDeNacimiento;
+            Telefono = telefono;
         }
+        public string Telefono { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public DateTime? FechaDeNacimiento { get; set; }

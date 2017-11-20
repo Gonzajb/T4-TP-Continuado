@@ -46,10 +46,14 @@ namespace TallerIV.Dominio.Coincidencias
                 && (avisoOrigen.HorasTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.HorasTrabajo == usEmp.Busqueda.HorasTrabajo : true)
                 && (avisoOrigen.SueldoOfrecidoPrioridad == Prioridad.Excluyente ? avisoOrigen.SueldoOfrecido >= usEmp.Busqueda.SueldoMinimo : true)
                 && (avisoOrigen.TipoRelacionDeTrabajoPrioridad == Prioridad.Excluyente ? avisoOrigen.TipoRelacionDeTrabajo == usEmp.Busqueda.TipoRelacionDeTrabajo : true)
+            ).ToList();
+
+            listCandidatos = listCandidatos.Where(usEmp =>
+                avisoOrigen.AptitudesBuscadas.Where(x => x.Prioridad == Prioridad.Excluyente).Select(x => x.Aptitud).Intersect(usEmp.Aptitud).Count() == avisoOrigen.AptitudesBuscadas.Where(x => x.Prioridad == Prioridad.Excluyente).Count()
                 && !avisoOrigen.UsuariosEmpleadoAprobados.Any(aviso => aviso.Id == usEmp.Id)
                 && !avisoOrigen.UsuariosEmpleadoDesaprobados.Any(aviso => aviso.Id == usEmp.Id)
-            ).ToList();
-            
+                ).ToList();
+
             //Se generan las coincidencias
             foreach (var empleado in listCandidatos)
             {
@@ -58,7 +62,7 @@ namespace TallerIV.Dominio.Coincidencias
             }
 
             //Se ordenan las coincidencias
-            listCoincidencias = listCoincidencias.OrderBy(x => x.Porcentaje).ToList();
+            listCoincidencias = listCoincidencias.OrderByDescending(x => x.Porcentaje).ToList();
 
             return listCoincidencias;
         }
@@ -90,7 +94,8 @@ namespace TallerIV.Dominio.Coincidencias
                     .ToList();
                 listCandidatos = listCandidatos.Where(aviso =>
                     !avisosAprobados.Any(avisoAprobado => avisoAprobado.Id == aviso.Id)
-                    && !avisosDesaprobados.Any(avisoDesaprobado => avisoDesaprobado.Id == aviso.Id))
+                    && !avisosDesaprobados.Any(avisoDesaprobado => avisoDesaprobado.Id == aviso.Id)
+                    && aviso.AptitudesBuscadas.Where(x => x.Prioridad == Prioridad.Excluyente).Select(x => x.Aptitud).Intersect(usuarioEmpleadoOrigen.Aptitud).Count() == aviso.AptitudesBuscadas.Where(x => x.Prioridad == Prioridad.Excluyente).Count())
                     .ToList();
 
                 //Se generan las coincidencias
