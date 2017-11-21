@@ -10,10 +10,10 @@
         </h1>
     </div>
 </div>
-<div class="row">
+<div class="row" id="avisos">
     @foreach (var item in Model)
     {
-        <div class="col-md-6" id="@item.Aviso.Id">
+        <div class="col-md-6 aviso" id="@item.Aviso.Id" hidden>
             <!-- Advanced Active Theme Color Widget Alternative -->
             <div class="widget">
                 <div class="widget-advanced widget-advanced-alt">
@@ -87,11 +87,78 @@
             <!-- END Advanced Active Theme Color Widget Alternative -->
         </div>
     }
+    <div class="col-lg-6">
+        <div class="col-sm-6 col-lg-6">
+            <!-- Widget -->
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                        <i class="fa fa-thumbs-o-up"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong><span id="avisosAprobados">@ViewBag.Usuario.AvisosAprobados.Count</span></strong>
+                        <small>Aprobaciones</small>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        <div class="col-sm-6 col-lg-6">
+            <!-- Widget -->
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                        <i class="fa fa-thumbs-o-down"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong><span id="avisosDesaprobados">@ViewBag.Usuario.AvisosDesaprobados.Count</span></strong>
+                        <small>Desprobaciones</small>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        <div class="col-sm-6 col-lg-6">
+            <!-- Widget -->
+            <a href="@Url.Action("Index", "EncuentrosReclutador")" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="fa fa-group"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong><span id="encuentros">@ViewBag.CantidadEncuentros</span></strong><br>
+                        <small>Encuentros</small>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        <div class="col-sm-6 col-lg-6">
+            <!-- Widget -->
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                        <i class="gi gi-envelope"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        <strong>0</strong>
+                        <small>Mensajes</small>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+    </div>
 </div>
 
 
 
 <script>
+    function mostrarNuevo() {
+        var divAviso = $('.aviso').first();
+        divAviso.show();
+    }
+
     function LlamarLike(id)
     {
         $.ajax({
@@ -102,10 +169,17 @@
                 // your data could be a View or Json or what ever you returned in your action method 
                 // parse your data here
                 if(!data.error){
-                    if (data.encuentro) {
-                        bootbox.alert("Se ha generado un encuentro! Le hemos enviado un aviso al reclutador así el mismo se contacta contigo.");
-                    }
-                    $("#" + id).fadeOut(300, function () { $(this).remove(); });
+                    $("#" + id).fadeOut(600, function () {
+                        $(this).remove();
+                        if (data.encuentro) {
+                            bootbox.alert("Se ha generado un encuentro! Le hemos enviado un aviso al reclutador así el mismo se contacta contigo.");
+                            var encuentros = parseInt($('#encuentros').text()) + 1;
+                            $('#encuentros').text(encuentros);
+                        }
+                        var aprobados = parseInt($('#avisosAprobados').text()) + 1;
+                        $('#avisosAprobados').text(aprobados);
+                        mostrarNuevo();
+                    });
                 }else{
                     bootbox.alert(data.message);
                 }
@@ -125,8 +199,12 @@
                 // your data could be a View or Json or what ever you returned in your action method 
                 // parse your data here
                 if(!data.error){
-                    alert(data.message);
-                    $("#" + id).remove();
+                    $("#" + id).fadeOut(600, function () {
+                        $(this).remove();
+                        var desaprobados = parseInt($('#avisosDesaprobados').text()) + 1;
+                        $('#avisosDesaprobados').text(desaprobados);
+                        mostrarNuevo();
+                    });
                 }else{
                     alert(data.message);
                 }
@@ -136,4 +214,7 @@
             }
         });
     }
+    $(function () {
+        mostrarNuevo();
+    });
 </script>

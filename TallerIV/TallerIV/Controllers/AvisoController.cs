@@ -146,6 +146,7 @@ namespace TallerIV.Controllers
             GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
             List<Coincidencia> coincidenciasList = generadorCoincidencias.GenerarListadoCoincidencias(aviso, queryEmpleados);
             ViewBag.Aviso = aviso;
+            ViewBag.CantidadEncuentros = db.Encuentros.Count(x => x.Aviso_Id == aviso.Id);
             return View(coincidenciasList);
         }
 

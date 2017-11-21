@@ -12,12 +12,11 @@
     </div>
 </div>
 <div class="row">
-
     <div>
         <div class="col-lg-12">
             @foreach (var item in Model)
             {
-                <div class="col-md-6" id="@item.Empleado.Id">
+                <div class="col-md-6 postulante" id="@item.Empleado.Id" hidden>
                     <!-- Advanced Active Theme Color Widget Alternative -->
                     <div class="widget">
                         <div class="widget-advanced widget-advanced-alt">
@@ -29,11 +28,11 @@
                                 <div class="widget-options">
                                     <button class="btn btn-lg btn-danger" data-toggle="tooltip" title="" data-original-title="Desaprobar" onclick="LlamarDisLike(@item.Aviso.Id,'@item.Empleado.Id')"><i class="fa fa-thumbs-o-down"></i></button>
                                 </div>
-                                <a href="page_ready_user_profile.html">
+                                <a href="#">
                                     <img src="/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="widget-image img-circle">
                                 </a>
                                 <h4 class="widget-content-light">
-                                    <a href="page_ready_user_profile.html">@item.Empleado.Nombre @item.Empleado.Apellido</a><br />
+                                    <a href="#">@item.Empleado.Nombre @item.Empleado.Apellido</a><br />
                                     <a style="font-size:12px;" href="#" onclick="bootbox.alert('@item.Empleado.CartaDePresentacion')">Ver carta de presentación</a><br>
                                     @*<small><i class="gi gi-pin"></i> New York</small>*@
                                 </h4>
@@ -97,11 +96,79 @@
                     <!-- END Advanced Active Theme Color Widget Alternative -->
                 </div>
             }
+            <div class="col-lg-6">
+                <div class="col-sm-6 col-lg-6">
+                    <!-- Widget -->
+                    <a href="#" class="widget widget-hover-effect1">
+                        <div class="widget-simple">
+                            <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </div>
+                            <h3 class="widget-content text-right animation-pullDown">
+                                <strong><span id="usuariosEmpleadoAprobados">@ViewBag.Aviso.UsuariosEmpleadoAprobados.Count</span></strong>
+                                <small>Aprobaciones</small>
+                            </h3>
+                        </div>
+                    </a>
+                    <!-- END Widget -->
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- Widget -->
+                    <a href="#" class="widget widget-hover-effect1">
+                        <div class="widget-simple">
+                            <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                                <i class="fa fa-thumbs-o-down"></i>
+                            </div>
+                            <h3 class="widget-content text-right animation-pullDown">
+                                <strong><span id="usuariosEmpleadoDesaprobados">@ViewBag.Aviso.UsuariosEmpleadoDesaprobados.Count</span></strong>
+                                <small>Desprobaciones</small>
+                            </h3>
+                        </div>
+                    </a>
+                    <!-- END Widget -->
+                </div>
+                <div class="col-sm-6 col-lg-6">
+                    <!-- Widget -->
+                    <a href="@Url.Action("Index", "EncuentrosReclutador")" class="widget widget-hover-effect1">
+                        <div class="widget-simple">
+                            <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                                <i class="fa fa-group"></i>
+                            </div>
+                            <h3 class="widget-content text-right animation-pullDown">
+                                <strong><span id="encuentros">@ViewBag.CantidadEncuentros</span></strong><br>
+                                <small>Encuentros</small>
+                            </h3>
+                        </div>
+                    </a>
+                    <!-- END Widget -->
+                </div>
+                
+                <div class="col-sm-6 col-lg-6">
+                    <!-- Widget -->
+                    <a href="#" class="widget widget-hover-effect1">
+                        <div class="widget-simple">
+                            <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                                <i class="gi gi-envelope"></i>
+                            </div>
+                            <h3 class="widget-content text-right animation-pullDown">
+                                <strong>0</strong>
+                                <small>Mensajes</small>
+                            </h3>
+                        </div>
+                    </a>
+                    <!-- END Widget -->
+                </div>
+                
+            </div>
         </div>
     </div>
 </div>
 
 <script>
+    function mostrarNuevo() {
+        var divAviso = $('.postulante').first();
+        divAviso.show();
+    }
     function LlamarLike(ida, id)
     {
         $.ajax({
@@ -116,10 +183,17 @@
                 // your data could be a View or Json or what ever you returned in your action method
                 // parse your data here
                 if(!data.error){
-                    if (data.encuentro) {
-                        bootbox.alert("Se ha generado un encuentro! Ingrese al menú Mis Encuentros para ver los datos de contacto o iniciar una conversación con el postulante.")
-                    }
-                    $("#" + id).fadeOut(300, function() { $(this).remove(); });
+                    $("#" + id).fadeOut(300, function() { 
+                        $(this).remove();
+                        if (data.encuentro) {
+                            bootbox.alert("Se ha generado un encuentro! Ingrese al menú Mis Encuentros para ver los datos de contacto o iniciar una conversación con el postulante.");
+                            var encuentros = parseInt($('#encuentros').text()) + 1;
+                            $('#encuentros').text(encuentros);
+                        }
+                        var aprobados = parseInt($('#usuariosEmpleadoAprobados').text()) + 1;
+                        $('#usuariosEmpleadoAprobados').text(aprobados);
+                        mostrarNuevo();
+                    });
                     //$("#" + id).remove();
                 }else{
                     bootbox.alert(data.message);
@@ -144,8 +218,12 @@
                 // your data could be a View or Json or what ever you returned in your action method
                 // parse your data here
                 if(!data.error){
-                    alert(data.message);
-                    $("#" + id).remove();
+                    $("#" + id).fadeOut(300, function() { 
+                        $(this).remove();
+                        var desaprobados = parseInt($('#usuariosEmpleadoDesaprobados').text()) + 1;
+                        $('#usuariosEmpleadoDesaprobados').text(desaprobados);
+                        mostrarNuevo();
+                    });
                 }else{
                     alert(data.message);
                 }
@@ -155,4 +233,7 @@
             }
         });
     }
+    $(function(){
+        mostrarNuevo();
+    });
 </script>

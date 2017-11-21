@@ -24,6 +24,8 @@ namespace TallerIV.Controllers
             UsuarioEmpleado usuario = db.Users.OfType<UsuarioEmpleado>().Where(x => x.Id == uid).FirstOrDefault();
             GeneradorCoincidencias generadorCoincidencias = new GeneradorCoincidencias();
             List<Coincidencia> coincidenciasList = generadorCoincidencias.GenerarListadoCoincidencias(usuario, queryAvisos);
+            ViewBag.CantidadEncuentros = db.Encuentros.Count(x => x.UsuarioEmpleado_Id == uid);
+            ViewBag.Usuario = db.Users.OfType<UsuarioEmpleado>().FirstOrDefault(x => x.Id == uid);
             return View(coincidenciasList);
         }
         
