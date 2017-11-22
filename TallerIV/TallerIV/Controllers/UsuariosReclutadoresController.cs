@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,7 +19,8 @@ namespace TallerIV.Controllers
         // GET: UsuariosReclutadores
         public ActionResult Index()
         {
-            return View(db.IdentityUsers.OfType<UsuarioReclutador>().ToList());
+            var uid = this.User.Identity.GetUserId();
+            return View(db.IdentityUsers.OfType<UsuarioReclutador>().Where(x => x.UsuarioEmpresa_Id == uid).ToList());
         }
 
         // GET: UsuariosReclutadores/Details/5

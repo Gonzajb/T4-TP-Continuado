@@ -48,7 +48,7 @@ namespace TallerIV.Dominio.Coincidencias.CalculadoresDePorcentaje
                     }
 
                 }
-                coincidencia = new Coincidencia((float)PuntajeEmpleado / (float)PuntajeMaximo * 100, empleado, Aviso);                
+                coincidencia = new Coincidencia((float)Math.Round((float)PuntajeEmpleado / (float)PuntajeMaximo * 100), empleado, Aviso);                
             }
             else
             {
