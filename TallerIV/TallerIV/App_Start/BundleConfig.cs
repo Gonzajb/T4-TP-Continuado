@@ -31,6 +31,10 @@ namespace TallerIV
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            //css mobile
+            bundles.Add(new StyleBundle("~/Content/cssMobile").Include(
+                      "~/Content/css/Style.css"));
+
             bundles.Add(new StyleBundle("~/Content/Selectize/css").Include(
                       "~/Content/Selectize/selectize.css"));
         }

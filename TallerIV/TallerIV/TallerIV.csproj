@@ -246,6 +246,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\logo-nav.css" />
+    <Content Include="Content\mobile\css\Style.css" />
     <Content Include="Content\Selectize\css\selectize.bootstrap2.css" />
     <Content Include="Content\Selectize\css\selectize.bootstrap3.css" />
     <Content Include="Content\Selectize\css\selectize.css" />
@@ -383,6 +384,8 @@
     <Content Include="Views\UsuariosReclutadores\Details.cshtml" />
     <Content Include="Views\UsuariosReclutadores\Edit.cshtml" />
     <Content Include="Views\UsuariosReclutadores\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutProuiLogin.Mobile.cshtml" />
+    <Content Include="Views\Account\Login.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
