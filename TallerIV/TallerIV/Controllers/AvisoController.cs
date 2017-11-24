@@ -135,7 +135,24 @@ namespace TallerIV.Controllers
             }
             return View(aviso);
         }
-
+        //GET: Aviso/Estadisticas
+        public ActionResult Estadisticas(long Aid)
+        {
+            TallerIVDbContext db = new TallerIVDbContext();
+            //Aviso aviso = this.avisoService.GetById(Aid);
+            Aviso aviso = db.Avisos.FirstOrDefault();
+            float Total = aviso.UsuariosEmpleadoAprobados.Count() + aviso.UsuariosEmpleadoDesaprobados.Count();
+            if (Total == 0.0)
+            {
+                ViewBag.PorcentajeAp = 0;
+                ViewBag.PorcentajeDes = 0;
+            } else
+            {
+                ViewBag.PorcentajeAp = (aviso.UsuariosEmpleadoAprobados.Count()/Total) * 100;
+                ViewBag.PorcentajeDes = (aviso.UsuariosEmpleadoDesaprobados.Count() / Total) * 100;
+            }
+            return View(aviso);
+        }
         // GET: HomeEmpleado
         public ActionResult BuscarPostulantes(long id)
         {
