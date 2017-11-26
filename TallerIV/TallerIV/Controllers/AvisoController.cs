@@ -135,12 +135,12 @@ namespace TallerIV.Controllers
             }
             return View(aviso);
         }
-        //GET: Aviso/Estadisticas
-        public ActionResult Estadisticas(long Aid)
+        //GET: Aviso/Estadisticas/5
+        public ActionResult Estadisticas(long id)
         {
             TallerIVDbContext db = new TallerIVDbContext();
-            //Aviso aviso = this.avisoService.GetById(Aid);
-            Aviso aviso = db.Avisos.FirstOrDefault();
+            Aviso aviso = this.avisoService.GetById(id);
+            ViewBag.Aviso = aviso;
             float Total = aviso.UsuariosEmpleadoAprobados.Count() + aviso.UsuariosEmpleadoDesaprobados.Count();
             if (Total == 0.0)
             {

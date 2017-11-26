@@ -173,7 +173,7 @@
                             }
                             else if (userIsPostulante)
                             {
-                                <a href="@Url.Action("Edit", "Account")" data-toggle="tooltip" data-placement="bottom" title="Mi Perfil"><i class="gi gi-user"></i></a>
+                                <a href="@Url.Action("Edit", "Account")" data-toggle="tooltip" data-placement="bottom" title="Mi Perfil"><i class="gi gi-list"></i></a>
                             }
                             else if (userIsReclutador)
                             {
@@ -219,11 +219,11 @@
                                 <a href="@Url.Action("Index","Home")" class="dashboard"><i class="gi gi-home sidebar-nav-icon"></i>Panel de control</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Index", "UsuariosReclutadores")" class="dashboard">Reclutadores</a>
+                                <a href="@Url.Action("Index", "UsuariosReclutadores")" class="dashboard"><i class="gi gi-parents sidebar-nav-icon"></i>Reclutadores</a>
                                 @*<a href="@Url.Action("Register", "AccountReclutador")" class="dashboard">Reclutadores</a>*@
                             </li>
                             <li>
-                                <a href="@Url.Action("Index", "Aviso")" class="dashboard">Avisos</a>
+                                <a href="@Url.Action("Index", "Aviso")" class="dashboard"><i class="fa fa-bar-chart-o sidebar-nav-icon"></i>Avisos</a>
                             </li>
                         }
                         @*<li>
