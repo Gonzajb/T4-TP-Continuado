@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TallerIV.Dominio.UsuarioReclutador>
+
+@{
+    ViewBag.Title = "ReasignarAviso";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="gi gi-align_left"></i>Reasignar Aviso: @ViewBag.Aviso.Titulo
+        </h1>
+    </div>
+</div>
+<br>
+<h3>Listado de Reclutadores disponibles</h3>
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Nombre de Usuario
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <input type="radio" name="radios" id="radio1" />
+                    <label for="radio1">@item.Nombre</label>
+                </td>
+                <td>
+                    <label for='regular'>@item.Apellido</label>
+                </td>
+                <td>
+                    <label for='regular'>@item.UserName</label>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-default" value="Reasignar" />
+    </div>
+</div>
+<script>
+    $('.table tbody tr td').click(function (event) {
+        if (event.target.type !== 'radio') {
+            $(':radio', this).trigger('click');
+        }
+    });</script>

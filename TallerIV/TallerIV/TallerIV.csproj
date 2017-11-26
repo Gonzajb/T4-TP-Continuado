@@ -387,6 +387,7 @@
     <Content Include="Views\Shared\_LayoutProuiLogin.Mobile.cshtml" />
     <Content Include="Views\Account\Login.Mobile.cshtml" />
     <Content Include="Views\Aviso\Estadisticas.cshtml" />
+    <Content Include="Views\Aviso\ReasignarAviso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

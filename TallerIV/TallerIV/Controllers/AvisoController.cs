@@ -65,6 +65,28 @@ namespace TallerIV.Controllers
             ViewBag.Nombre = "asda";
             return View();
         }
+        // GET: Aviso/Edit/5
+        public ActionResult ReasignarAviso(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Aviso aviso = this.avisoService.GetById(id.Value);
+            if (aviso == null)
+            {
+                return HttpNotFound();
+            }
+            UsuarioReclutadorService servicioReclutador = new UsuarioReclutadorService();
+            List<UsuarioReclutador> Reclutadores = servicioReclutador.GetAllByEmpresa(aviso.UsuarioEmpresa_Id).ToList();
+            ViewBag.Aviso = aviso;
+            if (Reclutadores == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Reclutadores);
+        }
+
         [HttpPost]
         public ActionResult ReasignarAviso(long idAviso, string idReclutador){
            avisoService.ReasignarAviso(idAviso, idReclutador);
