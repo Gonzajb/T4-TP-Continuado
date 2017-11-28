@@ -89,9 +89,13 @@ namespace TallerIV.Controllers
 
         [HttpPost]
         public ActionResult ReasignarAviso(long id, string Aid){
-           BaseService <UsuarioReclutador> reclutadorService = new BaseService<UsuarioReclutador>();
-            UsuarioReclutador reclutador = reclutadorService.GetAll().FirstOrDefault(r => r.Id == Aid);
-           avisoService.ReasignarAviso(id, reclutador);
+            TallerIVDbContext db = new TallerIVDbContext();
+            UsuarioReclutador reclutador = db.IdentityUsers.Find(Aid);
+            Aviso aviso = db.Avisos.Find(id);
+            //BaseService <UsuarioReclutador> reclutadorService = new BaseService<UsuarioReclutador>();
+            //UsuarioReclutador reclutador = reclutadorService.GetAll().FirstOrDefault(r => r.Id == Aid);
+            //avisoService.ReasignarAviso(id, reclutador);
+            avisoService.ReasignarAviso(aviso, reclutador);
             return RedirectToAction("Index");
         }
         // POST: Aviso/Create

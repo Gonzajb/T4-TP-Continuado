@@ -35,15 +35,14 @@ namespace TallerIV.Negocio.Servicios
 
         }
 
-        public void ReasignarAviso(long idAviso, UsuarioReclutador reclutador)
-        {
-            
-            Aviso aviso = this.GetById(idAviso);
+        public void ReasignarAviso(Aviso aviso, UsuarioReclutador reclutador)
+        {            
+            //Aviso aviso = this.GetById(idAviso);
             //UsuarioReclutadorService reclutadorService = new UsuarioReclutadorService();
-            //UsuarioReclutador Reclutador = reclutadorService.GetById(Aid);
-            //Aviso nuevoAviso = new Aviso(aviso.Titulo, aviso.Descripcion, aviso.FechaInicio, idReclutador, aviso.SueldoOfrecidoPrioridad, aviso.TipoRelacionDeTrabajo, aviso.TipoRelacionDeTrabajoPrioridad,aviso.HorasTrabajo,aviso.HorasTrabajoPrioridad, aviso.UsuarioEmpresa_Id, aivo)
+            //UsuarioReclutador Reclutador = reclutadorService.GetById(Aid);           
             //aviso.UsuarioReclutador_Id = reclutador.Id;
             aviso.UsuarioReclutador = reclutador;
+            aviso.UsuarioReclutador_Id = reclutador.Id;
             this.UpdateEntity(aviso);
         }
     }
