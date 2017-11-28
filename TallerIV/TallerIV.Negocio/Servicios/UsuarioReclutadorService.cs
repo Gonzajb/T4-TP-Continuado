@@ -14,6 +14,6 @@ namespace TallerIV.Negocio.Servicios
         {
             IQueryable<UsuarioReclutador> Reclutadores = this.GetAll().Where(a => a.UsuarioEmpresa_Id == usuarioEmpresaId);
             return Reclutadores.ToList();
-        }
+        }       
     }
 }
