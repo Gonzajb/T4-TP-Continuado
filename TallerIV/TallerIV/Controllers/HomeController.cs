@@ -45,26 +45,36 @@ namespace TallerIV.Controllers
         }
 
         protected static void GenerarStoredProcedure()
-        {            
-            string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
-
-            //string store = "CREATE PROCEDURE [spInsertADAuthorization] @AD_Account varchar(255),@AD_SID varchar(255),@AD_EmailAddress varchar(255),@DateImported datetime,@Active bit AS BEGIN SET NOCOUNT ON; INSERT INTO AD_Authorization (AD_Account, AD_SID, AD_EmailAddress, DateImported, Active) VALUES (@AD_Account,@AD_SID,@AD_EmailAddress,@DateImported,@Active) END";
-
-            using (SqlConnection connection = new SqlConnection(cs))
+        {
+            try
             {
-                string store1 = "CREATE PROCEDURE [AvisoDesaprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @avisoId END";
+                string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
 
-                using (SqlCommand cmd = new SqlCommand(store1, connection))
+                //string store = "CREATE PROCEDURE [spInsertADAuthorization] @AD_Account varchar(255),@AD_SID varchar(255),@AD_EmailAddress varchar(255),@DateImported datetime,@Active bit AS BEGIN SET NOCOUNT ON; INSERT INTO AD_Authorization (AD_Account, AD_SID, AD_EmailAddress, DateImported, Active) VALUES (@AD_Account,@AD_SID,@AD_EmailAddress,@DateImported,@Active) END";
+
+                using (SqlConnection connection = new SqlConnection(cs))
                 {
-                    connection.Open();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                    string store2 = "CREATE PROCEDURE [AvisoAprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @avisoId END";
-                    cmd.CommandText = store2;
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                    string store1 = "CREATE PROCEDURE [AvisoDesaprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @avisoId END";
+
+                    using (SqlCommand cmd = new SqlCommand(store1, connection))
+                    {
+                        connection.Open();
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
+                        string store2 = "CREATE PROCEDURE [AvisoAprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @avisoId END";
+                        cmd.CommandText = store2;
+                        cmd.ExecuteNonQuery();
+                        string store3 = "create PROCEDURE EstadisticaPorcentajeAViso (@avisoId INT) as begin select Porcentaje, count(1) as Cantidad, maximo as MaximoAviso from(SELECT cast(CAST(SUM(ap.Prioridad) as float) / cast(Maximo as float) as decimal(10, 1)) as Porcentaje, maximo from(select SUM(ap1.Prioridad) AS maximo, ap1.Aviso_Id from AptitudesPorAviso ap1 where ap1.Aviso_Id = @avisoId GROUP BY ap1.Aviso_Id) a1 inner join AptitudesPorAviso ap ON ap.Aviso_Id = a1.Aviso_Id inner join UsuarioEmpleadoAptitud uea on ap.Aptitud_Id = uea.Aptitud_Id WHERE ap.Aviso_Id = @avisoId GROUP BY UsuarioEmpleado_Id, maximo) as temp group by temp.Porcentaje, temp.maximo order by temp.Porcentaje END";
+                        cmd.CommandText = store3;
+                        cmd.ExecuteNonQuery();
+                        connection.Close();
+                    }
                 }
+            } catch (SqlException e)
+            {
+
             }
+            
         }
 
         protected static List<AptitudPorAviso> GenerarAptitudes(TallerIVDbContext db)
