@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 using TallerIV.Dominio.Coincidencias;
 using TallerIV.Dominio.Usuarios;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace TallerIV.Controllers
 {
@@ -167,23 +168,48 @@ namespace TallerIV.Controllers
         //GET: Aviso/Estadisticas/5
         public ActionResult Estadisticas(long id)
         {
-            SqlConnection sqlConnection = new SqlConnection("Data Source=A-srv-bdinst;Initial Catalog=redsocialtinder;Integrated Security=False;User Id=redsocialtinder;Password=ort2017;MultipleActiveResultSets=True");
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
+            // CONECCTION STRING PARA ORT
+            //SqlConnection sqlConnection = new SqlConnection("Data Source=A-srv-bdinst;Initial Catalog=redsocialtinder;Integrated Security=False;User Id=redsocialtinder;Password=ort2017;MultipleActiveResultSets=True");
 
-            cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
-            cmd.Parameters.AddWithValue("@query", id);
-            cmd.CommandType = CommandType.Text;
+            // CONECCTION STRING PERSONAL
+            string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
+            SqlConnection sqlConnection = new SqlConnection(cs);
+            SqlDataReader reader = null;
+
+            SqlCommand cmd = new SqlCommand("AvisoAprobadosPorUsuario", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            //Consulta para la cantidad de aprobaciones que tiene un Aviso.
+            //No hace falta, actualmente Estadistica calculo esto apartir del Aviso.
+            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
+            //Consulta para cantidad de Postulantes que aprobaron el aviso.
+            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @query";
+
+
+            //Consulta para cantidad de Postulantes que desaprobaron el aviso
+            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @query";
+
+            cmd.Parameters.AddWithValue("@avisoId", id);
             cmd.Connection = sqlConnection;
 
             sqlConnection.Open();
 
             reader = cmd.ExecuteReader();
             reader.Read();
-            int a = reader.GetInt32(reader.GetOrdinal("TOTAL"));
+            int UsuariosQueAprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
             sqlConnection.Close();
 
-         
+            cmd.CommandText = "AvisoDesaprobadosPorUsuario";
+
+
+            sqlConnection.Open();
+
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            int UsuariosQueDesaprobaron = 25;
+            UsuariosQueDesaprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
+            sqlConnection.Close();
 
 
 
