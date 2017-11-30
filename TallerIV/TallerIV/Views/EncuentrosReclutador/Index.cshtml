@@ -33,7 +33,7 @@
                     <form action="page_widgets_social.html" method="post" class="form-horizontal" onsubmit="return false;">
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <textarea id="widget-post2" name="widget-post2" rows="4" class="form-control" placeholder="Comienza una conversación..."></textarea>
+                                <textarea id="mensaje_@encuentro.Id" name="widget-post2" rows="4" class="form-control" placeholder="Comienza una conversación..."></textarea>
                             </div>
                         </div>
                         <div class="form-group remove-margin-bottom">
@@ -41,7 +41,7 @@
                                 <button onclick="descartar(@encuentro.Id)" class="btn btn-default"><i class="fa fa-times"></i> Descartar</button>
                             </div>
                             <div class="col-lg-offset-3 col-xs-6 text-right">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-pencil"></i> Contactar</button>
+                                <button onclick="iniciarConversacion(@encuentro.Id)" class="btn btn-default"><i class="fa fa-pencil"></i> Contactar</button>
                             </div>
                         </div>
                     </form>
@@ -60,18 +60,6 @@
                                 <small>@encuentro.UsuarioEmpleado.Telefono</small>
                             </h4>
                         </div>
-                        @*<div class="col-xs-4">
-                            <h3 class="widget-content-light">
-                                <a href="javascript:void(0)" class="themed-color-fire"><strong>150</strong></a><br>
-                                <small>Following</small>
-                            </h3>
-                        </div>
-                        <div class="col-xs-4">
-                            <h3 class="widget-content-light">
-                                <a href="javascript:void(0)" class="themed-color-fire"><strong>10.5k</strong></a><br>
-                                <small>Followers</small>
-                            </h3>
-                        </div>*@
                     </div>
                 </div>
             </div>
@@ -87,10 +75,30 @@
             //url: "/ControllerName/ActionName",
             url: '/EncuentrosReclutador/Descartar/' + id,
             success: (data) => {
-                // your data could be a View or Json or what ever you returned in your action method 
+                // your data could be a View or Json or what ever you returned in your action method
                 // parse your data here
                 if (!data.error) {
                     $("#" + id).fadeOut(300, function () { $(this).remove(); });
+                } else {
+                    bootbox.alert(data.message);
+                }
+            },
+            error: function (req, status, errorObj) {
+                alert('error');
+            }
+        });
+    }
+    var iniciarConversacion = function (id) {
+        var url = '/EncuentrosReclutador/IniciarConversacion?encuentro_id=' + id + '&usuario_id=' + '@ViewBag.UserId' + '&texto=' + $('#mensaje_' + id).text();
+        $.ajax({
+            // edit to add steve's suggestion.
+            //url: "/ControllerName/ActionName",
+            url: url,
+            success: (data) => {
+                // your data could be a View or Json or what ever you returned in your action method
+                // parse your data here
+                if (!data.error) {
+                    $("#" + id).fadeOut(300, function () { bootbox.alert("Se ha iniciado una nueva conversación con el usuario seleccionado."); $(this).remove(); });
                 } else {
                     bootbox.alert(data.message);
                 }

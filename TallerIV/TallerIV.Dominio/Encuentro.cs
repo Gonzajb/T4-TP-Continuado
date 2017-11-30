@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TallerIV.Dominio.Chat;
 
 namespace TallerIV.Dominio
 {
@@ -21,5 +22,6 @@ namespace TallerIV.Dominio
         public string UsuarioEmpleado_Id { get; set; }
         public virtual Aviso Aviso { get; set; }
         public long Aviso_Id { get; set; }
+        public virtual List<Mensaje> Mensajes { get; set; }
     }
 }

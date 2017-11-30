@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Avisos\AptitudPorAviso.cs" />
     <Compile Include="Avisos\Aviso.cs" />
+    <Compile Include="Chat\Mensaje.cs" />
     <Compile Include="Coincidencias\AprobadorAviso.cs" />
     <Compile Include="Coincidencias\AprobadorPostulante.cs" />
     <Compile Include="Coincidencias\CalculadoresDePorcentaje\CalculadorDePorcentajeAviso.cs" />
