@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using TallerIV.Dominio.Coincidencias;
 using TallerIV.Dominio.Usuarios;
+using System.Data.SqlClient;
 
 namespace TallerIV.Controllers
 {
@@ -166,6 +167,28 @@ namespace TallerIV.Controllers
         //GET: Aviso/Estadisticas/5
         public ActionResult Estadisticas(long id)
         {
+            SqlConnection sqlConnection = new SqlConnection("Data Source=A-srv-bdinst;Initial Catalog=redsocialtinder;Integrated Security=False;User Id=redsocialtinder;Password=ort2017;MultipleActiveResultSets=True");
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
+            cmd.Parameters.AddWithValue("@query", id);
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = sqlConnection;
+
+            sqlConnection.Open();
+
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            int a = reader.GetInt32(reader.GetOrdinal("TOTAL"));
+            sqlConnection.Close();
+
+         
+
+
+
+
+
             TallerIVDbContext db = new TallerIVDbContext();
             Aviso aviso = this.avisoService.GetById(id);
             ViewBag.Aviso = aviso;
