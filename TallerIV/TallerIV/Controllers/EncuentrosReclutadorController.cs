@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using TallerIV.Datos;
 using TallerIV.Dominio;
+using TallerIV.Dominio.Chat;
+using TallerIV.Negocio.Servicios;
 
 namespace TallerIV.Controllers
 {
@@ -38,7 +40,18 @@ namespace TallerIV.Controllers
             {
                 return Json(new { error = true, message = "No pudo descartarse el encuentro. Vuelva a intentarlo." }, JsonRequestBehavior.AllowGet);
             }
-
+        }
+        public JsonResult IniciarConversacion(int encuentro_id, string usuario_id, string texto) {
+            try
+            {
+                BaseService<Mensaje> mensajesService = new BaseService<Mensaje>();
+                Mensaje mensaje = new Mensaje(texto, usuario_id, encuentro_id);
+                mensajesService.AddEntity(mensaje);
+                return Json(new { error = false, message = "Conversación iniciada correctamente." });
+            }
+            catch (Exception e) {
+                return Json(new { error = true, message = "No se ha podido iniciar la conversación." });
+            }
         }
         protected override void Dispose(bool disposing)
         {

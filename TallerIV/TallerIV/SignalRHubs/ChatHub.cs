@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using TallerIV.Negocio.Servicios;
+using TallerIV.Dominio;
+using TallerIV.Datos;
+using TallerIV.Dominio.Chat;
 
 namespace TallerIV.SignalRHubs
 {
     public class ChatHub : Hub
     {
-        public void Send(string name, string message, string encuentro_id)
+        public void Send(string name, string message, string encuentro_id, string userid)
         {
-            // Call the broadcastMessage method to update clients.
-            Clients.Group(encuentro_id).addChatMessage(name, message);
+            TallerIVDbContext dbContext = new TallerIVDbContext();
+            BaseService<Mensaje> mensajesService = new BaseService<Mensaje>(dbContext);
+            mensajesService.AddEntity(new Mensaje(message, userid, int.Parse(encuentro_id)));
+            Clients.Group(encuentro_id).send(name, message);
         }
         public void JoinRoom(string encuentro_id)
         {

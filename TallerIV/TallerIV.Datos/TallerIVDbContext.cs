@@ -8,24 +8,21 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using TallerIV.Dominio;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TallerIV.Dominio.Avisos;
+using TallerIV.Dominio.Chat;
 
 namespace TallerIV.Datos
 {
     public class TallerIVDbContext : IdentityDbContext<Usuario>
     {
-
         public TallerIVDbContext() : base("TallerIVContext")
         {
         }
-
         public DbSet<Aviso> Avisos { get; set; }
         public DbSet<Encuentro> Encuentros { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Aptitud> Aptitudes { get; set; }
         public DbSet<AptitudPorAviso> AptitudesPorAviso { get; set; }
-        //public DbSet<UsuarioEmpleado> UsuarioEmpleado { get; set; }
-        //public DbSet<UsuarioEmpresa> UsuarioEmpresa { get; set; }
-
+        public DbSet<Mensaje> Mensajes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,6 +51,9 @@ namespace TallerIV.Datos
             modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id).WillCascadeOnDelete(false);
             modelBuilder.Entity<Encuentro>().HasRequired(e => e.Aviso).WithMany().HasForeignKey(a => a.Aviso_Id).WillCascadeOnDelete(false);
             modelBuilder.Entity<Encuentro>().HasRequired(e => e.UsuarioEmpleado).WithMany().HasForeignKey(a => a.UsuarioEmpleado_Id).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Encuentro>().HasMany(e => e.Mensajes).WithRequired().HasForeignKey(m => m.Encuentro_Id).WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Mensaje>().HasRequired(m => m.Usuario).WithMany().HasForeignKey(m => m.Usuario_Id).WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Like>().HasKey(l => l.Id).ToTable("Likes");
             modelBuilder.Entity<Like>().HasRequired(l => l.UsuarioReclutador).WithMany().HasForeignKey(a => a.UsuarioReclutador_Id);

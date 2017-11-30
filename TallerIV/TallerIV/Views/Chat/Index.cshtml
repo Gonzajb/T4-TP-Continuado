@@ -1,4 +1,5 @@
 ﻿@model TallerIV.Dominio.Encuentro
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
@@ -10,7 +11,11 @@
     <input type="text" id="message" />
     <input type="button" id="sendmessage" value="Send" />
     <input type="hidden" id="displayname" />
-    <ul id="discussion"></ul>
+    <ul id="discussion">
+        @foreach (var mensaje in Model.Mensajes) {
+            <li><strong>@mensaje.Usuario.Nombre</strong>: @mensaje.Texto</li>
+        }
+    </ul>
 </div>
 <!--Script references. -->
 <!--Reference the jQuery library. -->
@@ -35,7 +40,6 @@
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
             };
             // Get the user name and store it to prepend to messages.
-            $('#displayname').val(prompt('Enter your name:', ''));
             // Set initial focus to message input box.
             $('#message').focus();
             // Start the connection.
@@ -44,7 +48,7 @@
 
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    chat.server.send(username, $('#message').val(), '@Model.Id');
+                    chat.server.send(username, $('#message').val(), '@Model.Id', '@ViewBag.UserId');
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });

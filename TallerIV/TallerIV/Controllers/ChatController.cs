@@ -19,6 +19,7 @@ namespace TallerIV.Controllers
             BaseService<Encuentro> encuentroService = new BaseService<Encuentro>(db);
             Encuentro encuentro = encuentroService.GetById(encuentro_id);
             ViewBag.UserName = this.User.Identity.GetUserName();
+            ViewBag.UserId = this.User.Identity.GetUserId();
             return View(encuentro);
         }
     }
