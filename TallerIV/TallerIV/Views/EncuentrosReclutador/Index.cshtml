@@ -89,7 +89,7 @@
         });
     }
     var iniciarConversacion = function (id) {
-        var url = '/EncuentrosReclutador/IniciarConversacion?encuentro_id=' + id + '&usuario_id=' + '@ViewBag.UserId' + '&texto=' + $('#mensaje_' + id).text();
+        var url = '/EncuentrosReclutador/IniciarConversacion?encuentro_id=' + id + '&usuario_id=' + '@ViewBag.UserId' + '&texto=' + $('#mensaje_' + id).val();
         $.ajax({
             // edit to add steve's suggestion.
             //url: "/ControllerName/ActionName",

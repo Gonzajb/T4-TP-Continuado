@@ -23,6 +23,7 @@ namespace TallerIV.Controllers
         public ActionResult Index()
         {
             string userid = this.User.Identity.GetUserId();
+            ViewBag.UserId = userid;
             var encuentros = db.Encuentros.Include(e => e.Aviso).Include(e => e.UsuarioEmpleado).Include(e => e.UsuarioReclutador).Where(x => x.UsuarioReclutador_Id == userid);
             return View(encuentros.ToList());
         }
@@ -47,10 +48,10 @@ namespace TallerIV.Controllers
                 BaseService<Mensaje> mensajesService = new BaseService<Mensaje>();
                 Mensaje mensaje = new Mensaje(texto, usuario_id, encuentro_id);
                 mensajesService.AddEntity(mensaje);
-                return Json(new { error = false, message = "Conversación iniciada correctamente." });
+                return Json(new { error = false, message = "Conversación iniciada correctamente.", JsonRequestBehavior.AllowGet });
             }
             catch (Exception e) {
-                return Json(new { error = true, message = "No se ha podido iniciar la conversación." });
+                return Json(new { error = true, message = "No se ha podido iniciar la conversación.", JsonRequestBehavior.AllowGet });
             }
         }
         protected override void Dispose(bool disposing)
