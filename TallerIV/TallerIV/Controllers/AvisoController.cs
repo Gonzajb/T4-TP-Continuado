@@ -199,6 +199,7 @@ namespace TallerIV.Controllers
             reader.Read();
             int UsuariosQueAprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
             sqlConnection.Close();
+            ViewBag.UsuariosQueAprobaron = UsuariosQueAprobaron;
 
             cmd.CommandText = "AvisoDesaprobadosPorUsuario";
 
@@ -210,8 +211,23 @@ namespace TallerIV.Controllers
             int UsuariosQueDesaprobaron = 25;
             UsuariosQueDesaprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
             sqlConnection.Close();
+            ViewBag.UsuariosQueDesaprobaron = UsuariosQueDesaprobaron;
+
+            cmd.CommandText = "EstadisticaPorcentajeAViso";
 
 
+            sqlConnection.Open();
+
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            List<double> Porcentaje = new List<double>();
+            
+            while (reader.Read())
+            {
+                Porcentaje.Add(reader.GetFloat(reader.GetOrdinal("Porcentaje")));
+            }
+
+            ViewBag.Porcentaje = Porcentaje;
 
 
 
