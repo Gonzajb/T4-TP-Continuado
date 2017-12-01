@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\AvisoSPService.cs" />
     <Compile Include="Servicios\AvisosService.cs" />
     <Compile Include="Servicios\BaseService.cs" />
     <Compile Include="Servicios\TagsService.cs" />

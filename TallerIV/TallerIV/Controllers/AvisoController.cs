@@ -23,10 +23,12 @@ namespace TallerIV.Controllers
     {
         private AvisosService avisoService;
         private UsuarioReclutadorService reclutadorService;
+        private AvisoSPService avisoSPService;
         public AvisoController()
         {
             avisoService = new AvisosService();
             reclutadorService = new UsuarioReclutadorService();
+            avisoSPService = new AvisoSPService();
         }
 
         // GET: Aviso
@@ -168,16 +170,21 @@ namespace TallerIV.Controllers
         //GET: Aviso/Estadisticas/5
         public ActionResult Estadisticas(long id)
         {
+            ViewBag.UsuariosQueAprobaron = avisoSPService.AprobacionesDeUsuarios((int)id);
+            ViewBag.UsuariosQueDesaprobaron = avisoSPService.DesaprobacionesDeUsuarios((int)id);
+            ViewBag.Porcentaje = avisoSPService.PorcentajeDePuntos((int)id);
+
+
             // CONECCTION STRING PARA ORT
             //SqlConnection sqlConnection = new SqlConnection("Data Source=A-srv-bdinst;Initial Catalog=redsocialtinder;Integrated Security=False;User Id=redsocialtinder;Password=ort2017;MultipleActiveResultSets=True");
 
             // CONECCTION STRING PERSONAL
+
             string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
             SqlConnection sqlConnection = new SqlConnection(cs);
             SqlDataReader reader = null;
 
-            SqlCommand cmd = new SqlCommand("AvisoAprobadosPorUsuario", sqlConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
+
 
 
             //Consulta para la cantidad de aprobaciones que tiene un Aviso.
@@ -185,14 +192,10 @@ namespace TallerIV.Controllers
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
             //Consulta para cantidad de Postulantes que aprobaron el aviso.
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @query";
-
-
-            //Consulta para cantidad de Postulantes que desaprobaron el aviso
-            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @query";
-
+            SqlCommand cmd = new SqlCommand("AvisoAprobadosPorUsuario", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@avisoId", id);
             cmd.Connection = sqlConnection;
-
             sqlConnection.Open();
 
             reader = cmd.ExecuteReader();
@@ -201,9 +204,11 @@ namespace TallerIV.Controllers
             sqlConnection.Close();
             ViewBag.UsuariosQueAprobaron = UsuariosQueAprobaron;
 
+            //Consulta para cantidad de Postulantes que desaprobaron el aviso
+            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @query";
+            
             cmd.CommandText = "AvisoDesaprobadosPorUsuario";
-
-
+            
             sqlConnection.Open();
 
             reader = cmd.ExecuteReader();
@@ -213,7 +218,7 @@ namespace TallerIV.Controllers
             sqlConnection.Close();
             ViewBag.UsuariosQueDesaprobaron = UsuariosQueDesaprobaron;
 
-            cmd.CommandText = "EstadisticaPorcentajeAViso";
+            cmd.CommandText = "EstadisticaPorcentajeAviso";
 
 
             sqlConnection.Open();
@@ -226,7 +231,7 @@ namespace TallerIV.Controllers
             {
                 Porcentaje.Add(reader.GetFloat(reader.GetOrdinal("Porcentaje")));
             }
-
+            sqlConnection.Close();
             ViewBag.Porcentaje = Porcentaje;
 
 
