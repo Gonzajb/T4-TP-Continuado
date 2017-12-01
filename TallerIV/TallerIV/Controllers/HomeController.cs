@@ -8,6 +8,9 @@ using System.Web.Mvc;
 using TallerIV.Datos;
 using TallerIV.Dominio;
 using TallerIV.Dominio.Avisos;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace TallerIV.Controllers
 {
@@ -34,10 +37,34 @@ namespace TallerIV.Controllers
 
         public void GenerarEntidades() {
             var db = new TallerIVDbContext();
+            GenerarStoredProcedure();
             InicializarTags(db);
             InicializarUsuarios(db);
             InicializarAvisos(db);
             InicializacionParaEntrega(db);
+        }
+
+        protected static void GenerarStoredProcedure()
+        {            
+            string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
+
+            //string store = "CREATE PROCEDURE [spInsertADAuthorization] @AD_Account varchar(255),@AD_SID varchar(255),@AD_EmailAddress varchar(255),@DateImported datetime,@Active bit AS BEGIN SET NOCOUNT ON; INSERT INTO AD_Authorization (AD_Account, AD_SID, AD_EmailAddress, DateImported, Active) VALUES (@AD_Account,@AD_SID,@AD_EmailAddress,@DateImported,@Active) END";
+
+            using (SqlConnection connection = new SqlConnection(cs))
+            {
+                string store1 = "CREATE PROCEDURE [AvisoDesaprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @avisoId END";
+
+                using (SqlCommand cmd = new SqlCommand(store1, connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    string store2 = "CREATE PROCEDURE [AvisoAprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @avisoId END";
+                    cmd.CommandText = store2;
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
         }
 
         protected static List<AptitudPorAviso> GenerarAptitudes(TallerIVDbContext db)
