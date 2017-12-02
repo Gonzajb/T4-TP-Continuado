@@ -5,17 +5,56 @@
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
 
-<h2>Index</h2>
-
-<div class="container">
-    <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" />
-    <input type="hidden" id="displayname" />
-    <ul id="discussion">
-        @foreach (var mensaje in Model.Mensajes) {
-            <li><strong>@mensaje.Usuario.Nombre</strong>: @mensaje.Texto</li>
-        }
-    </ul>
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-chat"></i>Chat
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="block">
+        <!-- Block Title -->
+        <div class="block-title">
+            <h2><strong>Conversación</strong> Ezequiel</h2>
+        </div>
+        <!-- END Block Title -->
+        <!-- Block Content -->
+        <div class="row">
+            <div class="col-md-12" id="discussion">
+                @foreach (var mensaje in Model.Mensajes)
+            {
+                if (mensaje.Usuario_Id == ViewBag.UserId)
+                {
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="row text-left"><strong>@mensaje.Usuario.Nombre</strong></div>
+                                <div class="row text-left">@mensaje.Texto</div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="col-md-offset-6 col-md-6">
+                                <div class="row text-left"><strong>@mensaje.Usuario.Nombre</strong></div>
+                                <div class="row text-right">@mensaje.Texto</div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-12" style="margin-top:50px;">
+                <div class="col-md-10">
+                    <textarea class="form-control" id="message"></textarea>
+                </div>
+                <div class="col-md-2">
+                    <input class="btn btn-primary" type="button" id="sendmessage" value="Enviar" />
+                </div>
+            </div>
+        </div>
+        <!-- END Block Content -->
+    </div>
 </div>
 <!--Script references. -->
 <!--Reference the jQuery library. -->
@@ -27,17 +66,20 @@
 <!--Add script to update the page and send messages.-->
 <script type="text/javascript">
     $(function () {
-        var username = '@ViewBag.UserName';
+        var username = '@ViewBag.Name';
             // Declare a proxy to reference the hub.
             var chat = $.connection.chatHub;
             // Create a function that the hub can call to broadcast messages.
-            chat.client.send = function (name, message) {
+            chat.client.send = function (name, message, userid) {
                 // Html encode display name and message.
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(message).html();
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + encodedName
-                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+                if (userid == '@ViewBag.UserId') {
+                    $('#discussion').append('<div class="col-md-12 text-right"><strong>' + name + '</strong> ' + message + '</div>');
+                } else {
+                    $('#discussion').append('<div class="col-md-12 text-left"><strong>' + name + '</strong> ' + message + '</div>');
+                }
             };
             // Get the user name and store it to prepend to messages.
             // Set initial focus to message input box.

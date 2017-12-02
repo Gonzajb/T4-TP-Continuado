@@ -221,6 +221,7 @@
     <Compile Include="Controllers\AvisoController.cs" />
     <Compile Include="Controllers\BusquedaUsuarioPostulantesController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\ContactosController.cs" />
     <Compile Include="Controllers\EncuentrosPostulanteController.cs" />
     <Compile Include="Controllers\EncuentrosReclutadorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -403,6 +404,7 @@
     <Content Include="Views\Aviso\Estadisticas.cshtml" />
     <Content Include="Views\Aviso\ReasignarAviso.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Contactos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

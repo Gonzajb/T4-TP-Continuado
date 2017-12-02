@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TallerIV.Dominio.Encuentro>
+
+@{
+    ViewBag.Title = "Mis contactos";
+    Layout = "~/Views/Shared/_LayoutProui.cshtml";
+}
+
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-group"></i>Mis contactos
+        </h1>
+    </div>
+</div>
+<div class="row">
+    @foreach (var encuentro in Model)
+    {
+        <div class="col-lg-4" id="@encuentro.Id">
+            <!-- Simple Widget with Post Input - Variation 2 -->
+            <div class="widget">
+                <div class="widget-simple themed-background-fire">
+                    <a href="page_ready_user_profile.html">
+                        <img src="/Content/themes/proui/img/placeholders/avatars/avatar2.png" alt="avatar" class="widget-image img-circle pull-left">
+                    </a>
+                    <h4 class="widget-content widget-content-light text-right">
+                        <a href="page_ready_user_profile.html" class="themed-color-dark-fire">
+                            @if (ViewBag.UserId == encuentro.UsuarioEmpleado_Id)
+                            {
+                                <strong>@encuentro.UsuarioReclutador.Nombre @encuentro.UsuarioReclutador.Apellido</strong>
+                            }
+                            else
+                            {
+                                <strong>@encuentro.UsuarioEmpleado.Nombre @encuentro.UsuarioEmpleado.Apellido</strong>
+                            }
+                        </a>
+                        <small>(@encuentro.Aviso.Titulo)</small>
+                    </h4>
+                </div>
+                <div class="widget-extra-full">
+                    <form action="page_widgets_social.html" method="post" class="form-horizontal" onsubmit="return false;">
+                        <div class="form-group">
+                            <div class="col-xs-12" style="text-align:center;">
+                                @*<textarea id="mensaje_@encuentro.Id" name="widget-post2" rows="4" class="form-control" placeholder="Comienza una conversación..."></textarea>*@
+                            </div>
+                        </div>
+                        <div class="form-group remove-margin-bottom">
+                            <div class="text-center">
+                                <a href="@Url.Action("Index", "Chat", new { encuentro_id = encuentro.Id })">Click para ingresar al chat...</a>
+                                @*<button onclick="iniciarConversacion(@encuentro.Id)" class="btn btn-default"><i class="fa fa-pencil"></i> Ver conversación</button>*@
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="widget-extra themed-background-dark-fire">
+                    <div class="row text-center">
+                        <div class="col-xs-6">
+                            <h4 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>Email</strong></a><br>
+                                @if (ViewBag.UserId == encuentro.UsuarioEmpleado_Id)
+                                {
+                                    <small>@encuentro.UsuarioReclutador.UserName</small>
+                                }
+                                else
+                                {
+                                    <small>@encuentro.UsuarioEmpleado.UserName</small>
+                                }
+                            </h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <h4 class="widget-content-light">
+                                <a href="javascript:void(0)" class="themed-color-fire"><strong>Teléfono</strong></a><br>
+                                @if (ViewBag.UserId == encuentro.UsuarioEmpleado_Id)
+                                {
+                                    <small>@encuentro.UsuarioReclutador.Telefono</small>
+                                }
+                                else
+                                {
+                                    <small>@encuentro.UsuarioEmpleado.Telefono</small>
+                                }
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END Simple Widget with Post Input - Variation 2 -->
+        </div>
+    }
+</div>
+

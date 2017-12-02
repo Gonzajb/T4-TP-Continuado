@@ -48,10 +48,10 @@ namespace TallerIV.Controllers
                 BaseService<Mensaje> mensajesService = new BaseService<Mensaje>();
                 Mensaje mensaje = new Mensaje(texto, usuario_id, encuentro_id);
                 mensajesService.AddEntity(mensaje);
-                return Json(new { error = false, message = "Conversación iniciada correctamente.", JsonRequestBehavior.AllowGet });
+                return Json(new { error = false, message = "Conversación iniciada correctamente." }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e) {
-                return Json(new { error = true, message = "No se ha podido iniciar la conversación.", JsonRequestBehavior.AllowGet });
+                return Json(new { error = true, message = "No se ha podido iniciar la conversación." }, JsonRequestBehavior.AllowGet);
             }
         }
         protected override void Dispose(bool disposing)
