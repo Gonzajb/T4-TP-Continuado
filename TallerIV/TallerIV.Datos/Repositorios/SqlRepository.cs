@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Data;
+using TallerIV.Dominio.RangoEstadisitica;
 
 namespace TallerIV.Datos.Repositorios
 {
@@ -71,9 +72,12 @@ namespace TallerIV.Datos.Repositorios
             return resultado;
         }
 
-        public List<double> PorcentajeDePuntos (int IdAviso)
+        public List<RangoEstadistica> PorcentajeDePuntos (int IdAviso)
         {
-            List<double> resultado = new List<double>();
+            List<double> Porcentaje = new List<double>();
+            List<int> Cantidad = new List<int>();
+            List<RangoEstadistica> rangoEstadistica = new List<RangoEstadistica>();
+
             cmd = new SqlCommand();
             cmd.Connection = sqlConnection;
             cmd.CommandText = "EstadisticaPorcentajeAviso";
@@ -83,12 +87,12 @@ namespace TallerIV.Datos.Repositorios
 
             reader = cmd.ExecuteReader();
             while (reader.Read())
-            {
-                resultado.Add((double)reader.GetDecimal(reader.GetOrdinal("Porcentaje")));
+            {                
+                rangoEstadistica.Add(new RangoEstadistica(reader.GetDecimal(reader.GetOrdinal("PorcentajeDePuntos")), reader.GetInt32(reader.GetOrdinal("Cantidad")),reader.GetDecimal(reader.GetOrdinal("PorcentajeDeUsuarios"))));
             }
             cmd.Dispose();
             sqlConnection.Close();
-            return resultado;
+            return rangoEstadistica;
         }
         
     }

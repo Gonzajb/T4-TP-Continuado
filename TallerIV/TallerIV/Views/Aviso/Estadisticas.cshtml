@@ -1,15 +1,14 @@
-﻿@model TallerIV.Dominio.Aviso
+﻿@model TallerIV.Models.EstadisticaViewModel
 
 @{
     ViewBag.Title = "Estadisticas";
     Layout = "~/Views/Shared/_LayoutProui.cshtml";
 }
-
 <div class="content-header">
     <div class="header-section">
         <h1>
             <strong>Estadísticas: </strong>
-            <i class="fa fa-charts"></i>@ViewBag.Aviso.Titulo<br>
+            <i class="fa fa-charts"></i>@Model.TituloAviso<br>
         </h1>
     </div>
 </div>
@@ -17,90 +16,105 @@
     <div class="col-md-6">
         <div class="widget">
             <div class="widget-extra themed-background-dark-default text-center">
-                <h3 class="widget-content-light"><i class="fa fa-eye animation-floating"></i><small> @ViewBag.Aviso.Titulo</small></h3>
+                <h3 class="widget-content-light"><i class="fa fa-eye animation-floating"></i><small> Por parte del Reclutador </small></h3>
             </div>
             <div class="widget-simple">
                 <div class="row text-center">
                     <div class="col-xs-6">
                         <a href="#" class="widget widget-hover-effect1">
-                            <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                                <i class="fa fa-thumbs-o-up"></i>
+                            <div class="widget-simple">
+                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                </div>
+                                <h3 class="widget-content text-right animation-pullDown">
+                                    <strong><span id="ReclutadorAprobados">@Model.PorcentajeApRec %</span></strong>
+                                    <small>Aprobaciones</small>
+                                </h3>
                             </div>
                         </a>
-                        <h3 class="remove-margin-bottom"><small>@ViewBag.PorcentajeAp % </small><br><small> de Aprobaciones</small></h3>
+                        <!-- END Widget -->
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-sm-6 col-lg-6">
+                        <!-- Widget -->
                         <a href="#" class="widget widget-hover-effect1">
-                            <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
-                                <i class="fa fa-thumbs-o-down"></i>
+                            <div class="widget-simple">
+                                <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                                    <i class="fa fa-thumbs-o-down"></i>
+                                </div>
+                                <h3 class="widget-content text-right animation-pullDown">
+                                    <strong><span id="ReclutadorDesaprobados">@Model.PorcentajeDesRec %</span></strong>
+                                    <small>Desaprobaciones</small>
+                                </h3>
                             </div>
                         </a>
-                        <h3 class="remove-margin-bottom"><small>@ViewBag.PorcentajeDes %</small><br><small> de Desaprobaciones</small></h3>
+                        <!-- END Widget -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="col-sm-6 col-lg-6">
-            <!-- Widget -->
-            <a href="#" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                        <i class="fa fa-thumbs-o-up"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        <strong><span id="usuariosEmpleadoAprobados">@ViewBag.PorcentajeAp %</span></strong>
-                        <small>Aprobaciones</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        <div class="col-sm-6 col-lg-6">
-            <!-- Widget -->
-            <a href="#" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
-                        <i class="fa fa-thumbs-o-down"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        <strong><span id="usuariosEmpleadoDesaprobados">@ViewBag.PorcentajeDes %</span></strong>
-                        <small>Desprobaciones</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="widget">
             <div class="widget-extra themed-background-dark-default text-center">
-                <h3 class="widget-content-light"><i class="fa fa-eye animation-floating"></i><small> @ViewBag.Aviso.Titulo</small></h3>
+                <h3 class="widget-content-light"><i class="fa fa-eye animation-floating"></i><small> Por parte de los Postulantes</small></h3>
             </div>
             <div class="widget-simple">
+                <div class="row text-center">
                     <div class="col-xs-6">
-                        <div class="pie-chart" data-percent=@ViewBag.PorcentajeAp data-size="90" data-bar-color="#27ae60">
-                            <span>@ViewBag.PorcentajeAp %</span>                          
-                            <h4 class="remove-margin-bottom"><small>de aprobaciones</small><br></h4>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
+                        <a href="#" class="widget widget-hover-effect1">
+                            <div class="widget-simple">
+                                <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                </div>
+                                <h3 class="widget-content text-right animation-pullDown">
+                                    <strong><span id="usuariosEmpleadoAprobados">@Model.PorcentajeApPost %</span></strong>
+                                    <small>Aprobaciones</small>
+                                </h3>
+                            </div>
+                        </a>
+                        <!-- END Widget -->
                     </div>
-                    <div class="col-xs-6">
-                        <div class="pie-chart" data-percent=@ViewBag.PorcentajeDes data-size="90" data-bar-color="#e67e22">
-                            <span>@ViewBag.PorcentajeDes %</span> 
-                            <h4 class="remove-margin-bottom"><small>de desaprobaciones</small><br></h4>
+                    <div class="col-sm-6 col-lg-6">
+                        <!-- Widget -->
+                        <a href="#" class="widget widget-hover-effect1">
+                            <div class="widget-simple">
+                                <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                                    <i class="fa fa-thumbs-o-down"></i>
+                                </div>
+                                <h3 class="widget-content text-right animation-pullDown">
+                                    <strong><span id="usuariosEmpleadoDesaprobados">@Model.PorcentajeDesPost %</span></strong>
+                                    <small>Desaprobaciones</small>
+                                </h3>
+                            </div>
+                        </a>
+                        <!-- END Widget -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block">
+    <div class="block-title">
+
+        <h2><strong>  </strong> Chart</h2>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <h4 class="sub-header"><i class="fa fa-bar-chart-o"></i> Cantidad de Postulantes segun porcentaje de puntos</h4>
+            <div class="row">
+                @foreach (var item in Model.RangosEstadistica)
+                {
+                    <div class="col-sm-3">
+                        <div class="pie-chart block-section easyPieChart" data-percent="@item.PorcentajePostulantes" data-size="200" style="width: 200px; height: 200px; line-height: 200px;">
+                            <span>@item.Rango % <small>de puntos</small></span>
+                            <canvas width="162" height="162" style="width: 130px; height: 130px;"></canvas>
                         </div>
-                        <br>
+                        <small>Postulantes: @item.Cantidad</small>
                         <br>
                         <br>
                     </div>
+                }
             </div>
         </div>
     </div>

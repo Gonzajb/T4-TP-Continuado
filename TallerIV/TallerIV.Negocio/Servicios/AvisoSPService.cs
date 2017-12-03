@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TallerIV.Dominio;
 using TallerIV.Datos.Repositorios;
+using TallerIV.Dominio.RangoEstadisitica;
 
 namespace TallerIV.Negocio.Servicios
 {
@@ -23,9 +24,48 @@ namespace TallerIV.Negocio.Servicios
         {
             return sqlRepository.DesaprobacionesDePostulantes(IdAviso);
         }
-        public List<double> PorcentajeDePuntos(int IdAviso)
+        public List<RangoEstadistica> PorcentajeDePuntos(int IdAviso)
         {
             return sqlRepository.PorcentajeDePuntos(IdAviso);
+        }
+        public float CalcularPorcentaje(int parcial1, int parcial2)
+        {
+            try
+            {
+                return (float)parcial1 / (float)(parcial1 + parcial2);
+            } catch (DivideByZeroException e)
+            {
+                return 0;
+            }
+        }
+        public RangoEstadistica[] DevolverRangoEstadisticaOrdenado(int IdAviso)
+        {
+            List<RangoEstadistica> Temp = PorcentajeDePuntos(IdAviso);
+            RangoEstadistica[] rangoEstadistica = new RangoEstadistica[11];
+            for (int j = 0; j < rangoEstadistica.Length; j++)
+            {
+                rangoEstadistica[j] = new RangoEstadistica();
+            }
+            decimal contador = 0;
+            int i = 0;
+            while (contador !=rangoEstadistica.Length)
+            {
+                if (i >= Temp.Count || contador*10 != Temp[i].Rango)
+                {
+                    rangoEstadistica[(int)contador].Rango = (decimal)contador * (decimal)10.0;
+                    rangoEstadistica[(int)contador].Cantidad = 0;
+                    rangoEstadistica[(int)contador].PorcentajePostulantes = 0;
+                    contador = contador + 1;
+                } else
+                {
+                    rangoEstadistica[(int)contador].Rango = (int)Temp[i].Rango;
+                    rangoEstadistica[(int)contador].Cantidad = Temp[i].Cantidad;
+                    rangoEstadistica[(int)contador].PorcentajePostulantes = Temp[i].PorcentajePostulantes;
+                    i++;
+                    contador = contador + 1;
+                }
+            }
+            return rangoEstadistica;
         }
     }
 }

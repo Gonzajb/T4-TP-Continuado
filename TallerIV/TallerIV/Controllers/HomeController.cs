@@ -64,7 +64,28 @@ namespace TallerIV.Controllers
                         string store2 = "CREATE PROCEDURE [AvisoAprobadosPorUsuario] @avisoId INT AS BEGIN SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @avisoId END";
                         cmd.CommandText = store2;
                         cmd.ExecuteNonQuery();
-                        string store3 = "create PROCEDURE EstadisticaPorcentajeAviso (@avisoId INT) as begin select Porcentaje, count(1) as Cantidad, maximo as MaximoAviso from(SELECT cast(CAST(SUM(ap.Prioridad) as float) / cast(Maximo as float) as decimal(10, 1)) as Porcentaje, maximo from(select SUM(ap1.Prioridad) AS maximo, ap1.Aviso_Id from AptitudesPorAviso ap1 where ap1.Aviso_Id = @avisoId GROUP BY ap1.Aviso_Id) a1 inner join AptitudesPorAviso ap ON ap.Aviso_Id = a1.Aviso_Id inner join UsuarioEmpleadoAptitud uea on ap.Aptitud_Id = uea.Aptitud_Id WHERE ap.Aviso_Id = @avisoId GROUP BY UsuarioEmpleado_Id, maximo) as temp group by temp.Porcentaje, temp.maximo order by temp.Porcentaje END";
+                        string store3 = @"CREATE PROCEDURE estadisticaporcentajeaviso (@avisoId INT) AS BEGIN
+SELECT Porcentaje,
+       count(1) AS Cantidad,
+       sum(count(1)) OVER () AS TotalUsuarios,
+                          maximo AS MaximoAviso
+FROM
+  (SELECT cast(CAST(SUM(ap.Prioridad) AS float) / cast(Maximo AS float) AS decimal(10, 1)) AS Porcentaje,
+          maximo
+   FROM
+     (SELECT SUM(ap1.Prioridad) AS maximo,
+             ap1.Aviso_Id
+      FROM AptitudesPorAviso ap1
+      WHERE ap1.Aviso_Id = @avisoId
+      GROUP BY ap1.Aviso_Id) a1
+   INNER JOIN AptitudesPorAviso ap ON ap.Aviso_Id = a1.Aviso_Id
+   INNER JOIN UsuarioEmpleadoAptitud uea ON ap.Aptitud_Id = uea.Aptitud_Id
+   WHERE ap.Aviso_Id = @avisoId
+   GROUP BY UsuarioEmpleado_Id,
+            maximo) AS TEMP
+GROUP BY temp.Porcentaje,
+         temp.maximo
+ORDER BY Porcentaje END";
                         cmd.CommandText = store3;
                         cmd.ExecuteNonQuery();
                         connection.Close();

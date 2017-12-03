@@ -237,6 +237,7 @@
     <Compile Include="Models\EditEmpresaViewModel.cs" />
     <Compile Include="Models\EditPostulanteViewModel.cs" />
     <Compile Include="Models\EditReclutadorViewModel.cs" />
+    <Compile Include="Models\EstadisticaViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterEmpresaViewModel.cs" />
@@ -307,7 +308,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ViewModels\AptitudesPorAvisoViewModel.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -400,9 +403,9 @@
     <Content Include="Views\UsuariosReclutadores\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutProuiLogin.Mobile.cshtml" />
     <Content Include="Views\Account\Login.Mobile.cshtml" />
-    <Content Include="Views\Aviso\Estadisticas.cshtml" />
     <Content Include="Views\Aviso\ReasignarAviso.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Aviso\Estadisticas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

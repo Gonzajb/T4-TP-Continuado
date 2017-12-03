@@ -15,6 +15,8 @@ using TallerIV.Dominio.Coincidencias;
 using TallerIV.Dominio.Usuarios;
 using System.Data.SqlClient;
 using System.Configuration;
+using TallerIV.Dominio.RangoEstadisitica;
+using TallerIV.Models;
 
 namespace TallerIV.Controllers
 {
@@ -69,7 +71,7 @@ namespace TallerIV.Controllers
             ViewBag.Nombre = "asda";
             return View();
         }
-        // GET: Aviso/Edit/5
+        // GET: Aviso/ReasignarAviso/5
         public ActionResult ReasignarAviso(int? id)
         {
             if (id == null)
@@ -170,21 +172,42 @@ namespace TallerIV.Controllers
         //GET: Aviso/Estadisticas/5
         public ActionResult Estadisticas(long id)
         {
-            ViewBag.UsuariosQueAprobaron = avisoSPService.AprobacionesDeUsuarios((int)id);
-            ViewBag.UsuariosQueDesaprobaron = avisoSPService.DesaprobacionesDeUsuarios((int)id);
-            ViewBag.Porcentaje = avisoSPService.PorcentajeDePuntos((int)id);
+            Aviso aviso = this.avisoService.GetById(id);
 
+            int PostulantesQueAprobaron = avisoSPService.AprobacionesDeUsuarios((int)id);
+            int PostulantesQueDesaprobaron = avisoSPService.DesaprobacionesDeUsuarios((int)id);
+            float PorcentajeAprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueAprobaron, PostulantesQueDesaprobaron);
+            float PorcentajeDesaprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueDesaprobaron, PostulantesQueAprobaron);
 
-            // CONECCTION STRING PARA ORT
-            //SqlConnection sqlConnection = new SqlConnection("Data Source=A-srv-bdinst;Initial Catalog=redsocialtinder;Integrated Security=False;User Id=redsocialtinder;Password=ort2017;MultipleActiveResultSets=True");
+            //float PostulantesQueAprobaron = (float)avisoSPService.AprobacionesDeUsuarios((int)id);
+            //float PostulantesQueDesaprobaron = (float) avisoSPService.DesaprobacionesDeUsuarios((int)id);
+            //int TotalPostulantes = (int) PostulantesQueAprobaron + (int) PostulantesQueDesaprobaron;
 
-            // CONECCTION STRING PERSONAL
+            //float PorcentajeAprobadosPostulante;
+            //float PorcentajeDesaprobadosPostulante;
+            //if (TotalPostulantes == 0)
+            //{
+            //    PorcentajeAprobadosPostulante = 0;
+            //    PorcentajeDesaprobadosPostulante = 0;
+            //} else
+            //{
+            //    PorcentajeAprobadosPostulante = PostulantesQueAprobaron / TotalPostulantes;
+            //    PorcentajeDesaprobadosPostulante = PostulantesQueDesaprobaron / TotalPostulantes;
+            //}
 
-            string cs = ConfigurationManager.ConnectionStrings["TallerIVContext"].ConnectionString;
-            SqlConnection sqlConnection = new SqlConnection(cs);
-            SqlDataReader reader = null;
-
-
+            //int TotalReclutador = aviso.UsuariosEmpleadoAprobados.Count() + aviso.UsuariosEmpleadoDesaprobados.Count();
+            //float PorcentajeAprobadosReclutador;
+            //float PorcentajeDesaprobadosReclutador;
+            //if (TotalReclutador == 0.0)
+            //{
+            //    PorcentajeAprobadosReclutador = 0;
+            //    PorcentajeDesaprobadosReclutador = 0;
+            //}
+            //else
+            //{
+            //    PorcentajeAprobadosReclutador = (aviso.UsuariosEmpleadoAprobados.Count() / TotalReclutador) * 100;
+            //    PorcentajeDesaprobadosReclutador = (aviso.UsuariosEmpleadoDesaprobados.Count() / TotalReclutador) * 100;
+            //}
 
 
             //Consulta para la cantidad de aprobaciones que tiene un Aviso.
@@ -192,64 +215,20 @@ namespace TallerIV.Controllers
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
             //Consulta para cantidad de Postulantes que aprobaron el aviso.
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @query";
-            SqlCommand cmd = new SqlCommand("AvisoAprobadosPorUsuario", sqlConnection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@avisoId", id);
-            cmd.Connection = sqlConnection;
-            sqlConnection.Open();
+            float PorcentajeAprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoAprobados.Count(), aviso.UsuariosEmpleadoDesaprobados.Count());
+            float PorcentajeDesaprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoDesaprobados.Count(), aviso.UsuariosEmpleadoAprobados.Count());
 
-            reader = cmd.ExecuteReader();
-            reader.Read();
-            int UsuariosQueAprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
-            sqlConnection.Close();
-            ViewBag.UsuariosQueAprobaron = UsuariosQueAprobaron;
+            RangoEstadistica[] rangoEstadistica = avisoSPService.DevolverRangoEstadisticaOrdenado((int)id);
 
-            //Consulta para cantidad de Postulantes que desaprobaron el aviso
-            //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso1 WHERE Aviso_Id = @query";
-            
-            cmd.CommandText = "AvisoDesaprobadosPorUsuario";
-            
-            sqlConnection.Open();
+            EstadisticaViewModel vista = new EstadisticaViewModel { TituloAviso = aviso.Titulo, PorcentajeApPost = PorcentajeAprobadosPostulante*100, PorcentajeDesPost = PorcentajeDesaprobadosPostulante*100, PorcentajeApRec = PorcentajeAprobadosReclutador*100, PorcentajeDesRec = PorcentajeDesaprobadosReclutador*100, RangosEstadistica = rangoEstadistica };
 
-            reader = cmd.ExecuteReader();
-            reader.Read();
-            int UsuariosQueDesaprobaron = 25;
-            UsuariosQueDesaprobaron = reader.GetInt32(reader.GetOrdinal("TOTAL"));
-            sqlConnection.Close();
-            ViewBag.UsuariosQueDesaprobaron = UsuariosQueDesaprobaron;
+            string a = "dasdas";
+            //ViewBag.Aviso = aviso;
+            //ViewBag.PorcentajeAp = 0.4f;
+            //ViewBag.PorcentajeDes = 0.6f;
 
-            cmd.CommandText = "EstadisticaPorcentajeAviso";
-
-
-            sqlConnection.Open();
-
-            reader = cmd.ExecuteReader();
-            reader.Read();
-            List<double> Porcentaje = new List<double>();
-            
-            while (reader.Read())
-            {
-                Porcentaje.Add(reader.GetFloat(reader.GetOrdinal("Porcentaje")));
-            }
-            sqlConnection.Close();
-            ViewBag.Porcentaje = Porcentaje;
-
-
-
-            TallerIVDbContext db = new TallerIVDbContext();
-            Aviso aviso = this.avisoService.GetById(id);
-            ViewBag.Aviso = aviso;
-            float Total = aviso.UsuariosEmpleadoAprobados.Count() + aviso.UsuariosEmpleadoDesaprobados.Count();
-            if (Total == 0.0)
-            {
-                ViewBag.PorcentajeAp = 0;
-                ViewBag.PorcentajeDes = 0;
-            } else
-            {
-                ViewBag.PorcentajeAp = (aviso.UsuariosEmpleadoAprobados.Count()/Total) * 100;
-                ViewBag.PorcentajeDes = (aviso.UsuariosEmpleadoDesaprobados.Count() / Total) * 100;
-            }
-            return View(aviso);
+            return View(vista);
+            //return View(aviso);
         }
         // GET: HomeEmpleado
         public ActionResult BuscarPostulantes(long id)
