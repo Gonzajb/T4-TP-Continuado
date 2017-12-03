@@ -197,9 +197,9 @@
                             <li>
                                 <a href="@Url.Action("Edit","BusquedaUsuarioPostulantes")" class="dashboard"><i class="gi gi-search sidebar-nav-icon"></i>Administrar búsqueda</a>
                             </li>
-                            @*<li>
-                                <a href="@Url.Action("Index","EncuentrosPostulante")" class="dashboard"><i class="gi gi-group sidebar-nav-icon"></i> Mis encuentros</a>
-                            </li>*@
+                            <li>
+                                <a href="@Url.Action("Index","Contactos")" class="dashboard"><i class="fa fa-handshake-o sidebar-nav-icon"></i> Mis contactos</a>
+                            </li>
                         }
                         @if (userIsReclutador)
                         {
@@ -211,6 +211,9 @@
                             </li>
                             <li>
                                 <a href="@Url.Action("Index","EncuentrosReclutador")" class="dashboard"><i class="gi gi-group sidebar-nav-icon"></i> Mis encuentros</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","Contactos")" class="dashboard"><i class="fa fa-handshake-o sidebar-nav-icon"></i> Mis contactos</a>
                             </li>
                         }
                         @if (userIsEmpresa)

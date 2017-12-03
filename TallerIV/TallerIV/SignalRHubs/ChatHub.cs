@@ -17,7 +17,7 @@ namespace TallerIV.SignalRHubs
             TallerIVDbContext dbContext = new TallerIVDbContext();
             BaseService<Mensaje> mensajesService = new BaseService<Mensaje>(dbContext);
             mensajesService.AddEntity(new Mensaje(message, userid, int.Parse(encuentro_id)));
-            Clients.Group(encuentro_id).send(name, message);
+            Clients.Group(encuentro_id).send(name, message, userid);
         }
         public void JoinRoom(string encuentro_id)
         {

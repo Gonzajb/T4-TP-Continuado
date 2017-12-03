@@ -17,9 +17,12 @@ namespace TallerIV.Controllers
         {
             TallerIVDbContext db = new TallerIVDbContext();
             BaseService<Encuentro> encuentroService = new BaseService<Encuentro>(db);
+            BaseService<UsuarioPersona> usuariosService = new BaseService<UsuarioPersona>(db);
             Encuentro encuentro = encuentroService.GetById(encuentro_id);
-            ViewBag.UserName = this.User.Identity.GetUserName();
-            ViewBag.UserId = this.User.Identity.GetUserId();
+            string userid = this.User.Identity.GetUserId();
+            UsuarioPersona usuario = usuariosService.GetAll().FirstOrDefault(x => x.Id == userid);
+            ViewBag.Name = usuario.Nombre;
+            ViewBag.UserId = userid;
             return View(encuentro);
         }
     }
