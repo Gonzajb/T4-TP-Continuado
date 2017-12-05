@@ -95,13 +95,16 @@ namespace TallerIV.Controllers
 
         [HttpPost]
         public ActionResult ReasignarAviso(long id, string Aid){
-            TallerIVDbContext db = new TallerIVDbContext();
-            UsuarioReclutador reclutador = db.IdentityUsers.Find(Aid);
-            Aviso aviso = db.Avisos.Find(id);
-            //BaseService <UsuarioReclutador> reclutadorService = new BaseService<UsuarioReclutador>();
-            //UsuarioReclutador reclutador = reclutadorService.GetAll().FirstOrDefault(r => r.Id == Aid);
-            //avisoService.ReasignarAviso(id, reclutador);
-            avisoService.ReasignarAviso(aviso, reclutador);
+            //OPCION 1
+            //TallerIVDbContext db = new TallerIVDbContext();
+            //UsuarioReclutador reclutador = db.IdentityUsers.Find(Aid);
+            //Aviso aviso = db.Avisos.Find(id);
+            //avisoService.ReasignarAviso(aviso, reclutador);
+
+
+            //OPCION 3
+            avisoService.ReasignarAviso(id, Aid);
+
             return RedirectToAction("Index");
         }
         // POST: Aviso/Create
@@ -179,12 +182,10 @@ namespace TallerIV.Controllers
             float PorcentajeAprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueAprobaron, PostulantesQueDesaprobaron);
             float PorcentajeDesaprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueDesaprobaron, PostulantesQueAprobaron);
 
-            //float PostulantesQueAprobaron = (float)avisoSPService.AprobacionesDeUsuarios((int)id);
-            //float PostulantesQueDesaprobaron = (float) avisoSPService.DesaprobacionesDeUsuarios((int)id);
-            //int TotalPostulantes = (int) PostulantesQueAprobaron + (int) PostulantesQueDesaprobaron;
+            PorcentajeAprobadosPostulante = (float)Math.Round(PorcentajeAprobadosPostulante, 4);
+            PorcentajeDesaprobadosPostulante = (float)Math.Round(PorcentajeDesaprobadosPostulante, 4);
 
-            //float PorcentajeAprobadosPostulante;
-            //float PorcentajeDesaprobadosPostulante;
+
             //if (TotalPostulantes == 0)
             //{
             //    PorcentajeAprobadosPostulante = 0;
@@ -193,20 +194,6 @@ namespace TallerIV.Controllers
             //{
             //    PorcentajeAprobadosPostulante = PostulantesQueAprobaron / TotalPostulantes;
             //    PorcentajeDesaprobadosPostulante = PostulantesQueDesaprobaron / TotalPostulantes;
-            //}
-
-            //int TotalReclutador = aviso.UsuariosEmpleadoAprobados.Count() + aviso.UsuariosEmpleadoDesaprobados.Count();
-            //float PorcentajeAprobadosReclutador;
-            //float PorcentajeDesaprobadosReclutador;
-            //if (TotalReclutador == 0.0)
-            //{
-            //    PorcentajeAprobadosReclutador = 0;
-            //    PorcentajeDesaprobadosReclutador = 0;
-            //}
-            //else
-            //{
-            //    PorcentajeAprobadosReclutador = (aviso.UsuariosEmpleadoAprobados.Count() / TotalReclutador) * 100;
-            //    PorcentajeDesaprobadosReclutador = (aviso.UsuariosEmpleadoDesaprobados.Count() / TotalReclutador) * 100;
             //}
 
 
@@ -218,17 +205,26 @@ namespace TallerIV.Controllers
             float PorcentajeAprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoAprobados.Count(), aviso.UsuariosEmpleadoDesaprobados.Count());
             float PorcentajeDesaprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoDesaprobados.Count(), aviso.UsuariosEmpleadoAprobados.Count());
 
+            if (float.IsNaN(PorcentajeAprobadosReclutador))
+            {
+                PorcentajeAprobadosReclutador = 0;
+            } else
+            {
+                PorcentajeAprobadosReclutador = (float)Math.Round(PorcentajeAprobadosReclutador, 4);
+            }
+            if (float.IsNaN(PorcentajeDesaprobadosReclutador))
+            {
+                PorcentajeDesaprobadosReclutador = 0;
+            } else
+            {
+                PorcentajeDesaprobadosReclutador = (float)Math.Round(PorcentajeDesaprobadosReclutador, 4);
+            }
+
             RangoEstadistica[] rangoEstadistica = avisoSPService.DevolverRangoEstadisticaOrdenado((int)id);
 
             EstadisticaViewModel vista = new EstadisticaViewModel { TituloAviso = aviso.Titulo, PorcentajeApPost = PorcentajeAprobadosPostulante*100, PorcentajeDesPost = PorcentajeDesaprobadosPostulante*100, PorcentajeApRec = PorcentajeAprobadosReclutador*100, PorcentajeDesRec = PorcentajeDesaprobadosReclutador*100, RangosEstadistica = rangoEstadistica };
 
-            string a = "dasdas";
-            //ViewBag.Aviso = aviso;
-            //ViewBag.PorcentajeAp = 0.4f;
-            //ViewBag.PorcentajeDes = 0.6f;
-
             return View(vista);
-            //return View(aviso);
         }
         // GET: HomeEmpleado
         public ActionResult BuscarPostulantes(long id)

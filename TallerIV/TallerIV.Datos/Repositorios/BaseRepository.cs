@@ -62,5 +62,9 @@ namespace TallerIV.Datos.Repositorios
             dbSet.AddOrUpdate(entity);
             db.SaveChanges();
         }
+        public TallerIVDbContext GetDbContext()
+        {
+            return db;
+        }
     }
 }

@@ -42,5 +42,9 @@ namespace TallerIV.Negocio.Servicios
         public void UpdateEntity(T entity) {
             this.repository.UpdateEntity(entity);
         }
+        public TallerIVDbContext GetDbContext()
+        {
+            return repository.GetDbContext();
+        }
     }
 }
