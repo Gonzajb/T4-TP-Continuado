@@ -88,7 +88,7 @@ namespace TallerIV.Datos.Repositorios
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {                
-                rangoEstadistica.Add(new RangoEstadistica(reader.GetDecimal(reader.GetOrdinal("PorcentajeDePuntos")), reader.GetInt32(reader.GetOrdinal("Cantidad")),reader.GetDecimal(reader.GetOrdinal("PorcentajeDeUsuarios"))));
+                rangoEstadistica.Add(new RangoEstadistica(reader.GetDecimal(reader.GetOrdinal("PORCENTAJEDEPUNTOS")), reader.GetInt32(reader.GetOrdinal("CANTIDAD")),reader.GetDecimal(reader.GetOrdinal("PORCENTAJEDEUSUARIOS"))));
             }
             cmd.Dispose();
             sqlConnection.Close();
