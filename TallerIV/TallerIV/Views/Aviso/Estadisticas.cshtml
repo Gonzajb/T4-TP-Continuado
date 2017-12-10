@@ -119,3 +119,39 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+   window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		theme: "theme2",
+		title:{
+            text: "Cantidad de Postulantes segun porcentaje de puntos"
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			toolTipContent: "{y} - #percent %" + " del total",
+            yValueFormatString: "# Cantidad de Postulantes",
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{  y: @Model.RangosEstadistica[0].Cantidad, indexLabel: "@Model.RangosEstadistica[0].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[1].Cantidad, indexLabel: "@Model.RangosEstadistica[1].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[2].Cantidad, indexLabel: "@Model.RangosEstadistica[2].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[3].Cantidad, indexLabel: "@Model.RangosEstadistica[3].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[4].Cantidad, indexLabel: "@Model.RangosEstadistica[4].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[5].Cantidad, indexLabel: "@Model.RangosEstadistica[5].Rango" + "% de puntos"},
+                {  y: @Model.RangosEstadistica[6].Cantidad, indexLabel: "@Model.RangosEstadistica[6].Rango" + "% de puntos" },
+				{  y: @Model.RangosEstadistica[7].Cantidad, indexLabel: "@Model.RangosEstadistica[7].Rango" + "% de puntos"},
+				{  y: @Model.RangosEstadistica[8].Cantidad, indexLabel: "@Model.RangosEstadistica[8].Rango" + "% de puntos"},
+                {  y: @Model.RangosEstadistica[9].Cantidad, indexLabel: "@Model.RangosEstadistica[9].Rango" + "% de puntos" },
+				{  y: @Model.RangosEstadistica[10].Cantidad, indexLabel: "@Model.RangosEstadistica[10].Rango" + "% de puntos"},			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div id="chartContainer" style="height: 600px; width: 100%;"></div>
+
