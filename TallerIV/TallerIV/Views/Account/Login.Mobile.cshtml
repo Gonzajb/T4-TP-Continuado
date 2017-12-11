@@ -6,27 +6,59 @@
     Layout = "~/Views/Shared/_LayoutProuiLogin.Mobile.cshtml";
 }
 
+<style>
+    .login-mobile{
+        width:100%;
+        height: 150px;
+        position:relative;
+        top:50px;
+    }
+    
+    .usuario-input-mobile {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .passwrd-input-mobile {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .input{
+        width:95%;
+        padding-top:7px;
+        padding-bottom: 7px;
+        border: solid 1px #808080;
+    }
+
+    .login-button {
+        width: 45%;
+        padding: 5px;
+        float: left;
+
+    }
+    .register-button {
+        width: 45%;
+        padding: 5px;
+        float: right;
+        color:#000000;
+        font-weight: bold;
+        font-style: normal;
+        background: #ffffff;
+        
+    }
+
+        .register-button a {
+            font-style: normal;
+            Text-decoration: none;
+        }
+
+   
+</style>
+
 <script src="~/Scripts/bootbox.js"></script>
 
-<!-- Login Block -->
-<div class="block push-bit">
-    @if (!String.IsNullOrEmpty(ViewBag.Message))
-    {
-        <div class="alert alert-success alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            @ViewBag.Message
-        </div>
-    }
-
-    @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
-    {
-        <div class="alert alert-danger alert-dismissable">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            @ViewBag.ErrorMessage
-        </div>
-
-    }
-    <!-- Login Form -->
+    <div class="login-mobile">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-bordered form-control-borderless", @id = "form-login" }))
     {
         @Html.AntiForgeryToken()
@@ -38,79 +70,129 @@
                 </div>
             </div>
         }
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder = "Email" })
-                </div>
-            </div>
+
+        <div class="usuario-input-mobile">
+            @Html.TextBoxFor(m => m.Email, new { @class = "input", @placeholder = "Email" })
         </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeholder = "Contraseña" })
-                </div>
-            </div>
+
+        <div class="passwrd-input-mobile">
+            @Html.PasswordFor(m => m.Password, new { @class = "input", @placeholder = "Contraseña" })
         </div>
-        <div class="form-group form-actions">
-            <div class="col-xs-4">
-                <label class="switch switch-primary remember-me" data-toggle="tooltip" title="Recordarme">
-                    @Html.CheckBoxFor(m => m.RememberMe, new { @checked = true })
-                    <span></span>
-                </label>
+        <div class="buttons">
+            <div class="login-button">
+                <button type="submit" style="float:left;"> Ingresar</button>
             </div>
-            <div class="col-xs-8 text-right">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Ingresar</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-6 text-center">
-                <a href="javascript:void(0)" id="link-reminder-login"><small>Olvidaste tu contraseña</small></a>
-            </div>
-            <div class="col-xs-6 text-center">
-                <a href="@Url.Action("Index","RegisterAccount")" @*onclick="registrar()"*@ id="link-reminder-login"><small>Quiero registrarme</small></a>
+
+            <div class="register-button">
+                <a href="@Url.Action("Index","RegisterAccount")" style="float:right;"><small>Quiero registrarme</small></a>
             </div>
         </div>
     }
-    <!-- END Login Form -->
-    <!-- Reminder Form -->
-    @using (Html.BeginForm("GeneratePasswordResetToken", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-bordered form-control-borderless display-none", @id = "form-reminder" }))
-    {
-        @Html.AntiForgeryToken()
-        if (!ViewData.ModelState.IsValid)
+    </div>
+ 
+    <!-- Login Block -->
+    @*@<div class="block push-bit">
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
         {
+            <div class="alert alert-success alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                @ViewBag.Message
+            </div>
+        }
+
+        @if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                @ViewBag.ErrorMessage
+            </div>
+
+        }
+        <!-- Login Form -->
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-bordered form-control-borderless", @id = "form-login" }))
+        {
+            @Html.AntiForgeryToken()
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="alert alert-danger">@Html.ValidationSummary()</div>
+                    </div>
+                </div>
+            }
             <div class="form-group">
                 <div class="col-xs-12">
-                    <div class="alert alert-danger">@Html.ValidationSummary()</div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder = "Email" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeholder = "Contraseña" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-xs-4">
+                    <label class="switch switch-primary remember-me" data-toggle="tooltip" title="Recordarme">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @checked = true })
+                        <span></span>
+                    </label>
+                </div>
+                <div class="col-xs-8 text-right">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Ingresar</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 text-center">
+                    <a href="javascript:void(0)" id="link-reminder-login"><small>Olvidaste tu contraseña</small></a>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <a href="@Url.Action("Index","RegisterAccount")" id="link-reminder-login"><small>Quiero registrarme</small></a>
+                </div>
+            </div>
+        }*@
+        <!-- END Login Form -->
+        <!-- Reminder Form -->
+        @*@using (Html.BeginForm("GeneratePasswordResetToken", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-bordered form-control-borderless display-none", @id = "form-reminder" }))
+        {
+            @Html.AntiForgeryToken()
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="alert alert-danger">@Html.ValidationSummary()</div>
+                    </div>
+                </div>
+            }
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder = "Mail" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-xs-12 text-right">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Recuperar Contraseña</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 text-center">
+                    <small>Recordar Contraseña?</small> <a href="javascript:void(0)" id="link-reminder"><small>Iniciar Sesión</small></a>
                 </div>
             </div>
         }
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder = "Mail" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group form-actions">
-            <div class="col-xs-12 text-right">
-                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Recuperar Contraseña</button>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12 text-center">
-                <small>Recordar Contraseña?</small> <a href="javascript:void(0)" id="link-reminder"><small>Iniciar Sesión</small></a>
-            </div>
-        </div>
-    }
-    <!-- END Reminder Form -->
-</div>
-<!-- END Login Block -->
+        <!-- END Reminder Form -->
+    </div>*@
+    <!-- END Login Block -->
 
-<script>
+    <script>
 
 $(document).ready(function () {
     $('label.remember-me').children('input[type=hidden]').insertAfter('label.remember-me');
@@ -121,4 +203,4 @@ $(document).ready(function () {
         closeButton: false
     });
 };*@
-</script>
+    </script>
