@@ -103,7 +103,7 @@
         <div class="col-md-12">
             <h4 class="sub-header"><i class="fa fa-bar-chart-o"></i> Cantidad de Postulantes segun porcentaje de puntos</h4>
             <div class="row">
-                @foreach (var item in Model.RangosEstadistica)
+                @foreach (var item in Model.RangosEstadistica.Where(i => i.Cantidad > 0))
                 {
                     <div class="col-sm-3">
                         <div class="pie-chart block-section easyPieChart" data-percent="@item.PorcentajePostulantes" data-size="200" style="width: 200px; height: 200px; line-height: 200px;">
@@ -134,18 +134,12 @@
 			toolTipContent: "{y} - #percent %" + " del total",
             yValueFormatString: "# Cantidad de Postulantes",
 			legendText: "{indexLabel}",
-			dataPoints: [
-				{  y: @Model.RangosEstadistica[0].Cantidad, indexLabel: "@Model.RangosEstadistica[0].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[1].Cantidad, indexLabel: "@Model.RangosEstadistica[1].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[2].Cantidad, indexLabel: "@Model.RangosEstadistica[2].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[3].Cantidad, indexLabel: "@Model.RangosEstadistica[3].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[4].Cantidad, indexLabel: "@Model.RangosEstadistica[4].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[5].Cantidad, indexLabel: "@Model.RangosEstadistica[5].Rango" + "% de puntos"},
-                {  y: @Model.RangosEstadistica[6].Cantidad, indexLabel: "@Model.RangosEstadistica[6].Rango" + "% de puntos" },
-				{  y: @Model.RangosEstadistica[7].Cantidad, indexLabel: "@Model.RangosEstadistica[7].Rango" + "% de puntos"},
-				{  y: @Model.RangosEstadistica[8].Cantidad, indexLabel: "@Model.RangosEstadistica[8].Rango" + "% de puntos"},
-                {  y: @Model.RangosEstadistica[9].Cantidad, indexLabel: "@Model.RangosEstadistica[9].Rango" + "% de puntos" },
-				{  y: @Model.RangosEstadistica[10].Cantidad, indexLabel: "@Model.RangosEstadistica[10].Rango" + "% de puntos"},			]
+            dataPoints: [
+                @foreach (var item in Model.RangosEstadistica.Where(i => i.Cantidad > 0)){
+                    <text>{  y: @item.Cantidad, indexLabel: "@item.Rango" + "% de puntos"}, </text>
+
+                }
+					]
 		}
 		]
 	});
