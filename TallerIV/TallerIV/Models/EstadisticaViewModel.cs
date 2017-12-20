@@ -17,6 +17,6 @@ namespace TallerIV.Models
         //public int TotalPostulante;
         public float PorcentajeApPost;
         public float PorcentajeDesPost;
-        public RangoEstadistica[] RangosEstadistica = new RangoEstadistica[11];    
+        public List<RangoEstadistica> RangosEstadistica = new List<RangoEstadistica>();    
     }
 }

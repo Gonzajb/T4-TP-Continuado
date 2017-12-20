@@ -94,32 +94,36 @@
         </div>
     </div>
 </div>
-<div class="block">
-    <div class="block-title">
+@if (Model.RangosEstadistica.Count > 0)
+{
 
-        <h2><strong>  </strong> Chart</h2>
-    </div>
-    <div class="row text-center">
-        <div class="col-md-12">
-            <h4 class="sub-header"><i class="fa fa-bar-chart-o"></i> Cantidad de Postulantes segun porcentaje de puntos</h4>
-            <div class="row">
-                @foreach (var item in Model.RangosEstadistica.Where(i => i.Cantidad > 0))
+
+    <div class="block">
+        <div class="block-title">
+
+            <h2><strong>  </strong> Chart</h2>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h4 class="sub-header"><i class="fa fa-bar-chart-o"></i> Cantidad de Postulantes segun porcentaje de puntos</h4>
+                <div class="row">
+                    @foreach (var item in Model.RangosEstadistica.Where(i => i.Cantidad > 0))
                 {
-                    <div class="col-sm-3">
-                        <div class="pie-chart block-section easyPieChart" data-percent="@item.PorcentajePostulantes" data-size="200" style="width: 200px; height: 200px; line-height: 200px;">
-                            <span>@item.Rango % <small>de puntos</small></span>
-                            <canvas width="162" height="162" style="width: 130px; height: 130px;"></canvas>
+                        <div class="col-sm-3">
+                            <div class="pie-chart block-section easyPieChart" data-percent="@item.PorcentajePostulantes" data-size="200" style="width: 200px; height: 200px; line-height: 200px;">
+                                <span>@item.Rango % <small>de puntos</small></span>
+                                <canvas width="162" height="162" style="width: 130px; height: 130px;"></canvas>
+                            </div>
+                            <small>Postulantes: @item.Cantidad</small>
+                            <br>
+                            <br>
                         </div>
-                        <small>Postulantes: @item.Cantidad</small>
-                        <br>
-                        <br>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
    window.onload = function () {
 	var chart = new CanvasJS.Chart("chartContainer",
 	{
@@ -135,7 +139,7 @@
             yValueFormatString: "# Cantidad de Postulantes",
 			legendText: "{indexLabel}",
             dataPoints: [
-                @foreach (var item in Model.RangosEstadistica.Where(i => i.Cantidad > 0)){
+                @foreach (var item in Model.RangosEstadistica){
                     <text>{  y: @item.Cantidad, indexLabel: "@item.Rango" + "% de puntos"}, </text>
 
                 }
@@ -145,7 +149,8 @@
 	});
 	chart.render();
 }
-</script>
-<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<div id="chartContainer" style="height: 600px; width: 100%;"></div>
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div id="chartContainer" style="height: 600px; width: 100%;"></div>
+}
 

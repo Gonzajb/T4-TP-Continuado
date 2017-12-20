@@ -220,7 +220,7 @@ namespace TallerIV.Controllers
                 PorcentajeDesaprobadosReclutador = (float)Math.Round(PorcentajeDesaprobadosReclutador, 4);
             }
 
-            RangoEstadistica[] rangoEstadistica = avisoSPService.DevolverRangoEstadisticaOrdenado((int)id);
+            List<RangoEstadistica> rangoEstadistica = avisoSPService.PorcentajeDePuntos((int)id);
 
             EstadisticaViewModel vista = new EstadisticaViewModel { TituloAviso = aviso.Titulo, PorcentajeApPost = PorcentajeAprobadosPostulante*100, PorcentajeDesPost = PorcentajeDesaprobadosPostulante*100, PorcentajeApRec = PorcentajeAprobadosReclutador*100, PorcentajeDesRec = PorcentajeDesaprobadosReclutador*100, RangosEstadistica = rangoEstadistica };
 

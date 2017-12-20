@@ -30,42 +30,50 @@ namespace TallerIV.Negocio.Servicios
         }
         public float CalcularPorcentaje(int parcial1, int parcial2)
         {
-            try
+            float resultado;
+
+            
+            if (parcial1+parcial2 == 0)
             {
-                return (float)parcial1 / (float)(parcial1 + parcial2);
-            } catch (DivideByZeroException e)
+                resultado = 0;                
+            } else
             {
-                return 0;
+                resultado = (float)parcial1 / (float)(parcial1 + parcial2); ;
             }
+            return resultado;
+
         }
-        public RangoEstadistica[] DevolverRangoEstadisticaOrdenado(int IdAviso)
-        {
-            List<RangoEstadistica> Temp = PorcentajeDePuntos(IdAviso);
-            RangoEstadistica[] rangoEstadistica = new RangoEstadistica[11];
-            for (int j = 0; j < rangoEstadistica.Length; j++)
-            {
-                rangoEstadistica[j] = new RangoEstadistica();
-            }
-            decimal contador = 0;
-            int i = 0;
-            while (contador !=rangoEstadistica.Length)
-            {
-                if (i >= Temp.Count || contador*10 != Temp[i].Rango)
-                {
-                    rangoEstadistica[(int)contador].Rango = (decimal)contador * (decimal)10.0;
-                    rangoEstadistica[(int)contador].Cantidad = 0;
-                    rangoEstadistica[(int)contador].PorcentajePostulantes = 0;
-                    contador = contador + 1;
-                } else
-                {
-                    rangoEstadistica[(int)contador].Rango = (int)Temp[i].Rango;
-                    rangoEstadistica[(int)contador].Cantidad = Temp[i].Cantidad;
-                    rangoEstadistica[(int)contador].PorcentajePostulantes = Temp[i].PorcentajePostulantes;
-                    i++;
-                    contador = contador + 1;
-                }
-            }
-            return rangoEstadistica;
-        }
+
+        // Teniea sentido si devolvia todos los rangos pero solo se devuelven los que tengan datos.
+
+        //public RangoEstadistica[] DevolverRangoEstadisticaOrdenado(int IdAviso)
+        //{
+        //    List<RangoEstadistica> Temp = PorcentajeDePuntos(IdAviso);
+        //    RangoEstadistica[] rangoEstadistica = new RangoEstadistica[11];
+        //    for (int j = 0; j < rangoEstadistica.Length; j++)
+        //    {
+        //        rangoEstadistica[j] = new RangoEstadistica();
+        //    }
+        //    decimal contador = 0;
+        //    int i = 0;
+        //    while (contador !=rangoEstadistica.Length)
+        //    {
+        //        if (i >= Temp.Count || contador*10 != Temp[i].Rango)
+        //        {
+        //            rangoEstadistica[(int)contador].Rango = (decimal)contador * (decimal)10.0;
+        //            rangoEstadistica[(int)contador].Cantidad = 0;
+        //            rangoEstadistica[(int)contador].PorcentajePostulantes = 0;
+        //            contador = contador + 1;
+        //        } else
+        //        {
+        //            rangoEstadistica[(int)contador].Rango = (int)Temp[i].Rango;
+        //            rangoEstadistica[(int)contador].Cantidad = Temp[i].Cantidad;
+        //            rangoEstadistica[(int)contador].PorcentajePostulantes = Temp[i].PorcentajePostulantes;
+        //            i++;
+        //            contador = contador + 1;
+        //        }
+        //    }
+        //    return rangoEstadistica;
+        //}
     }
 }
