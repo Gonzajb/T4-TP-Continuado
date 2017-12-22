@@ -182,43 +182,14 @@ namespace TallerIV.Controllers
             float PorcentajeAprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueAprobaron, PostulantesQueDesaprobaron);
             float PorcentajeDesaprobadosPostulante = avisoSPService.CalcularPorcentaje(PostulantesQueDesaprobaron, PostulantesQueAprobaron);
 
-            PorcentajeAprobadosPostulante = (float)Math.Round(PorcentajeAprobadosPostulante, 4);
-            PorcentajeDesaprobadosPostulante = (float)Math.Round(PorcentajeDesaprobadosPostulante, 4);
-
-
-            //if (TotalPostulantes == 0)
-            //{
-            //    PorcentajeAprobadosPostulante = 0;
-            //    PorcentajeDesaprobadosPostulante = 0;
-            //} else
-            //{
-            //    PorcentajeAprobadosPostulante = PostulantesQueAprobaron / TotalPostulantes;
-            //    PorcentajeDesaprobadosPostulante = PostulantesQueDesaprobaron / TotalPostulantes;
-            //}
-
-
             //Consulta para la cantidad de aprobaciones que tiene un Aviso.
             //No hace falta, actualmente Estadistica calculo esto apartir del Aviso.
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from AvisoUsuariosEmpleadosAprobados WHERE Aviso_Id = @query";
             //Consulta para cantidad de Postulantes que aprobaron el aviso.
             //cmd.CommandText = "SELECT COUNT(UsuarioEmpleado_Id) as TOTAL from UsuarioEmpleadoAviso WHERE Aviso_Id = @query";
-            float PorcentajeAprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoAprobados.Count(), aviso.UsuariosEmpleadoDesaprobados.Count());
-            float PorcentajeDesaprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoDesaprobados.Count(), aviso.UsuariosEmpleadoAprobados.Count());
 
-            if (float.IsNaN(PorcentajeAprobadosReclutador))
-            {
-                PorcentajeAprobadosReclutador = 0;
-            } else
-            {
-                PorcentajeAprobadosReclutador = (float)Math.Round(PorcentajeAprobadosReclutador, 4);
-            }
-            if (float.IsNaN(PorcentajeDesaprobadosReclutador))
-            {
-                PorcentajeDesaprobadosReclutador = 0;
-            } else
-            {
-                PorcentajeDesaprobadosReclutador = (float)Math.Round(PorcentajeDesaprobadosReclutador, 4);
-            }
+            float PorcentajeAprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoAprobados.Count(), aviso.UsuariosEmpleadoDesaprobados.Count());
+            float PorcentajeDesaprobadosReclutador = avisoSPService.CalcularPorcentaje(aviso.UsuariosEmpleadoDesaprobados.Count(), aviso.UsuariosEmpleadoAprobados.Count());         
 
             List<RangoEstadistica> rangoEstadistica = avisoSPService.PorcentajeDePuntos((int)id);
 

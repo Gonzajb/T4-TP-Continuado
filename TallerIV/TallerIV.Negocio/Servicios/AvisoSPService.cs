@@ -40,6 +40,7 @@ namespace TallerIV.Negocio.Servicios
             {
                 resultado = (float)parcial1 / (float)(parcial1 + parcial2); ;
             }
+            resultado = (float)Math.Round(resultado, 4);
             return resultado;
 
         }
